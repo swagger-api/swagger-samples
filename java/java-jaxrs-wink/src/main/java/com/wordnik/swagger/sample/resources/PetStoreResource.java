@@ -48,9 +48,9 @@ public class PetStoreResource {
   @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid ID supplied"),
       @ApiResponse(code = 404, message = "Order not found") })
   public Response getOrderById(
-      @ApiParam(value = "ID of pet that needs to be fetched", allowableValues = "range[1,5]", required = true) @PathParam("orderId") String orderId)
+      @ApiParam(value = "ID of pet that needs to be fetched", allowableValues = "range[1,5]", required = true) @PathParam("orderId") Long orderId)
       throws NotFoundException {
-    Order order = storeData.findOrderById(ru.getLong(0, 10000, 0, orderId));
+    Order order = storeData.findOrderById(orderId);
     if (null != order) {
       return Response.ok().entity(order).build();
     } else {
