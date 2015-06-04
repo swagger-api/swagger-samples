@@ -2,9 +2,7 @@
 
 ## Overview
 This is a java project to build a stand-alone server which implements the Swagger spec.  You can find out 
-more about both the spec and the framework at http://swagger.io.  For more information 
-about Wordnik's APIs, please visit http://developer.wordnik.com.  There is an online version of this
-server at http://petstore.swagger.io/v2/swagger.json
+more about both the spec and the framework at http://swagger.io.
 
 ### To build from source
 Please follow instructions to build the top-level [swagger-core project](https://github.com/swagger-api/swagger-core)
@@ -38,5 +36,4 @@ based on api-key.  There are two keys defined in the sample app:
 <li>- special-key</li>
 
 When no key is applied, the "default-key" is applied to all operations.  If the "special-key" is entered, a
-number of other resources are shown in the UI, including sample CRUD operations.  Note this behavior is similar
-to that on http://developer.wordnik.com/docs but the behavior is entirely up to the implementor.
+number of other resources are shown in the UI, including sample CRUD operations.
