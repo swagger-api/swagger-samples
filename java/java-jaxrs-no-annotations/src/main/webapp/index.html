@@ -19,6 +19,7 @@
   <script src='swagger-ui.js' type='text/javascript'></script>
   <script src='lib/highlight.7.3.pack.js' type='text/javascript'></script>
   <script src='lib/marked.js' type='text/javascript'></script>
+  <script src='lib/swagger-oauth.js' type='text/javascript'></script>
 
   <script type="text/javascript">
     $(function () {
@@ -34,32 +35,33 @@
         supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
         onComplete: function(swaggerApi, swaggerUi){
           if(typeof initOAuth == "function") {
-            /*
             initOAuth({
               clientId: "your-client-id",
               realm: "your-realms",
               appName: "your-app-name"
             });
-            */
           }
+
           $('pre code').each(function(i, e) {
             hljs.highlightBlock(e)
           });
+
+          addApiKeyAuthorization();
         },
         onFailure: function(data) {
           log("Unable to Load SwaggerUI");
         },
         docExpansion: "none",
-        sorter : "alpha"
+        apisSorter: "alpha",
+        showRequestHeaders: false
       });
 
-      function addApiKeyAuthorization() {
+      function addApiKeyAuthorization(){
         var key = encodeURIComponent($('#input_apiKey')[0].value);
-        log("key: " + key);
         if(key && key.trim() != "") {
-            var apiKeyAuth = new SwaggerClient.ApiKeyAuthorization("api_key", key, "query");
-            window.swaggerUi.api.clientAuthorizations.add("api_key", apiKeyAuth);
-            log("added key " + key);
+          var apiKeyAuth = new SwaggerClient.ApiKeyAuthorization("api_key", key, "query");
+          window.swaggerUi.api.clientAuthorizations.add("api_key", apiKeyAuth);
+          log("added key " + key);
         }
       }
 
@@ -67,10 +69,9 @@
 
       // if you have an apiKey you would like to pre-populate on the page for demonstration purposes...
       /*
-        var apiKey = "myApiKeyXXXX123456789";
-        $('#input_apiKey').val(apiKey);
-        addApiKeyAuthorization();
-      */
+       var apiKey = "myApiKeyXXXX123456789";
+       $('#input_apiKey').val(apiKey);
+       */
 
       window.swaggerUi.load();
 
@@ -79,7 +80,7 @@
           console.log.apply(console, arguments);
         }
       }
-  });
+    });
   </script>
 </head>
 
