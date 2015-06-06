@@ -5,9 +5,10 @@ This is a java project to build a stand-alone server which implements the Swagge
 
 ### To run (with Maven)
 To run the server, run this task:
-<pre>
+
+```
 mvn package -Dlog4j.configuration=file:./conf/log4j.properties jetty:run
-</pre>
+```
 
 This will start Jetty embedded on port 8002.
 
@@ -16,8 +17,7 @@ Once started, you can navigate to http://localhost:8002/api/swagger.json to view
 This tells you that the server is up and ready to demonstrate Swagger.
 
 ### Using the UI
-
-The sample application hosts the [swagger-ui](https://github.com/swagger-api/swagger-ui) at http://localhost:8002. You can use that to browse the API.
+There is an HTML5-based API tool bundled in this sample--you can view it it at [http://localhost:8002](http://localhost:8002). This lets you inspect the API using an interactive UI.  You can access the source of this code from [here](https://github.com/swagger-api/swagger-ui)
 
 ### Applying an API key
 The sample app has an implementation of the Swagger ApiAuthorizationFilter.  This restricts access to resources based on api-key.  There are two keys defined in the sample app:
