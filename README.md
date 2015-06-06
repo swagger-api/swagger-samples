@@ -9,7 +9,7 @@ programming, Swagger removes the guesswork in calling the service.
 Check out [Swagger-Spec](https://github.com/swagger-api/swagger-spec) for additional information about the Swagger 
 project, including additional libraries with support for SpringMVC, other languages and more.
  
- ## What's here?
+## What's here?
  
- This repository serves for samples for various projects. Right now it contains the samples for swagger-core under
- the java library. Each sample contains a README file with details how to run it and what to check.
+This repository serves for samples for various projects. Right now it contains the samples for swagger-core under
+the java library. Each sample contains a README file with details how to run it and what to check.
