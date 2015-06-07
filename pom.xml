@@ -9,7 +9,7 @@
   <artifactId>swagger-samples-project</artifactId>
   <packaging>pom</packaging>
   <name>swagger-samples</name>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <url>https://github.com/swagger-api/swagger-samples</url>
   <scm>
     <connection>scm:git:git@github.com:swagger-api/swagger-samples.git</connection>
@@ -289,6 +289,7 @@
     </profile>
   </profiles>
   <modules>
+    <module>java/java-resteasy-spring</module>
     <module>java/java-jaxrs</module>
     <module>java/java-jersey2</module>
     <module>java/java-jaxrs-subresource</module>
@@ -297,7 +298,6 @@
     <module>java/java-dropwizard</module>
     <module>java/java-jersey-jaxrs</module>
     <module>java/java-jaxrs-no-annotations</module>
-    <module>java/java-resteasy-spring</module>
     <module>java/java-resteasy</module>
     <module>java/java-jersey-spring</module>
     <module>java/java-jersey2-guice</module>
@@ -422,7 +422,7 @@
   <properties>
     <joda-version>1.2</joda-version>
     <joda-time-version>2.2</joda-time-version>
-    <swagger-version>1.5.0-SNAPSHOT</swagger-version>
+    <swagger-version>1.5.0</swagger-version>
     <swagger-ui-version>2.1.0-M2</swagger-ui-version>
     <scala-version>2.10.4</scala-version>
     <felix-version>2.3.4</felix-version>

@@ -2,7 +2,7 @@
   <parent>
     <groupId>io.swagger</groupId>
     <artifactId>swagger-samples-project</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <relativePath>../..</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
