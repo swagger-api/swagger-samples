@@ -6,7 +6,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.swagger</groupId>
-  <artifactId>swagger-project</artifactId>
+  <artifactId>swagger-samples-project</artifactId>
   <packaging>pom</packaging>
   <name>swagger-samples</name>
   <version>1.0.0-SNAPSHOT</version>
