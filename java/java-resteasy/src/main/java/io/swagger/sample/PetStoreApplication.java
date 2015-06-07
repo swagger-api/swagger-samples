@@ -11,8 +11,7 @@ import java.util.Set;
 public class PetStoreApplication extends Application {
     HashSet<Object> singletons = new HashSet<Object>();
 
-    public PetStoreApplication() {
-    }
+    public PetStoreApplication() { }
 
     @Override
     public Set<Class<?>> getClasses() {
@@ -33,5 +32,3 @@ public class PetStoreApplication extends Application {
         return singletons;
     }
 }
-
-
