@@ -32,10 +32,16 @@ public class SwaggerExampleGuiceContextListener extends GuiceServletContextListe
                 BeanConfig beanConfig = new BeanConfig();
                 beanConfig.setVersion("1.0.0");
                 beanConfig.setSchemes(new String[]{"http"});
+                beanConfig.setDescription("This is a app.");
+                beanConfig.setTitle("Swagger Petstore");
                 beanConfig.setHost("localhost:8002");
                 beanConfig.setBasePath("/api");
                 beanConfig.setFilterClass("io.swagger.sample.util.ApiAuthorizationFilterImpl");
                 beanConfig.setResourcePackage("io.swagger.sample.resource");
+                beanConfig.setContact("apiteam@swagger.io");
+                beanConfig.setLicense("Apache 2.0");
+                beanConfig.setLicenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html");
+
                 beanConfig.setScan(true);
 
                 filter("/*").through(ApiOriginFilter.class);
