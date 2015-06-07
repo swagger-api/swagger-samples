@@ -18,7 +18,8 @@ public class Bootstrap extends HttpServlet {
     scanner.setResourcePackage("io.swagger.sample.resource");
     ScannerFactory.setScanner(scanner);
     Info info = new Info()
-      .title("Swagger Sample App")
+      .title("Swagger Petstore")
+      .version("1.0.0")
       .description("This is a sample server Petstore server.  You can find out more about Swagger " + 
         "at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, " +
         "you can use the api key `special-key` to test the authorization filters.")
@@ -30,7 +31,10 @@ public class Bootstrap extends HttpServlet {
         .url("http://www.apache.org/licenses/LICENSE-2.0.html"));
 
     ServletContext context = config.getServletContext();
-    Swagger swagger = new Swagger().info(info);
+    Swagger swagger = new Swagger()
+      .info(info)
+      .host("localhost:8002")
+      .basePath("/api");
     swagger.securityDefinition("api_key", new ApiKeyAuthDefinition("api_key", In.HEADER));
     swagger.securityDefinition("petstore_auth", 
       new OAuth2Definition()
