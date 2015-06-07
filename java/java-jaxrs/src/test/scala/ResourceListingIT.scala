@@ -26,7 +26,7 @@ class ResourceListingIT extends FlatSpec with Matchers {
     info.getVersion() should be ("1.0.0")
     info.getTitle() should be ("Swagger Petstore")
     info.getContact() should not be (null)
-    info.getContact().getName() should be ("apiteam@swagger.io")
+    info.getContact().getEmail() should be ("apiteam@swagger.io")
     info.getLicense() should not be (null)
     info.getLicense().getName() should be ("Apache 2.0")
   }
