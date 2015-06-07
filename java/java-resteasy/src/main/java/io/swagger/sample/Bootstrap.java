@@ -30,7 +30,10 @@ public class Bootstrap extends HttpServlet {
         .url("http://www.apache.org/licenses/LICENSE-2.0.html"));
 
     ServletContext context = config.getServletContext();
-    Swagger swagger = new Swagger().info(info);
+    Swagger swagger = new Swagger()
+      .info(info)
+      .basePath("/api")
+      .host("localhost:8002");
     swagger.securityDefinition("petstore_auth",
       new OAuth2Definition()
         .implicit("http://localhost:8002/oauth/dialog")

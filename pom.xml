@@ -295,7 +295,6 @@
     <module>java/java-jaxrs-no-webxml</module>
     <module>java/java-mule</module>
     <module>java/java-dropwizard</module>
-    <module>java/java-jaxrs-cxf</module>
     <module>java/java-jersey-jaxrs</module>
     <module>java/java-jaxrs-no-annotations</module>
     <module>java/java-resteasy-spring</module>
@@ -303,6 +302,7 @@
     <module>java/java-jersey-spring</module>
     <module>java/java-jersey2-guice</module>
     <module>java/java-jaxrs-wink</module>
+    <module>java/java-jaxrs-cxf</module>
   </modules>
   <reporting>
     <outputDirectory>target/site</outputDirectory>
