@@ -9,7 +9,7 @@
   <artifactId>swagger-samples-project</artifactId>
   <packaging>pom</packaging>
   <name>swagger-samples</name>
-  <version>1.0.0</version>
+  <version>1.0.1-SNAPSHOT</version>
   <url>https://github.com/swagger-api/swagger-samples</url>
   <scm>
     <connection>scm:git:git@github.com:swagger-api/swagger-samples.git</connection>
