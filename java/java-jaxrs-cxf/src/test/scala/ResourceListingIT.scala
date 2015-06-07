@@ -21,6 +21,7 @@ class ResourceListingIT extends FlatSpec with Matchers {
     swagger.getBasePath() should be ("/api")
 
     val info = swagger.getInfo()
+
     info should not be (null)
     info.getVersion() should be ("1.0.0")
     info.getTitle() should be ("Swagger Petstore")

@@ -41,7 +41,7 @@
   <bean id="swaggerConfig" class="io.swagger.jaxrs.config.BeanConfig">
     <property name="resourcePackage" value="io.swagger.sample.resource"/>
     <property name="version" value="1.0.0"/>
-    <property name="host" value="http://localhost:8002"/>
+    <property name="host" value="localhost:8002"/>
     <property name="basePath" value="/api"/>
     <property name="title" value="Swagger Petstore"/>
     <property name="description" value="This is a app."/>
