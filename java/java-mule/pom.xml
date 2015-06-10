@@ -119,4 +119,14 @@
       <scope>compile</scope>
     </dependency>
   </dependencies>
+  <repositories>
+    <repository>
+      <id>codehaus-mule-repo</id>
+      <name>codehaus-mule-repo</name>
+      <url>
+        https://repository-master.mulesoft.org/nexus/content/groups/public/
+      </url>
+      <layout>default</layout>
+    </repository>
+  </repositories>
 </project>
