@@ -22,8 +22,9 @@ import io.swagger.sample.exception.NotFoundException;
 
 import javax.ws.rs.*;
 
-@Api(hidden = true, value = "/owner", description = "Operations about the owners", position = 1)
+@Api(value = "/owner", description = "Operations about the owners", position = 1)
 @Produces("application/json")
+@Path("/whatever")
 public class OwnerResource {
 	private String petId;
 
