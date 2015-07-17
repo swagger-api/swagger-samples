@@ -24,6 +24,8 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.*;
 
+import java.util.List;
+
 @Path("/pet")
 @Api(tags = {"pet"})
 @Produces({"application/json", "application/xml"})
