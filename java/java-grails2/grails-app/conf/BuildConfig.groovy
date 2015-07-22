@@ -15,36 +15,34 @@ grails.project.dependency.resolution = {
         // excludes 'ehcache'
         excludes 'grails-plugin-log4j'        
     }
-    log "error" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+    log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     checksums true // Whether to verify checksums on resolve
 
     repositories {
         inherits true // Whether to inherit repository definitions from plugins
+        mavenRepo "https://repo.grails.org/grails/plugins"
+        mavenRepo "http://repo.grails.org/grails/repo"
 
-        grailsPlugins()
-        grailsHome()
-        grailsCentral()
-
-        mavenLocal()
-        mavenCentral()
-
-        // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
-        mavenRepo "http://snapshots.repository.codehaus.org"
-        mavenRepo "https://oss.sonatype.org/content/repositories/snapshots"
-        mavenRepo "http://repository.codehaus.org"
+        mavenRepo "http://repo1.maven.org/maven2/"
+        mavenRepo "http://repository.ow2.org/nexus/content/repositories/public"
+        mavenRepo "http://repo.grails.org/grails/core"
+        mavenRepo "https://oss.sonatype.org/content/groups/public/"
         mavenRepo "http://download.java.net/maven/2/"
         mavenRepo "http://repository.jboss.com/maven2/"
         mavenRepo "http://maven.restlet.org"
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
-        compile 'io.swagger:swagger-jaxrs:1.5.0-SNAPSHOT'
-        compile 'ch.qos.logback:logback-classic:1.0.6'
+        compile 'io.swagger:swagger-core:1.5.0'
+//    TODO wonder if we can pull in swagger-ui resources like this
+//    compile 'org.webjars:swagger-ui:2.1.0'
+        compile 'io.swagger:swagger-jersey2-jaxrs:1.5.0'
         runtime 'ch.qos.logback:logback-classic:1.0.6'
     }
 
     plugins {
-        runtime ":hibernate:$grailsVersion"
+
+	    runtime ":hibernate:$grailsVersion"
         runtime ":jquery:1.8.0"
         runtime ":resources:1.1.6"
         compile ':jaxrs:0.8'
