@@ -16,6 +16,10 @@
 
 package io.swagger.sample.data;
 
+import io.swagger.sample.model.Category;
+import io.swagger.sample.model.Pet;
+import io.swagger.sample.model.Tag;
+
 import java.util.*;
 
 public class PetData {

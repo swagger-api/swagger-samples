@@ -1,7 +1,7 @@
 org.grails.jaxrs.url.mappings = ['/api','/swagger.*']
 org.grails.jaxrs.provider.init.parameters = [
   'com.sun.jersey.config.property.packages': 
-    'io.swagger.swagger.sample.resource;io.swagger.swagger.jaxrs.listing;io.swagger.swagger.jaxrs.json']
+    'io.swagger.sample.resource;io.swagger.sample.model;io.swagger.jaxrs.listing;io.swagger.jaxrs.json']
 
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format

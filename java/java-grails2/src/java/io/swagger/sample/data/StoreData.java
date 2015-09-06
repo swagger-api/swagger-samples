@@ -16,6 +16,8 @@
 
 package io.swagger.sample.data;
 
+import io.swagger.sample.model.Order;
+
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;

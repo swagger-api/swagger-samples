@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+    <!-- https://github.com/swagger-api/swagger-core/wiki/Swagger-Core-Jersey-2.X-Project-Setup-1.5#configure-and-initialize-swagger-->
+    <!-- Package scanning as a servlet (also available as class names, see link above)-->
+    <servlet>
+        <servlet-name>jersey</servlet-name>
+        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <param-name>jersey.config.server.provider.packages</param-name>
+            <param-value>
+                io.swagger.jaxrs.listing,
+                io.swagger.sample.resource,
+                {your.application.packages}
+            </param-value>
+        </init-param>
+        <init-param>
+            <param-name>jersey.config.server.wadl.disableWadl</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>jersey</servlet-name>
+        <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
+    <!-- END Package scanning as a servlet-->
+
+    <!-- There are two main ways to configure and initialize the Swagger definition within your application. The first, within the web.xml,
+    offers a simplified method of configuration. If you're looking for more control, then the BeanConfig path is the one you should choose-->
+    <servlet>
+        <!-- A few things to note:
+            * The api.version should reflect the version of your own API.
+            * swagger.api.basepath should point to the context root of your API. This defers from server to server and how you configured your JAX-RS application.
+            * There's no <servlet-mapping> for this servlet as it is only used for initialization and doesn't actually expose any interface.-->
+        <servlet-name>Jersey2Config</servlet-name>
+        <servlet-class>io.swagger.jersey.config.JerseyJaxrsConfig</servlet-class>
+        <init-param>
+            <param-name>api.version</param-name>
+            <param-value>1.0.0</param-value>
+        </init-param>
+        <init-param>
+            <param-name>swagger.api.basepath</param-name>
+            <param-value>http://localhost:8002/api</param-value>
+        </init-param>
+        <!-- replace this with your own Impl -->
+        <init-param>
+            <param-name>swagger.filter</param-name>
+            <param-value>io.swagger.sample.util.ApiAuthorizationFilterImpl</param-value>
+        </init-param>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+
+</web-app>
