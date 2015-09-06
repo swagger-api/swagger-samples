@@ -33,10 +33,10 @@ grails.project.dependency.resolution = {
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
-        compile 'io.swagger:swagger-core:1.5.0'
+        compile 'io.swagger:swagger-core:1.5.3'
 //    TODO wonder if we can pull in swagger-ui resources like this
 //    compile 'org.webjars:swagger-ui:2.1.0'
-        compile 'io.swagger:swagger-jersey2-jaxrs:1.5.0'
+        compile 'io.swagger:swagger-jersey2-jaxrs:1.5.3'
         runtime 'ch.qos.logback:logback-classic:1.0.6'
     }
 
