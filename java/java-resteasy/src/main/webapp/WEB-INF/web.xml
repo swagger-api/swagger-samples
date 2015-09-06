@@ -23,16 +23,6 @@
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>DefaultJaxrsConfig</servlet-name>
-        <servlet-class>io.swagger.jaxrs.config.DefaultJaxrsConfig</servlet-class>
-        <init-param>
-            <param-name>swagger.filter</param-name>
-            <param-value>io.swagger.sample.util.ApiAuthorizationFilterImpl</param-value>
-        </init-param>
-        <load-on-startup>2</load-on-startup>
-    </servlet>
-
     <filter>
         <filter-name>ApiOriginFilter</filter-name>
         <filter-class>io.swagger.sample.util.ApiOriginFilter</filter-class>

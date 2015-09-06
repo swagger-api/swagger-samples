@@ -31,9 +31,7 @@ public class Bootstrap extends HttpServlet {
 
     ServletContext context = config.getServletContext();
     Swagger swagger = new Swagger()
-      .info(info)
-      .basePath("/api")
-      .host("localhost:8002");
+      .info(info);
     swagger.securityDefinition("petstore_auth",
       new OAuth2Definition()
         .implicit("http://localhost:8002/oauth/dialog")
