@@ -25,10 +25,10 @@ import javax.ws.rs.*;
 @Api(hidden = true, value = "/owner", description = "Operations about the owners", position = 1)
 @Produces("application/json")
 public class OwnerResource {
-	private String petId;
+	private Long petId;
 
 	public OwnerResource(){}
-	public OwnerResource(String petId){
+	public OwnerResource(Long petId){
 		this.petId = petId;
 	}
 
