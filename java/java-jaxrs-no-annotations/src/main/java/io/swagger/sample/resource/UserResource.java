@@ -70,8 +70,11 @@ public class UserResource {
   @DELETE
   @Path("/{username}")
   public Response deleteUser(String username) {
-    userData.removeUser(username);
-    return Response.ok().entity("").build();
+    if (userData.removeUser(username)) {
+      return Response.ok().entity("").build();
+    } else {
+      return Response.status(Response.Status.NOT_FOUND).build();
+    }
   }
 
   @GET

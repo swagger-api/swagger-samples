@@ -33,13 +33,12 @@ import io.swagger.sample.model.Pet;
 @Produces({"application/json", "application/xml"})
 public class PetResource {
   static PetData petData = new PetData();
-  static JavaRestResourceUtil ru = new JavaRestResourceUtil();
 
   @GET
   @Path("/{petId}")
-  public Response getPetById(@PathParam("petId") String petId)
+  public Response getPetById(@PathParam("petId") Long petId)
       throws NotFoundException {
-    Pet pet = petData.getPetbyId(ru.getLong(0, 100000, 0, petId));
+    Pet pet = petData.getPetById(petId);
     if (null != pet) {
       return Response.ok().entity(pet).build();
     } else {
