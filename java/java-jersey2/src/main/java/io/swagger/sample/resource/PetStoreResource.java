@@ -33,7 +33,7 @@ public class PetStoreResource {
   @GET
   @Path("/order/{orderId}")
   @ApiOperation(value = "Find purchase order by ID",
-    notes = "For valid response try integer IDs with value <= 5 or > 10. Other values will generated exceptions",
+    notes = "For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions",
     response = Order.class)
   @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid ID supplied"),
       @ApiResponse(code = 404, message = "Order not found") })
@@ -69,7 +69,10 @@ public class PetStoreResource {
   public Response deleteOrder(
       @BeanParam AuthenticationInfo info,
       @ApiParam(value = "ID of order to delete") @PathParam("orderId") Long orderId) {
-    storeData.deleteOrder(orderId);
-    return Response.ok().entity("").build();
+    if (storeData.deleteOrder(orderId)) {
+      return Response.ok().entity("").build();
+    } else {
+      return Response.status(Response.Status.NOT_FOUND).entity("Order not found").build();
+    }
   }
 }
