@@ -38,7 +38,6 @@ import javax.ws.rs.*;
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public class PetResource {
   static PetData petData = new PetData();
-  static JavaRestResourceUtil ru = new JavaRestResourceUtil();
 
   @GET
   @Path("/{petId}")
@@ -52,7 +51,7 @@ public class PetResource {
   public Response getPetById(
       @ApiParam(value = "ID of pet that needs to be fetched", allowableValues = "range[1,5]", required = true) @PathParam("petId") Long petId)
       throws NotFoundException {
-    Pet pet = petData.getPetbyId(petId);
+    Pet pet = petData.getPetById(petId);
     if (null != pet) {
       return Response.ok().entity(pet).build();
     } else {
@@ -63,12 +62,16 @@ public class PetResource {
   @DELETE
   @Path("/{petId}")
   @ApiOperation(value = "Deletes a pet")
-  @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid pet value")})
+  @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid ID supplied"),
+      @ApiResponse(code = 404, message = "Pet not found")})
   public Response deletePet(
     @ApiParam() @HeaderParam("api_key") String apiKey,
     @ApiParam(value = "Pet id to delete", required = true)@PathParam("petId") Long petId) {
-    petData.deletePet(petId);
-    return Response.ok().build();
+    if (petData.deletePet(petId)) {
+      return Response.ok().build();
+    } else {
+      return Response.status(Response.Status.NOT_FOUND).build();
+    }
   }
 
   @POST
@@ -132,7 +135,7 @@ public class PetResource {
    @ApiParam(value = "Updated status of the pet", required = false)@FormParam("status") String status) {
     System.out.println(name);
     System.out.println(status);
-    Pet pet = petData.getPetbyId(petId);
+    Pet pet = petData.getPetById(petId);
     if(pet != null) {
       if(name != null && !"".equals(name))
         pet.setName(name);

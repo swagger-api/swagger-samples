@@ -57,7 +57,7 @@ public class PetData {
         "url1", "url2" }, new String[] { "tag3", "tag4" }, "available"));
   }
 
-  public Pet getPetbyId(long petId) {
+  public Pet getPetById(long petId) {
     for (Pet pet : pets) {
       if (pet.getId() == petId) {
         return pet;
@@ -66,15 +66,17 @@ public class PetData {
     return null;
   }
 
-  public void deletePet(long petId) {
+  public boolean deletePet(long petId) {
     if(pets.size() > 0) {
       for (int i = pets.size(); i >= 0; i++) {
         Pet pet = pets.get(i);
         if(pet.getId() == petId) {
           pets.remove(i);
+          return true;
         }
       }
     }
+    return false;
   }
 
   public List<Pet> findPetByStatus(String status) {
