@@ -58,7 +58,7 @@ public class PetData {
         "url1", "url2" }, new String[] { "tag3", "tag4" }, "available"));
   }
 
-  public Pet getPetbyId(long petId) {
+  public Pet getPetById(long petId) {
     for (Pet pet : pets) {
       if (pet.getId() == petId) {
         return pet;
