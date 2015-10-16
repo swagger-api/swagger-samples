@@ -72,14 +72,16 @@ public class UserData {
     users.add(user);
   }
 
-  public void removeUser(String username) {
+  public boolean removeUser(String username) {
     if (users.size() > 0) {
       for (int i = users.size() - 1; i >= 0; i--) {
         if (users.get(i).getUsername().equals(username)) {
           users.remove(i);
+          return true;
         }
       }
     }
+    return false;
   }
 
   private static User createUser(long id, String username, String firstName,

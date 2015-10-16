@@ -90,8 +90,11 @@ public class UserResource {
       @ApiResponse(code = 404, message = "User not found") })
   public Response deleteUser(
       @ApiParam(value = "The name that needs to be deleted", required = true) @PathParam("username") String username) {
-    userData.removeUser(username);
-    return Response.ok().entity("").build();
+    if (userData.removeUser(username)) {
+          return Response.ok().entity("").build();
+      } else {
+          return Response.status(Response.Status.NOT_FOUND).build();
+      }
   }
 
   @GET
