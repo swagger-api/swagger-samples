@@ -16,7 +16,6 @@
 
 package io.swagger.sample.bean;
 
-import io.swagger.annotations.*;
 import io.swagger.sample.data.UserData;
 import io.swagger.sample.model.User;
 import io.swagger.sample.exception.ApiException;
@@ -24,7 +23,6 @@ import io.swagger.sample.exception.NotFoundException;
 import io.swagger.sample.resource.UserResource;
 
 import javax.ws.rs.core.Response;
-import javax.ws.rs.*;
 
 public class UserResourceBean implements UserResource {
   static UserData userData = new UserData();
@@ -59,8 +57,11 @@ public class UserResourceBean implements UserResource {
 
   @Override
   public Response deleteUser(String username) {
-    userData.removeUser(username);
-    return Response.ok().entity("").build();
+    if (userData.removeUser(username)) {
+      return Response.ok().entity("").build();
+    } else {
+      return Response.status(Response.Status.NOT_FOUND).build();
+    }
   }
 
   @Override

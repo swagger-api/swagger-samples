@@ -22,15 +22,13 @@ import io.swagger.sample.exception.NotFoundException;
 import io.swagger.sample.resource.PetResource;
 
 import javax.ws.rs.core.Response;
-import javax.ws.rs.*;
 
 public class PetResourceBean implements PetResource {
     static PetData petData = new PetData();
-    static JavaRestResourceUtil ru = new JavaRestResourceUtil();
 
     @Override
-    public Pet getPetById(String petId) throws NotFoundException {
-        Pet pet = petData.getPetbyId(ru.getLong(0, 100000, 0, petId));
+    public Pet getPetById(Long petId) throws NotFoundException {
+        Pet pet = petData.getPetById(petId);
         if (null != pet) {
             return pet;
         } else {
