@@ -28,19 +28,18 @@ import javax.ws.rs.*;
 @Produces({"application/json", "application/xml"})
 public class PetResource {
   static PetData petData = new PetData();
-  static JavaRestResourceUtil ru = new JavaRestResourceUtil();
 
   @GET
   @Path("/{petId}")
   @ApiOperation(value = "Find pet by ID", 
-    notes = "Returns a pet when ID < 10.  ID > 10 or nonintegers will simulate API error conditions", 
+    notes = "Returns a pet when 0 < ID <= 10.  ID > 10 or nonintegers will simulate API error conditions",
     response = Pet.class)
   @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid ID supplied"),
       @ApiResponse(code = 404, message = "Pet not found") })
   public Response getPetById(
-      @ApiParam(value = "ID of pet that needs to be fetched", allowableValues = "range[1,5]", required = true) @PathParam("petId") String petId)
-      throws io.swagger.sample.exception.NotFoundException {
-    Pet pet = petData.getPetbyId(ru.getLong(0, 100000, 0, petId));
+      @ApiParam(value = "ID of pet that needs to be fetched", allowableValues = "range[1,10]", required = true)
+      @PathParam("petId") Long petId) throws io.swagger.sample.exception.NotFoundException {
+    Pet pet = petData.getPetById(petId);
     if (null != pet) {
       return Response.ok().entity(pet).build();
     } else {
