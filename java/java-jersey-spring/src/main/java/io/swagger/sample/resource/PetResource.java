@@ -24,12 +24,12 @@ public interface PetResource {
     @GET
     @Path("/{petId}")
     @ApiOperation(value = "Find pet by ID",
-            notes = "Returns a pet when ID < 10.  ID > 10 or nonintegers will simulate API error conditions"
+            notes = "Returns a pet when 0 < ID <= 10.  ID > 10 or nonintegers will simulate API error conditions"
     )
     @ApiResponses(value = {@ApiResponse(code = 400, message = "Invalid ID supplied"),
             @ApiResponse(code = 404, message = "Pet not found")})
     Pet getPetById(
-            @PathParam("petId") String petId)
+            @PathParam("petId") Long petId)
             throws NotFoundException;
 
     @POST

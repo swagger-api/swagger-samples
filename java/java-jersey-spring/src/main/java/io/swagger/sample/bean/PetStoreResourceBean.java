@@ -29,7 +29,6 @@ import javax.ws.rs.*;
 @Component
 public class PetStoreResourceBean implements PetStoreResource {
   static StoreData storeData = new StoreData();
-  static JavaRestResourceUtil ru = new JavaRestResourceUtil();
 
   @Override
   public Response getOrderById(Long orderId) throws NotFoundException {
@@ -48,8 +47,11 @@ public class PetStoreResourceBean implements PetStoreResource {
   }
 
   @Override
-  public Response deleteOrder(String orderId) {
-    storeData.deleteOrder(ru.getLong(0, 10000, 0, orderId));
-    return Response.ok().entity("").build();
+  public Response deleteOrder(Long orderId) {
+    if (storeData.deleteOrder(orderId)) {
+      return Response.ok().entity("").build();
+    } else {
+      return Response.status(Response.Status.NOT_FOUND).entity("Order not found").build();
+    }
   }
 }
