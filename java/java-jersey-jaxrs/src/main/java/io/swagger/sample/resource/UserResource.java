@@ -74,7 +74,7 @@ public class UserResource {
       @ApiResponse(code = 400, message = "Invalid user supplied"),
       @ApiResponse(code = 404, message = "User not found") })
   public Response updateUser(
-      @ApiParam(value = "name that need to be deleted", required = true) @PathParam("username") String username,
+      @ApiParam(value = "name that need to be updated", required = true) @PathParam("username") String username,
       @ApiParam(value = "Updated user object", required = true) User user) {
     userData.addUser(user);
     return Response.ok().entity("").build();
@@ -122,7 +122,7 @@ public class UserResource {
     response = String.class,
     position = 6,
     responseHeaders = {
-      @ResponseHeader(name = "X-Expires-After", description = "date in UTC when toekn expires", response = Date.class),
+      @ResponseHeader(name = "X-Expires-After", description = "date in UTC when token expires", response = Date.class),
       @ResponseHeader(name = "X-Rate-Limit", description = "calls per hour allowed by the user", response = Integer.class)
     })
   @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid username/password supplied") })
