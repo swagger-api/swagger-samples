@@ -2,24 +2,15 @@ package controllers
 
 import models.Order
 import api._
-import io.swagger.core._
 import io.swagger.annotations._
-import io.swagger.core.util.ScalaJsonUtil
+import io.swagger.util.Json
 
-import play.api._
 import play.api.mvc._
-import play.api.data._
-import play.api.data.Forms._
-import play.api.data.format.Formats._
-import play.api.Play.current
-import play.api.data.format.Formats._
 
-import javax.ws.rs.{QueryParam, PathParam}
-import java.io.StringWriter
 import scala.collection.JavaConverters._
 
 @Api(value = "/store", description = "Operations about store")
-object StoreApiController extends BaseApiController {
+class StoreApiController extends BaseApiController {
   var storeData = new StoreData
 
   @ApiOperation(nickname = "getOrderById",
@@ -29,7 +20,7 @@ object StoreApiController extends BaseApiController {
     new ApiResponse(code = 400, message = "Invalid ID supplied"),
     new ApiResponse(code = 404, message = "Order not found")))
   def getOrderById(
-    @ApiParam(value = "ID of pet that needs to be fetched", required = true)@PathParam("orderId") orderId: String) = Action { implicit request =>
+    @ApiParam(value = "ID of pet that needs to be fetched", required = true) orderId: String) = Action { implicit request =>
     storeData.findOrderById(getLong(0, 10000, 0, orderId)) match {
       case Some(order) => JsonResponse(order)
       case _ => JsonResponse(new value.ApiResponse(404, "Order not found"), 404)
@@ -40,7 +31,7 @@ object StoreApiController extends BaseApiController {
     value = "Gets orders in the system", response = classOf[models.Order], httpMethod = "GET", responseContainer = "List")
   @ApiResponses(Array(
     new ApiResponse(code = 404, message = "No Orders found")))
-  def getOrders(@ApiImplicitParam(value = "Get all orders or only those which are complete", dataType = "Boolean", required = true)@QueryParam("isComplete") isComplete: Boolean) = Action { implicit request =>
+  def getOrders(@ApiImplicitParam(value = "Get all orders or only those which are complete", dataType = "Boolean", required = true) isComplete: Boolean) = Action { implicit request =>
     val orders: java.util.List[Order] = storeData.orders.toList.asJava
     JsonResponse(orders)
   }
@@ -50,11 +41,11 @@ object StoreApiController extends BaseApiController {
   @ApiResponses(Array(
     new ApiResponse(code = 400, message = "Invalid order")))
   @ApiImplicitParams(Array(
-    new ApiImplicitParam(name = "body", value = "order placed for purchasing the pet", required = true, dataType = "Order", paramType = "body")))
+    new ApiImplicitParam(name = "body", value = "order placed for purchasing the pet", required = true, dataType = "models.Order", paramType = "body")))
   def placeOrder = Action { implicit request =>
     request.body.asJson match {
       case Some(e) => {
-        val order = ScalaJsonUtil.mapper.readValue(e.toString, classOf[Order]).asInstanceOf[Order]
+        val order = Json.mapper.readValue(e.toString, classOf[Order])
         storeData.placeOrder(order)
         JsonResponse(order)
       }
@@ -69,9 +60,11 @@ object StoreApiController extends BaseApiController {
     new ApiResponse(code = 400, message = "Invalid ID supplied"),
     new ApiResponse(code = 404, message = "Order not found")))
   def deleteOrder(
-    @ApiParam(value = "ID of the order that needs to be deleted", required = true)@PathParam("orderId") orderId: String) = Action {
+    @ApiParam(value = "ID of the order that needs to be deleted", required = true) orderId: String) = Action {
     implicit request =>
       storeData.deleteOrder(getLong(0, 10000, 0, orderId))
       Ok
   }
 }
+
+object StoreApiController {}

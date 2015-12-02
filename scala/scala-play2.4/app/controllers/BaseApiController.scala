@@ -2,13 +2,9 @@ package controllers
 
 import util.RestResourceUtil
 
-import value._
-import api._
-import io.swagger.core.util.Json
+import io.swagger.util.Json
 
 import play.api.mvc._
-
-import java.io.StringWriter
 
 class BaseApiController extends Controller with RestResourceUtil {
   // APIs
