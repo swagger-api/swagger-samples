@@ -5,12 +5,10 @@ import api._
 
 import play.api.mvc._
 
-
-import javax.ws.rs.{QueryParam, PathParam}
+import io.swagger.util.Json
 
 
 import io.swagger.annotations._
-import io.swagger.core.util.ScalaJsonUtil
 
 @Api(value = "/pet", description = "Operations about pets")
 class PetApiController extends BaseApiController {
@@ -36,7 +34,7 @@ class PetApiController extends BaseApiController {
     new ApiResponse(code = 400, message = "Invalid ID supplied"),
     new ApiResponse(code = 404, message = "Pet not found")))
   def getPetById(
-    @ApiParam(value = "ID of the pet to fetch") @PathParam("id") id: String) = Action {
+    @ApiParam(value = "ID of the pet to fetch") id: String) = Action {
     implicit request =>
       petData.getPetbyId(getLong(0, 100000, 0, id)) match {
         case Some(pet) => JsonResponse(pet)
@@ -56,12 +54,12 @@ class PetApiController extends BaseApiController {
   @ApiResponses(Array(
     new ApiResponse(code = 405, message = "Invalid input")))
   @ApiImplicitParams(Array(
-    new ApiImplicitParam(value = "Pet object that needs to be added to the store", required = true, dataType = "Pet", paramType = "body")))
+    new ApiImplicitParam(value = "Pet object that needs to be added to the store", required = true, dataType = "models.Pet", paramType = "body")))
   def addPet() = Action {
     implicit request =>
       request.body.asJson match {
         case Some(e) => {
-          val pet = ScalaJsonUtil.mapper.readValue(e.toString, classOf[Pet]).asInstanceOf[Pet]
+          val pet = Json.mapper.readValue(e.toString, classOf[Pet])
           petData.addPet(pet)
           Ok
         }
@@ -76,12 +74,12 @@ class PetApiController extends BaseApiController {
     new ApiResponse(code = 404, message = "Pet not found"),
     new ApiResponse(code = 405, message = "Validation exception")))
   @ApiImplicitParams(Array(
-    new ApiImplicitParam(value = "Pet object that needs to be updated in the store", required = true, dataType = "Pet", paramType = "body")))
+    new ApiImplicitParam(value = "Pet object that needs to be updated in the store", required = true, dataType = "models.Pet", paramType = "body")))
   def updatePet() = Action {
     implicit request =>
       request.body.asJson match {
         case Some(e) => {
-          val pet = ScalaJsonUtil.mapper.readValue(e.toString, classOf[Pet]).asInstanceOf[Pet]
+          val pet = Json.mapper.readValue(e.toString, classOf[Pet])
           petData.addPet(pet)
           JsonResponse("SUCCESS")
         }
@@ -97,7 +95,7 @@ class PetApiController extends BaseApiController {
     new ApiResponse(code = 400, message = "Invalid status value")))
   def findPetsByStatus(
     @ApiParam(value = "Status values that need to be considered for filter", required = true, defaultValue = "available",
-      allowableValues = "available,pending,sold", allowMultiple = true) @QueryParam("status") status: String) = Action {
+      allowableValues = "available,pending,sold", allowMultiple = true) status: String) = Action {
     implicit request =>
       var results = petData.findPetByStatus(status)
       JsonResponse(results)
@@ -111,7 +109,7 @@ class PetApiController extends BaseApiController {
     new ApiResponse(code = 400, message = "Invalid tag value")))
   def findPetsByTags(
                       @ApiParam(value = "Tags to filter by", required = true,
-                        allowMultiple = true) @QueryParam("tags") tags: String) = Action {
+                        allowMultiple = true) tags: String) = Action {
     implicit request =>
       var results = petData.findPetByTags(tags)
       JsonResponse(results)
@@ -134,4 +132,3 @@ class PetApiController extends BaseApiController {
 }
 
 object PetApiController {}
-

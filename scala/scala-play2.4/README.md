@@ -8,7 +8,7 @@ server at http://petstore.swagger.wordnik.com/api/api-docs.json
 
 ## Version compatibility
 =======
-This version is compatible with Play 2.3.0 and Swagger 1.3.13-SNAPSHOT
+This version is compatible with Play 2.4.0 and Swagger 1.5.0-SNAPSHOT
 
 ### To build Swagger from source (optional)
 Please follow instructions to build the top-level [swagger-core project](https://github.com/swagger-api/swagger-play)
@@ -26,7 +26,14 @@ val appDependencies: Seq[sbt.ModuleID] = Seq(
 You can run the sample app as such:
 
 ````
-play run
+activator testProd
 ````
 
 The application will listen on port 9000 and respond to `http://localhost:9000/api-docs`
+
+You can test the sample app as such:
+
+
+````
+activator test
+````
