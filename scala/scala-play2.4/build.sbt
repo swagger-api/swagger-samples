@@ -10,7 +10,7 @@ libraryDependencies ++= Seq(
   javaJdbc,
   cache,
   javaWs,
-  "io.swagger"     %% "swagger-play2"      % "1.5.0-SNAPSHOT",
+  "io.swagger"     %% "swagger-play2"      % "1.5.0",
   "io.swagger"      % "swagger-parser"     % "1.0.13",
   "org.specs2"     %% "specs2-core"        % "3.6.6"            % "test",
   "org.specs2"     %% "specs2-mock"        % "3.6.6"            % "test",
