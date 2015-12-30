@@ -6,7 +6,7 @@ through network traffic inspection. When properly defined via Swagger, a consume
 remote service with a minimal amount of implementation logic. Similar to what interfaces have done for lower-level 
 programming, Swagger removes the guesswork in calling the service.
 
-Check out [Swagger-Spec](https://github.com/swagger-api/swagger-spec) for additional information about the Swagger 
+Check out [Swagger-Spec](https://github.com/OAI/OpenAPI-Specification) for additional information about the Swagger 
 project, including additional libraries with support for SpringMVC, other languages and more.
  
 ## What's here?

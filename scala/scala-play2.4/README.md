@@ -1,7 +1,7 @@
 # Swagger Playframework Sample App
 
 ## Overview
-This is a scala project to build a stand-alone server which implements the Swagger spec.  You can find out 
+This is a scala project to build a stand-alone server which implements the OpenAPI Spec.  You can find out 
 more about both the spec and the framework at http://swagger.io.  There is an online version of this
 server at [http://petstore.swagger.io](http://petstore.swagger.io)
 
