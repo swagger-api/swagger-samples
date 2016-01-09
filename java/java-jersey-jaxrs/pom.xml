@@ -18,6 +18,17 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
         <version>2.1.1</version>
+        <configuration>
+           <webResources>
+             <resource>
+             <!-- this is relative to the pom.xml directory -->
+             <directory>${project.build.directory}/swagger-ui-master/dist</directory>
+             <excludes>
+               <exclude>index.html</exclude>
+             </excludes>
+             </resource>
+           </webResources>
+        </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-failsafe-plugin</artifactId>
