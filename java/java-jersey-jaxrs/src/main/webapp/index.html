@@ -27,7 +27,7 @@
       if (url && url.length > 1) {
         url = decodeURIComponent(url[1]);
       } else {
-        url = window.location.protocol + '//' + window.location.host + '/v2/swagger.json';
+        url = 'FULL_SWAGGER_PATH/swagger.json';
       }
       window.swaggerUi = new SwaggerUi({
         url: url,
