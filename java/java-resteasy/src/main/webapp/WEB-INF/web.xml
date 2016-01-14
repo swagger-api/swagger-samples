@@ -4,11 +4,6 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee  http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
-    <context-param>
-        <param-name>resteasy.servlet.mapping.prefix</param-name>
-        <param-value>/api</param-value>
-    </context-param>
-
     <servlet>
         <servlet-name>resteasy</servlet-name>
         <servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
@@ -16,11 +11,39 @@
             <param-name>javax.ws.rs.Application</param-name>
             <param-value>io.swagger.sample.PetStoreApplication</param-value>
         </init-param>
-        <load-on-startup>1</load-on-startup>
+        <init-param>
+            <param-name>scanner.id</param-name>
+            <param-value>scanner.id.test.1</param-value>
+        </init-param>
+        <init-param>
+            <param-name>resteasy.servlet.mapping.prefix</param-name>
+            <param-value>/api-a</param-value>
+        </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>resteasy</servlet-name>
-        <url-pattern>/api/*</url-pattern>
+        <url-pattern>/api-a/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>resteasyadditional</servlet-name>
+        <servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
+        <init-param>
+            <param-name>javax.ws.rs.Application</param-name>
+            <param-value>io.swagger.sample.PetStoreApplication</param-value>
+        </init-param>
+        <init-param>
+            <param-name>scanner.id</param-name>
+            <param-value>scanner.id.test.2</param-value>
+        </init-param>
+        <init-param>
+            <param-name>resteasy.servlet.mapping.prefix</param-name>
+            <param-value>/api-b</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>resteasyadditional</servlet-name>
+        <url-pattern>/api-b/*</url-pattern>
     </servlet-mapping>
 
     <filter>
@@ -31,7 +54,21 @@
     <servlet>
         <servlet-name>Bootstrap</servlet-name>
         <servlet-class>io.swagger.sample.Bootstrap</servlet-class>
-        <load-on-startup>2</load-on-startup>
+        <init-param>
+            <param-name>scanner.id</param-name>
+            <param-value>scanner.id.test.1</param-value>
+        </init-param>
+        <load-on-startup>3</load-on-startup>
+    </servlet>
+
+    <servlet>
+        <servlet-name>BootstrapAdditional</servlet-name>
+        <servlet-class>io.swagger.sample.BootstrapAdditional</servlet-class>
+        <init-param>
+            <param-name>scanner.id</param-name>
+            <param-value>scanner.id.test.2</param-value>
+        </init-param>
+        <load-on-startup>3</load-on-startup>
     </servlet>
 
     <filter-mapping>

@@ -1,27 +1,36 @@
 package io.swagger.sample;
 
-import io.swagger.config.ScannerFactory;
 import io.swagger.jaxrs.config.AbstractScanner;
-import io.swagger.models.*;
-import io.swagger.jaxrs.config.ReflectiveJaxrsScanner;
+import io.swagger.jaxrs.config.BeanConfig;
+import io.swagger.models.Contact;
+import io.swagger.models.ExternalDocs;
+import io.swagger.models.Info;
+import io.swagger.models.License;
+import io.swagger.models.Swagger;
+import io.swagger.models.Tag;
+import io.swagger.models.auth.OAuth2Definition;
 
-import io.swagger.models.auth.*;
-
-import javax.servlet.http.HttpServlet;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 
-public class Bootstrap extends HttpServlet {
+public class BootstrapAdditional extends HttpServlet {
+
   @Override
   public void init(ServletConfig config) throws ServletException {
-    ReflectiveJaxrsScanner scanner = new ReflectiveJaxrsScanner();
-    scanner.setResourcePackage("io.swagger.sample.resource");
-    ScannerFactory.setScanner(scanner);
-    config.getServletContext().setAttribute(config.getInitParameter(AbstractScanner.ATTR_SCANNER_ID), scanner);
+
+    BeanConfig beanConfig = new BeanConfig();
+    beanConfig.setVersion("1.0.2");
+    beanConfig.setSchemes(new String[]{"http"});
+    beanConfig.setHost("localhost:8002");
+    beanConfig.setBasePath("/api-b");
+    beanConfig.setFilterClass("io.swagger.sample.util.ApiAuthorizationFilterImpl");
+    beanConfig.setResourcePackage("io.swagger.sample.resource");
+    beanConfig.setScan(true);
+
     Info info = new Info()
       .title("Swagger Petstore")
-      .version("1.0.0")
       .description("This is a sample server Petstore server.  You can find out more about Swagger " + 
         "at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, " +
         "you can use the api key `special-key` to test the authorization filters.")
@@ -33,16 +42,15 @@ public class Bootstrap extends HttpServlet {
         .url("http://www.apache.org/licenses/LICENSE-2.0.html"));
 
     ServletContext context = config.getServletContext();
+
+    context.setAttribute(config.getInitParameter(AbstractScanner.ATTR_SCANNER_ID), beanConfig);
     Swagger swagger = new Swagger()
-      .info(info)
-      .host("localhost:8002")
-      .basePath("/api");
-    swagger.securityDefinition("api_key", new ApiKeyAuthDefinition("api_key", In.HEADER));
-    swagger.securityDefinition("petstore_auth", 
+      .info(info);
+    swagger.securityDefinition("petstore_auth",
       new OAuth2Definition()
-        .implicit("http://petstore.swagger.io/api/oauth/dialog")
-        .scope("read:pets", "read your pets")
-        .scope("write:pets", "modify pets in your account"));
+        .implicit("http://localhost:8002/oauth/dialog")
+        .scope("email", "Access to your email address")
+        .scope("pets", "Access to your pets"));
     swagger.tag(new Tag()
       .name("pet")
       .description("Everything about your Pets")
@@ -54,7 +62,6 @@ public class Bootstrap extends HttpServlet {
       .name("user")
       .description("Operations about user")
       .externalDocs(new ExternalDocs("Find out more about our store", "http://swagger.io")));
-
     context.setAttribute("swagger", swagger);
   }
 }

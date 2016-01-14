@@ -1,5 +1,7 @@
 package io.swagger.sample;
 
+import io.swagger.jaxrs.config.AbstractScanner;
+import io.swagger.jaxrs.config.BeanConfig;
 import io.swagger.models.Contact;
 import io.swagger.models.ExternalDocs;
 import io.swagger.models.Info;
@@ -17,6 +19,16 @@ public class Bootstrap extends HttpServlet {
 
   @Override
   public void init(ServletConfig config) throws ServletException {
+
+    BeanConfig beanConfig = new BeanConfig();
+    beanConfig.setVersion("1.0.2");
+    beanConfig.setSchemes(new String[]{"http"});
+    beanConfig.setHost("localhost:8002");
+    beanConfig.setBasePath("/api-a");
+    beanConfig.setFilterClass("io.swagger.sample.util.ApiAuthorizationFilterImpl");
+    beanConfig.setResourcePackage("io.swagger.sample.resource");
+    beanConfig.setScan(true);
+
     Info info = new Info()
       .title("Swagger Petstore")
       .description("This is a sample server Petstore server.  You can find out more about Swagger " + 
@@ -30,6 +42,8 @@ public class Bootstrap extends HttpServlet {
         .url("http://www.apache.org/licenses/LICENSE-2.0.html"));
 
     ServletContext context = config.getServletContext();
+
+    context.setAttribute(config.getInitParameter(AbstractScanner.ATTR_SCANNER_ID), beanConfig);
     Swagger swagger = new Swagger()
       .info(info);
     swagger.securityDefinition("petstore_auth",

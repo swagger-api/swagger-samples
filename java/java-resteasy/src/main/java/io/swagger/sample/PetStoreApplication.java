@@ -1,6 +1,5 @@
 package io.swagger.sample;
 
-import io.swagger.jaxrs.config.BeanConfig;
 import io.swagger.sample.resource.PetResource;
 import io.swagger.sample.resource.PetStoreResource;
 import io.swagger.sample.resource.UserResource;
@@ -13,14 +12,6 @@ public class PetStoreApplication extends Application {
     HashSet<Object> singletons = new HashSet<Object>();
 
     public PetStoreApplication() {
-        BeanConfig beanConfig = new BeanConfig();
-        beanConfig.setVersion("1.0.2");
-        beanConfig.setSchemes(new String[]{"http"});
-        beanConfig.setHost("localhost:8002");
-        beanConfig.setBasePath("/api");
-        beanConfig.setFilterClass("io.swagger.sample.util.ApiAuthorizationFilterImpl");
-        beanConfig.setResourcePackage("io.swagger.sample.resource");
-        beanConfig.setScan(true);
     }
 
     @Override
