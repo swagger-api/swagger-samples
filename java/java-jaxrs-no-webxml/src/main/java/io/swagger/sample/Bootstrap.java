@@ -1,7 +1,9 @@
 package io.swagger.sample;
 
 import io.swagger.config.ScannerFactory;
+import io.swagger.config.SwaggerConfig;
 import io.swagger.jaxrs.config.AbstractScanner;
+import io.swagger.jaxrs.config.SwaggerContextService;
 import io.swagger.models.*;
 import io.swagger.jaxrs.config.ReflectiveJaxrsScanner;
 
@@ -18,7 +20,15 @@ public class Bootstrap extends HttpServlet {
     ReflectiveJaxrsScanner scanner = new ReflectiveJaxrsScanner();
     scanner.setResourcePackage("io.swagger.sample.resource");
     ScannerFactory.setScanner(scanner);
-    config.getServletContext().setAttribute(config.getInitParameter(AbstractScanner.ATTR_SCANNER_ID), scanner);
+    new SwaggerContextService()
+            .withServletConfig(config)
+            .withSwaggerConfig(scanner)
+            .withScanner(scanner)
+            .withScannerId(config.getInitParameter(AbstractScanner.SCANNER_ID_KEY))
+            .withConfigId(config.getInitParameter(SwaggerConfig.CONFIG_ID_KEY))
+            .initConfig()
+            .initScanner();
+
     Info info = new Info()
       .title("Swagger Petstore")
       .version("1.0.0")

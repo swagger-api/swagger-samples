@@ -9,6 +9,8 @@ import io.swagger.models.License;
 import io.swagger.models.Swagger;
 import io.swagger.models.Tag;
 import io.swagger.models.auth.OAuth2Definition;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -16,6 +18,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
 public class Bootstrap extends HttpServlet {
+
+  Logger LOGGER = LoggerFactory.getLogger(Bootstrap.class);
 
   @Override
   public void init(ServletConfig config) throws ServletException {
@@ -27,6 +31,9 @@ public class Bootstrap extends HttpServlet {
     beanConfig.setBasePath("/api-a");
     beanConfig.setFilterClass("io.swagger.sample.util.ApiAuthorizationFilterImpl");
     beanConfig.setResourcePackage("io.swagger.sample.resource");
+    beanConfig.setServletConfig(config);
+    beanConfig.setScannerId(config.getInitParameter(AbstractScanner.SCANNER_ID_KEY));
+    LOGGER.debug("Bootstrap init: " + beanConfig.getScannerId());
     beanConfig.setScan(true);
 
     Info info = new Info()
@@ -43,7 +50,6 @@ public class Bootstrap extends HttpServlet {
 
     ServletContext context = config.getServletContext();
 
-    context.setAttribute(config.getInitParameter(AbstractScanner.ATTR_SCANNER_ID), beanConfig);
     Swagger swagger = new Swagger()
       .info(info);
     swagger.securityDefinition("petstore_auth",

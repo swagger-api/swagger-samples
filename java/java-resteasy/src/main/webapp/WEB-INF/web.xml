@@ -12,8 +12,8 @@
             <param-value>io.swagger.sample.PetStoreApplication</param-value>
         </init-param>
         <init-param>
-            <param-name>scanner.id</param-name>
-            <param-value>scanner.id.test.1</param-value>
+            <param-name>swagger.scanner.id</param-name>
+            <param-value>test.1</param-value>
         </init-param>
         <init-param>
             <param-name>resteasy.servlet.mapping.prefix</param-name>
@@ -33,8 +33,8 @@
             <param-value>io.swagger.sample.PetStoreApplication</param-value>
         </init-param>
         <init-param>
-            <param-name>scanner.id</param-name>
-            <param-value>scanner.id.test.2</param-value>
+            <param-name>swagger.scanner.id</param-name>
+            <param-value>test.2</param-value>
         </init-param>
         <init-param>
             <param-name>resteasy.servlet.mapping.prefix</param-name>
@@ -55,8 +55,8 @@
         <servlet-name>Bootstrap</servlet-name>
         <servlet-class>io.swagger.sample.Bootstrap</servlet-class>
         <init-param>
-            <param-name>scanner.id</param-name>
-            <param-value>scanner.id.test.1</param-value>
+            <param-name>swagger.scanner.id</param-name>
+            <param-value>test.1</param-value>
         </init-param>
         <load-on-startup>3</load-on-startup>
     </servlet>
@@ -65,8 +65,8 @@
         <servlet-name>BootstrapAdditional</servlet-name>
         <servlet-class>io.swagger.sample.BootstrapAdditional</servlet-class>
         <init-param>
-            <param-name>scanner.id</param-name>
-            <param-value>scanner.id.test.2</param-value>
+            <param-name>swagger.scanner.id</param-name>
+            <param-value>test.2</param-value>
         </init-param>
         <load-on-startup>3</load-on-startup>
     </servlet>
