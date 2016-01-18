@@ -16,7 +16,7 @@ public class Bootstrap extends HttpServlet {
   public void init(ServletConfig config) throws ServletException {
     ReflectiveJaxrsScanner scanner = new ReflectiveJaxrsScanner();
     scanner.setResourcePackage("io.swagger.sample.resource");
-    ScannerFactory.setScanner(scanner);
+    ScannerFactory.setScanner(scanner, "localhost:8002", "api");
     Info info = new Info()
       .title("Swagger Petstore")
       .version("1.0.0")
