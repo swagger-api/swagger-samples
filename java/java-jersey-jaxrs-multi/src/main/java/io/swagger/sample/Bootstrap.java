@@ -1,11 +1,11 @@
 package io.swagger.sample;
 
+import io.swagger.jaxrs.config.SwaggerContextService;
 import io.swagger.models.*;
 
 import io.swagger.models.auth.*;
 
 import javax.servlet.http.HttpServlet;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 
@@ -17,14 +17,13 @@ public class Bootstrap extends HttpServlet {
       .description("This is a sample server Petstore server.  You can find out more about Swagger " + 
         "at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, " +
         "you can use the api key `special-key` to test the authorization filters.")
-      .termsOfService("http://swagger.io/terms/")
+      .termsOfService("http://swagger.io1/terms/")
       .contact(new Contact()
         .email("apiteam@swagger.io"))
       .license(new License()
         .name("Apache 2.0")
         .url("http://www.apache.org/licenses/LICENSE-2.0.html"));
 
-    ServletContext context = config.getServletContext();
     Swagger swagger = new Swagger().info(info);
     swagger.externalDocs(new ExternalDocs("Find out more about Swagger", "http://swagger.io"));
     swagger.securityDefinition("api_key", new ApiKeyAuthDefinition("api_key", In.HEADER));
@@ -45,6 +44,6 @@ public class Bootstrap extends HttpServlet {
       .description("Operations about user")
       .externalDocs(new ExternalDocs("Find out more about our store", "http://swagger.io")));
 
-    context.setAttribute("swagger", swagger);
+    new SwaggerContextService().withServletConfig(config).updateSwagger(swagger);
   }
 }
