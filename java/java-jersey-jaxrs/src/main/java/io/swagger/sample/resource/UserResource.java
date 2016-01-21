@@ -18,18 +18,18 @@ package io.swagger.sample.resource;
 
 import io.swagger.annotations.*;
 import io.swagger.sample.data.UserData;
-import io.swagger.sample.model.User;
 import io.swagger.sample.exception.ApiException;
 import io.swagger.sample.exception.NotFoundException;
+import io.swagger.sample.model.User;
 
-import java.util.Date;
-
-import javax.ws.rs.core.Response;
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.util.Date;
 
 @Path("/user")
 @Api(value="/user", description = "Operations about user")
-@Produces({"application/json", "application/xml"})
+@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public class UserResource {
   static UserData userData = new UserData();
 

@@ -28,7 +28,7 @@ import javax.ws.rs.*;
 
 @Path("/store")
 @Api(value="/store", tags = "store")
-@Produces({"application/json", "application/xml"})
+@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public class PetStoreResource {
   static StoreData storeData = new StoreData();
   static PetData petData = new PetData();
