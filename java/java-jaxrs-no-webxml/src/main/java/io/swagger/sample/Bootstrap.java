@@ -4,6 +4,7 @@ import io.swagger.config.ScannerFactory;
 import io.swagger.models.*;
 import io.swagger.jaxrs.config.ReflectiveJaxrsScanner;
 
+import io.swagger.jaxrs.config.SwaggerContextService;
 import io.swagger.models.auth.*;
 
 import javax.servlet.http.HttpServlet;
@@ -53,6 +54,6 @@ public class Bootstrap extends HttpServlet {
       .description("Operations about user")
       .externalDocs(new ExternalDocs("Find out more about our store", "http://swagger.io")));
 
-    context.setAttribute("swagger", swagger);
+    new SwaggerContextService().withServletConfig(config).updateSwagger(swagger);
   }
 }

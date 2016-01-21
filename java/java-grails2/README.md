@@ -1,7 +1,7 @@
 # Swagger Sample App
 
 ## Overview
-This is a grails project to build a stand-alone server which implements the Swagger spec.  You can find out more about both the spec and the framework at http://swagger.io. There is an online version similar to this server at http://petstore.swagger.io/v2/swagger.json
+This is a grails project to build a stand-alone server which implements the OpenAPI Spec.  You can find out more about both the spec and the framework at http://swagger.io. There is an online version similar to this server at http://petstore.swagger.io/v2/swagger.json
 
 ### Running the app
 You do not need to install Grails separately to run this project.  

@@ -1,5 +1,5 @@
 /**
- *  Copyright 2015 SmartBear Software
+ *  Copyright 2016 SmartBear Software
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -16,20 +16,16 @@
 
 package io.swagger.sample;
 
+import io.swagger.jaxrs.config.SwaggerContextService;
+import io.swagger.models.*;
+import io.swagger.models.auth.ApiKeyAuthDefinition;
+import io.swagger.models.auth.In;
+import io.swagger.models.auth.OAuth2Definition;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
-
-import io.swagger.models.Contact;
-import io.swagger.models.ExternalDocs;
-import io.swagger.models.Info;
-import io.swagger.models.License;
-import io.swagger.models.Swagger;
-import io.swagger.models.Tag;
-import io.swagger.models.auth.ApiKeyAuthDefinition;
-import io.swagger.models.auth.In;
-import io.swagger.models.auth.OAuth2Definition;
 
 public class Bootstrap extends HttpServlet {
   private static final long serialVersionUID = 1L;
@@ -69,6 +65,6 @@ public class Bootstrap extends HttpServlet {
       .description("Operations about user")
       .externalDocs(new ExternalDocs("Find out more about our store", "http://swagger.io")));
 
-    context.setAttribute("swagger", swagger);
+    new SwaggerContextService().withServletConfig(config).updateSwagger(swagger);
   }
 }

@@ -1,7 +1,7 @@
 # Swagger CXF Sample App
 
 ## Overview
-This is a java project to build a stand-alone server which implements the Swagger spec.  You can find out 
+This is a java project to build a stand-alone server which implements the OpenAPI Spec.  You can find out 
 more about both the spec and the framework at http://swagger.io.
 
 This sample creates an `application` context through the `applicationContext.xml`, allowing the `JAXRSServerFactoryBean` 
