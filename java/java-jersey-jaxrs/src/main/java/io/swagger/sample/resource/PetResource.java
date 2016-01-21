@@ -16,36 +16,30 @@
 
 package io.swagger.sample.resource;
 
-import io.swagger.annotations.*;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.sample.data.PetData;
-import io.swagger.sample.model.Pet;
-import io.swagger.sample.exception.NotFoundException;
-
 import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.multipart.FormDataParam;
-
+import io.swagger.annotations.*;
+import io.swagger.sample.data.PetData;
+import io.swagger.sample.exception.NotFoundException;
+import io.swagger.sample.model.Pet;
 import org.apache.commons.io.IOUtils;
-
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.InputStream;
-import java.io.FileOutputStream;
-import java.util.List;
-
-import org.slf4j.*;
-
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.util.List;
 
 @Path("/pet")
 @Api(value = "/pet", authorizations = {
-  @Authorization(value = "petstore_auth",
+  /*@Authorization(value = "petstore_auth",
   scopes = {
     @AuthorizationScope(scope = "write:pets", description = "modify pets in your account"),
     @AuthorizationScope(scope = "read:pets", description = "read your pets")
-  })
+  })*/
 }, tags = "pet")
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public class PetResource {
