@@ -289,6 +289,9 @@
     </profile>
   </profiles>
   <modules>
+    <module>java/inflector-dropwizard-guice</module>
+    <module>java/inflector-dropwizard</module>
+    <module>java/inflector-jetty-webxml</module>
     <module>java/java-dropwizard</module>
     <module>java/java-grails2</module>
     <module>java/java-resteasy-spring</module>
