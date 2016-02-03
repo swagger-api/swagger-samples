@@ -17,7 +17,7 @@ class IntegrationSpec extends Specification {
 
     "have the proper resource metadata" in {
       running(TestServer(3333)) {
-      	val json = Source.fromURL("http://localhost:3333/api-docs").mkString
+      	val json = Source.fromURL("http://localhost:3333/swagger.json").mkString
         val swagger: Swagger = new SwaggerParser().parse(json)
       	swagger.getSwagger must_==("2.0")
       }
@@ -25,7 +25,7 @@ class IntegrationSpec extends Specification {
 
     "contain all apis defined in the routes without api key" in {
     	running(TestServer(3333)) {
-      	val json = Source.fromURL("http://localhost:3333/api-docs").mkString
+      	val json = Source.fromURL("http://localhost:3333/swagger.json").mkString
         val swagger: Swagger = new SwaggerParser().parse(json)
 		    swagger.getPaths.size must_==(6)
         var count = 0
@@ -38,7 +38,7 @@ class IntegrationSpec extends Specification {
 
     "contain all operations defined in the pet resource without api key" in {
     	running(TestServer(3333)) {
-      	val json = Source.fromURL("http://localhost:3333/api-docs/pet").mkString
+      	val json = Source.fromURL("http://localhost:3333/pet/swagger.json").mkString
         val swagger: Swagger = new SwaggerParser().parse(json)
 		    (swagger.getDefinitions.keySet().asScala &
 		      Set(
@@ -51,7 +51,7 @@ class IntegrationSpec extends Specification {
 
     "contain models without api key" in {
       running(TestServer(3333)) {
-      val json = Source.fromURL("http://localhost:3333/api-docs/pet").mkString
+      val json = Source.fromURL("http://localhost:3333/pet/swagger.json").mkString
         val swagger: Swagger = new SwaggerParser().parse(json)
         (swagger.getPaths.keySet().asScala &
           Set(
@@ -64,7 +64,7 @@ class IntegrationSpec extends Specification {
 
     "no apis from store resource without valid api key" in {
       running(TestServer(3333)) {
-        val json = Source.fromURL("http://localhost:3333/api-docs/store").mkString
+        val json = Source.fromURL("http://localhost:3333/store/swagger.json").mkString
         val swagger: Swagger = new SwaggerParser().parse(json)
         Option(swagger.getPaths.keySet().asScala) must_==(Some(Set.empty))
       }
@@ -86,23 +86,23 @@ class IntegrationSpec extends Specification {
 
     "contain apis from store resource valid api key" in {
       running(TestServer(3333)) {
-        val json = Source.fromURL("http://localhost:3333/api-docs/store?api_key=special-key").mkString
+        val json = Source.fromURL("http://localhost:3333/store/swagger.json?api_key=special-key").mkString
         val swagger: Swagger = new SwaggerParser().parse(json)
-        swagger.getPaths.size must_==(2)
+        swagger.getPaths.size must_==(3)
       }
     }
 
     "contain correct models from store resource valid api key" in {
       running(TestServer(3333)) {
-        val json = Source.fromURL("http://localhost:3333/api-docs/store?api_key=special-key").mkString
+        val json = Source.fromURL("http://localhost:3333/store/swagger.json?api_key=special-key").mkString
         val swagger: Swagger = new SwaggerParser().parse(json)
-        swagger.getDefinitions.size must_==(5)
+        swagger.getDefinitions.size must_==(6)
       }
     }
 
     "contain all operations defined in the pet resource with api key" in {
     	running(TestServer(3333)) {
-      	val json = Source.fromURL("http://localhost:3333/api-docs/pet?api_key=special-key").mkString
+      	val json = Source.fromURL("http://localhost:3333/pet/swagger.json?api_key=special-key").mkString
         val swagger: Swagger = new SwaggerParser().parse(json)
 		    (swagger.getPaths.keySet().asScala &
 		      Set(
