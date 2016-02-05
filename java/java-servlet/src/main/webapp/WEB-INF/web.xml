@@ -17,7 +17,6 @@
     <servlet>
         <servlet-name>DefaultServletConfig</servlet-name>
         <servlet-class>io.swagger.servlet.config.DefaultServletConfig</servlet-class>
-        <load-on-startup>2</load-on-startup>
         <init-param>
             <param-name>swagger.resource.package</param-name>
             <param-value>io.swagger.sample.servlet</param-value>
@@ -30,6 +29,7 @@
             <param-name>api.version</param-name>
             <param-value>1.0.0</param-value>
         </init-param>
+        <load-on-startup>2</load-on-startup>
     </servlet>
 
     <!-- swagger api declaration -->
