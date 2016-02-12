@@ -65,6 +65,18 @@ class StoreApiController extends BaseApiController {
       storeData.deleteOrder(getLong(0, 10000, 0, orderId))
       Ok
   }
+
+    @ApiOperation(value = "get Orders with query and implicit params as Option[Int] type",
+      nickname = "getOrders",
+      notes = "Returns orders",
+      response = classOf[models.Order],
+      responseContainer = "List",
+      httpMethod = "GET")
+    @ApiImplicitParams(Array(
+      new ApiImplicitParam(name = "limitimplicit", value = "Number of orders", required = false, dataType = "Option[Int]", paramType = "query")))
+    def listOrdersOption(limit:  Option[Int]) = Action {
+      request => Ok("test case")
+    }
 }
 
 object StoreApiController {}

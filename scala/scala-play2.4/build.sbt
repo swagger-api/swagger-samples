@@ -4,7 +4,7 @@ version := "1.5.1-SNAPSHOT"
 
 lazy val root = (project in file(".")).enablePlugins(PlayJava)
 
-scalaVersion := "2.11.6"
+scalaVersion := "2.11.7"
 
 libraryDependencies ++= Seq(
   javaJdbc,
@@ -12,9 +12,9 @@ libraryDependencies ++= Seq(
   javaWs,
   "io.swagger"        %% "swagger-play2"              % "1.5.1",
   "io.swagger"         % "swagger-parser"             % "1.0.16",
-  "org.specs2"        %% "specs2-core"                % "3.6"              % "test",
-  "org.specs2"        %% "specs2-mock"                % "3.6"              % "test",
-  "org.specs2"        %% "specs2-junit"               % "3.6"              % "test",
+  "org.specs2"        %% "specs2-core"                % "3.6.6"            % "test",
+  "org.specs2"        %% "specs2-mock"                % "3.6.6"            % "test",
+  "org.specs2"        %% "specs2-junit"               % "3.6.6"            % "test",
   "org.mockito"        % "mockito-core"               % "1.9.5"            % "test"
 )
 

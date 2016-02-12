@@ -31,7 +31,7 @@ public class IntegrationTest {
               RequestBuilder request = new RequestBuilder();
               request = new RequestBuilder()
               .method(GET)
-              .uri("/api-docs");              
+              .uri("/swagger.json");
               Result result = route(request);
               assertEquals(OK, result.status());
               JsonNode json = Json.parse(contentAsString(result));

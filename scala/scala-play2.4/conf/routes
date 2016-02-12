@@ -9,6 +9,7 @@ GET     /swagger.json           controllers.ApiHelpController.getResources
 
 OPTIONS /*wholepath             @controllers.PetApiController.getOptions(wholepath)
 
+GET     /pet/swagger.json       controllers.ApiHelpController.getResource(path = "/pet")
 POST    /pet                    @controllers.PetApiController.addPet
 POST    /pet/:id                @controllers.PetApiController.attachImage(id)
 PUT     /pet                    @controllers.PetApiController.updatePet
@@ -16,11 +17,14 @@ GET     /pet/findByStatus       @controllers.PetApiController.findPetsByStatus(s
 GET     /pet/findByTags         @controllers.PetApiController.findPetsByTags(tags)
 GET     /pet/:id                @controllers.PetApiController.getPetById(id)
 
+GET     /store/swagger.json     controllers.ApiHelpController.getResource(path = "/store")
 POST    /store/order            controllers.StoreApiController.placeOrder
 GET     /store/order            controllers.StoreApiController.getOrders(isComplete:Boolean)
+GET     /store/order43          @controllers.StoreApiController.listOrdersOption(limit: Option[Int])
 GET     /store/order/:orderId   controllers.StoreApiController.getOrderById(orderId)
 DELETE  /store/order/:orderId   controllers.StoreApiController.deleteOrder(orderId)
 
+GET     /user/swagger.json      controllers.ApiHelpController.getResource(path = "/user")
 POST    /user                   controllers.UserApiController.createUser
 POST    /user/createWithArray   controllers.UserApiController.createUsersWithArrayInput
 POST    /user/createWithList    controllers.UserApiController.createUsersWithListInput
