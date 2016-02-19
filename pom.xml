@@ -304,6 +304,7 @@
     <module>java/java-jaxrs-no-annotations</module>
     <module>java/java-resteasy</module>
     <module>java/java-jersey-spring</module>
+    <module>java/java-jersey-governator</module>
     <module>java/java-jersey2-guice</module>
     <module>java/java-jaxrs-wink</module>
     <module>java/java-jaxrs-cxf</module>
