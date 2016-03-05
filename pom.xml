@@ -301,8 +301,10 @@
     <module>java/java-jaxrs-no-webxml</module>
     <module>java/java-mule</module>
     <module>java/java-jersey-jaxrs</module>
+    <module>java/java-jersey-jaxrs-multi</module>
     <module>java/java-jaxrs-no-annotations</module>
     <module>java/java-resteasy</module>
+    <module>java/java-resteasy-filter</module>
     <module>java/java-jersey-spring</module>
     <module>java/java-jersey-governator</module>
     <module>java/java-jersey2-guice</module>
