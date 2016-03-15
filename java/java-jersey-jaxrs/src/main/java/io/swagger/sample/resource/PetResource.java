@@ -35,11 +35,11 @@ import java.util.List;
 
 @Path("/pet")
 @Api(value = "/pet", authorizations = {
-  /*@Authorization(value = "petstore_auth",
+  @Authorization(value = "petstore_auth",
   scopes = {
     @AuthorizationScope(scope = "write:pets", description = "modify pets in your account"),
     @AuthorizationScope(scope = "read:pets", description = "read your pets")
-  })*/
+  })
 }, tags = "pet")
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public class PetResource {
