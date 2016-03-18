@@ -50,6 +50,7 @@ public class Bootstrap extends HttpServlet {
             .description("Operations about user")
             .externalDocs(new ExternalDocs("Find out more about our store", "http://swagger.io")));
     context.setAttribute("swagger", swagger);
+
     /* or use new mechanism @since 1.5.7 */
     //new SwaggerContextService().withServletConfig(config).updateSwagger(swagger);
   }
