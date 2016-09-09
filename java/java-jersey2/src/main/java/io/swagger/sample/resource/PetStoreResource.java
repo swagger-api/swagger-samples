@@ -20,9 +20,13 @@ import io.swagger.annotations.*;
 import io.swagger.sample.data.StoreData;
 import io.swagger.sample.model.AuthenticationInfo;
 import io.swagger.sample.model.Order;
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
+import org.glassfish.jersey.media.multipart.FormDataParam;
 
-import javax.ws.rs.core.Response;
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.io.InputStream;
 
 @Path("/store")
 @Api(value="/store" , description = "Operations about store")
@@ -46,6 +50,37 @@ public class PetStoreResource {
       return Response.ok().entity(order).build();
     } else {
       throw new io.swagger.sample.exception.NotFoundException(404, "Order not found");
+    }
+  }
+
+
+  @POST
+  @Path("/{petId}/uploadImage")
+  @Consumes({MediaType.MULTIPART_FORM_DATA})
+  @Produces({MediaType.APPLICATION_JSON})
+  @ApiOperation(value = "uploads an image",
+          response = io.swagger.sample.model.ApiResponse.class)
+  public Response uploadFile(
+          @ApiParam(value = "ID of pet to update", required = true) @PathParam("petId") Long petId,
+          @ApiParam(value = "Additional data to pass to server") @FormDataParam("additionalMetadata") String testString,
+          @ApiParam(value = "file to upload") @FormDataParam("file") InputStream inputStream,
+          @ApiParam(value = "file detail") @FormDataParam("file") FormDataContentDisposition fileDetail) {
+    try {
+      String msg = null;
+      if(inputStream != null) {
+        String uploadedFileLocation = "./" + fileDetail.getFileName();
+        System.out.println("uploading to " + uploadedFileLocation);
+//        IOUtils.copy(inputStream, new FileOutputStream(uploadedFileLocation));
+        msg = "additionalMetadata: " + testString + "\nFile uploaded to " + uploadedFileLocation + ", " + (new java.io.File(uploadedFileLocation)).length() + " bytes";
+      }
+      else {
+        msg = "additionalMetadata: " + testString + ", no file supplied";
+      }
+      io.swagger.sample.model.ApiResponse output = new io.swagger.sample.model.ApiResponse(200, msg);
+      return Response.status(200).entity(output).build();
+    }
+    catch (Exception e) {
+      return Response.status(500).build();
     }
   }
 
