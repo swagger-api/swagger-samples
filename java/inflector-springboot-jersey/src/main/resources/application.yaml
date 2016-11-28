@@ -1,0 +1,14 @@
+server:
+    port: 8080
+    servlet-path: /
+spring:
+  application:
+    name: inflector-springboot-jersey
+  jersey:
+    application-path: /api
+  jackson:
+    date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+    default-property-inclusion: NON_ABSENT
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+      INDENT_OUTPUT: true
