@@ -21,7 +21,7 @@ import io.swagger.sample.model.User;
 import java.util.*;
 
 public class UserData {
-  static List<User> users = Collections.synchronizedList( new ArrayList<User>() );
+  static List<User> users = new ArrayList<User>();
 
   static {
     users.add(createUser(1, "user1", "first name 1", "last name 1",

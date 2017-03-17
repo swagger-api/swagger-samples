@@ -24,8 +24,8 @@ import java.util.*;
 
 public class PetData {
 
-  static List<Pet> pets = Collections.synchronizedList(new ArrayList<Pet>());
-  static List<Category> categories = Collections.synchronizedList(new ArrayList<Category>());
+  static List<Pet> pets = new ArrayList<Pet>();
+  static List<Category> categories = new ArrayList<Category>();
 
   static {
     categories.add(createCategory(1, "Dogs"));
@@ -59,9 +59,11 @@ public class PetData {
   }
 
   public Pet getPetById(long petId) {
+    synchronized (pets) {
     for (Pet pet : pets) {
-      if (pet.getId() == petId) {
-        return pet;
+        if (pet.getId() == petId) {
+          return pet;
+        }
       }
     }
     return null;

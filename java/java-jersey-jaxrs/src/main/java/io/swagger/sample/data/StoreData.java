@@ -21,7 +21,7 @@ import io.swagger.sample.model.Order;
 import java.util.*;
 
 public class StoreData {
-  static List<Order> orders = Collections.synchronizedList(new ArrayList<Order>());
+  static List<Order> orders = new ArrayList<Order>();
 
   static {
     orders.add(createOrder(1, 1, 2, new Date(), "placed"));
