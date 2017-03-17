@@ -18,12 +18,10 @@ package io.swagger.sample.data;
 
 import io.swagger.sample.model.Order;
 
-import java.util.Date;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
 public class StoreData {
-  static List<Order> orders = new ArrayList<Order>();
+  static List<Order> orders = Collections.synchronizedList(new ArrayList<Order>());
 
   static {
     orders.add(createOrder(1, 1, 2, new Date(), "placed"));
@@ -39,32 +37,38 @@ public class StoreData {
   }
 
   public Order findOrderById(long orderId) {
-    for (Order order : orders) {
-      if (order.getId() == orderId) {
-        return order;
+    synchronized (orders) {
+      for (Order order : orders) {
+        if (order.getId() == orderId) {
+          return order;
+        }
       }
     }
     return null;
   }
 
   public Order placeOrder(Order order) {
-    if (orders.size() > 0) {
-      for (int i = orders.size() - 1; i >= 0; i--) {
-        if (orders.get(i).getId() == order.getId()) {
-          orders.remove(i);
-        }
+    synchronized (orders) {
+      if (orders.size() > 0) {
+          for (int i = orders.size() - 1; i >= 0; i--) {
+            if (orders.get(i).getId() == order.getId()) {
+              orders.remove(i);
+            }
+          }
+        orders.add(order);
       }
+      return order;
     }
-    orders.add(order);
-    return order;
   }
 
   public boolean deleteOrder(long orderId) {
     if (orders.size() > 0) {
-      for (int i = orders.size() - 1; i >= 0; i--) {
-        if (orders.get(i).getId() == orderId) {
-          orders.remove(i);
-          return true;
+      synchronized (orders) {
+        for (int i = orders.size() - 1; i >= 0; i--) {
+          if (orders.get(i).getId() == orderId) {
+            orders.remove(i);
+            return true;
+          }
         }
       }
     }
