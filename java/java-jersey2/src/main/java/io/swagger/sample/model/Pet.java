@@ -16,12 +16,13 @@
 
 package io.swagger.sample.model;
 
-import io.swagger.annotations.*;
+import io.swagger.oas.annotations.media.Schema;
 
-import java.util.List;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
-
-import javax.xml.bind.annotation.*;
+import java.util.List;
 
 @XmlRootElement(name = "Pet")
 public class Pet {
@@ -80,7 +81,7 @@ public class Pet {
   }
 
   @XmlElement(name = "status")
-  @ApiModelProperty(value = "pet status in the store", allowableValues = "available,pending,sold")
+  @Schema(description = "pet status in the store", _enum = "available,pending,sold")
   public String getStatus() {
     return status;
   }
