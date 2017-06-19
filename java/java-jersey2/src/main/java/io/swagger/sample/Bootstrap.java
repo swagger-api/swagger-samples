@@ -2,6 +2,7 @@ package io.swagger.sample;
 
 import io.swagger.jaxrs2.Reader;
 import io.swagger.oas.models.OpenAPI;
+import io.swagger.sample.resource.Metadata;
 import io.swagger.sample.resource.PetResource;
 import io.swagger.sample.resource.UserResource;
 
@@ -16,12 +17,11 @@ public class Bootstrap extends HttpServlet {
 
     Reader reader = new Reader(oas, null);
 
-    oas = reader.read(UserResource.class);
-    oas = reader.read(PetResource.class);
-    config.getServletContext().setAttribute("oas", oas);
+    reader.read(Metadata.class);
+    reader.read(UserResource.class);
+    reader.read(PetResource.class);
 
-
-
+    config.getServletContext().setAttribute("oas", reader.getOpenAPI());
 
     /*
     Info info = new Info()
