@@ -21,7 +21,7 @@ public class SwaggerListingResource {
     @GET
     @Produces({MediaType.APPLICATION_JSON, "application/yaml"})
     public Response getSwagger(@PathParam("type") String type) throws Exception {
-        OpenAPI oas = (OpenAPI)config.getServletContext().getAttribute("oas");
+        OpenAPI oas = (OpenAPI) config.getServletContext().getAttribute("oas");
         if (StringUtils.isNotBlank(type) && type.trim().equalsIgnoreCase("yaml")) {
             return Response.status(Response.Status.OK)
                     .entity(Yaml.mapper().writeValueAsString(oas))

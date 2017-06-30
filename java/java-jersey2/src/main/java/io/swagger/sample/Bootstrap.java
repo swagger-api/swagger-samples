@@ -11,17 +11,17 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
 public class Bootstrap extends HttpServlet {
-  @Override
-  public void init(ServletConfig config) throws ServletException {
-    OpenAPI oas = new OpenAPI();
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        OpenAPI oas = new OpenAPI();
 
-    Reader reader = new Reader(oas, null);
+        Reader reader = new Reader(oas, null);
 
-    reader.read(Metadata.class);
-    reader.read(UserResource.class);
-    reader.read(PetResource.class);
+        reader.read(Metadata.class);
+        reader.read(UserResource.class);
+        reader.read(PetResource.class);
 
-    config.getServletContext().setAttribute("oas", reader.getOpenAPI());
+        config.getServletContext().setAttribute("oas", reader.getOpenAPI());
 
     /*
     Info info = new Info()
@@ -46,5 +46,5 @@ public class Bootstrap extends HttpServlet {
         .scope("write:pets", "modify pets in your account"));
     new SwaggerContextService().withServletConfig(config).updateSwagger(swagger);
     */
-  }
+    }
 }

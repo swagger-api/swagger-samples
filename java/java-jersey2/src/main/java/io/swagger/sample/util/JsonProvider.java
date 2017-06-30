@@ -12,7 +12,9 @@ public class JsonProvider implements ContextResolver<ObjectMapper> {
 
     public JsonProvider() {
         objectMapper = Json.mapper();
-    };
+    }
+
+    ;
 
     @Override
     public ObjectMapper getContext(Class<?> type) {
