@@ -62,6 +62,7 @@ public class PetResource {
   }
 
   @POST
+  @Consumes("application/json")
   @Operation(summary = "Add a new pet to the store",
     responses = {
           @ApiResponse(responseCode = "405", description = "Invalid input")
