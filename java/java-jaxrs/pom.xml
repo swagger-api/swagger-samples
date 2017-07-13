@@ -83,6 +83,7 @@
               <goal>wget</goal>
             </goals>
             <configuration>
+              <skipCache>true</skipCache>
               <url>https://github.com/swagger-api/swagger-ui/archive/master.tar.gz</url>
               <unpack>true</unpack>
               <outputDirectory>${project.build.directory}</outputDirectory>
@@ -118,12 +119,7 @@
     </plugins>
   </build>
   <dependencies>
-    <dependency>
-      <groupId>io.swagger</groupId>
-      <artifactId>swagger-jaxrs</artifactId>
-      <version>${swagger-version}</version>
-      <scope>compile</scope>
-    </dependency>
+
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
@@ -162,6 +158,17 @@
       <groupId>com.sun.jersey</groupId>
       <artifactId>jersey-servlet</artifactId>
     </dependency>
+    <dependency>
+      <groupId>vuk</groupId>
+      <artifactId>vuk</artifactId>
+      <version>2</version>      
+    </dependency>
+        <!-- <dependency>
+      <groupId>io.swagger</groupId>
+      <artifactId>swagger-jaxrs</artifactId>
+      <version>${swagger-version}</version>
+      <scope>compile</scope>
+    </dependency> -->
   </dependencies>
   <properties>
     <coverage.complexity.minimum>0</coverage.complexity.minimum>

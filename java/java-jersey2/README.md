@@ -24,9 +24,9 @@ There is an HTML5-based API tool bundled in this sample--you can view it it at [
 The sample app has an implementation of the Swagger ApiAuthorizationFilter.  This restricts access to resources
 based on api-key.  There are two keys defined in the sample app:
 
-<li>- default-key</li>
+`default-key`
 
-<li>- special-key</li>
+`special-key`
 
 When no key is applied, the "default-key" is applied to all operations.  If the "special-key" is entered, a
 number of other resources are shown in the UI, including sample CRUD operations.

@@ -16,11 +16,11 @@
 
 package io.swagger.sample.model;
 
-import io.swagger.annotations.*;
+import io.swagger.oas.annotations.media.Schema;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
-
-import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name = "Order")
 public class Order {
@@ -68,7 +68,7 @@ public class Order {
   }
 
   @XmlElement(name = "status")
-  @ApiModelProperty(value = "Order Status", allowableValues = "placed, approved, delivered")
+  @Schema(description = "Order Status", _enum = "placed, approved, delivered")
   public String getStatus() {
     return status;
   }
