@@ -1,5 +1,5 @@
 /**
- *  Copyright 2016 SmartBear Software
+ *  Copyright 2015 SmartBear Software
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package io.swagger.sample.model;
 
 import io.swagger.annotations.*;
+import io.swagger.oas.annotations.media.Schema;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -24,7 +25,6 @@ import java.util.ArrayList;
 import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name = "Pet")
-@ApiModel(value = "Pet", subTypes = {Cat.class}, discriminator = "type")
 public class Pet {
   private long id;
   private Category category;
@@ -82,7 +82,11 @@ public class Pet {
   }
 
   @XmlElement(name = "status")
-  @ApiModelProperty(value = "pet status in the store", allowableValues = "available,pending,sold")
+  @Schema(
+		  name = "status",
+		  title = "pet status in the store",
+		  _enum = {"available", "pending", "sold"}
+		 )
   public String getStatus() {
     return status;
   }
@@ -90,16 +94,4 @@ public class Pet {
   public void setStatus(String status) {
     this.status = status;
   }
-
-  private String type;
-
-  @ApiModelProperty(required = true)
-  public String getType() {
-    return type;
-  }
-
-  public void setType(String type) {
-    this.type = type;
-  }
-
 }

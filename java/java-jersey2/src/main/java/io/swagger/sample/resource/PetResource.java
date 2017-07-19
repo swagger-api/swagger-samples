@@ -16,28 +16,43 @@
 
 package io.swagger.sample.resource;
 
-import io.swagger.annotations.*;
+import io.swagger.oas.annotations.Operation;
+import io.swagger.oas.annotations.Parameter;
+import io.swagger.oas.annotations.media.Content;
+import io.swagger.oas.annotations.media.Schema;
+import io.swagger.oas.annotations.responses.ApiResponse;
 import io.swagger.sample.data.PetData;
 import io.swagger.sample.model.Pet;
 
+import javax.ws.rs.BeanParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.*;
 
 @Path("/pet")
-@Api(tags = {"pet"})
 @Produces({"application/json", "application/xml"})
 public class PetResource {
   static PetData petData = new PetData();
 
   @GET
   @Path("/{petId}")
-  @ApiOperation(value = "Find pet by ID", 
-    notes = "Returns a pet when 0 < ID <= 10.  ID > 10 or nonintegers will simulate API error conditions",
-    response = Pet.class)
-  @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid ID supplied"),
-      @ApiResponse(code = 404, message = "Pet not found") })
+  @Operation(summary = "Find pet by ID",
+    description = "Returns a pet when 0 < ID <= 10.  ID > 10 or nonintegers will simulate API error conditions",
+    responses = {
+            @ApiResponse(description = "The pet", content = @Content(
+                    schema = @Schema(implementation = Pet.class)
+            )),
+            @ApiResponse(responseCode = "400", description = "Invalid ID supplied"),
+            @ApiResponse(responseCode = "404", description = "Pet not found")
+    })
   public Response getPetById(
-      @ApiParam(value = "ID of pet that needs to be fetched", allowableValues = "range[1,10]", required = true)
+      @Parameter(description = "ID of pet that needs to be fetched"/*, _enum = "range[1,10]"*/, required = true)
       @PathParam("petId") Long petId) throws io.swagger.sample.exception.NotFoundException {
     Pet pet = petData.getPetById(petId);
     if (null != pet) {
@@ -48,34 +63,43 @@ public class PetResource {
   }
 
   @POST
-  @ApiOperation(value = "Add a new pet to the store")
-  @ApiResponses(value = { @ApiResponse(code = 405, message = "Invalid input") })
+  @Consumes("application/json")
+  @Operation(summary = "Add a new pet to the store",
+    responses = {
+          @ApiResponse(responseCode = "405", description = "Invalid input")
+  })
   public Response addPet(
-      @ApiParam(value = "Pet object that needs to be added to the store", required = true) Pet pet) {
+      @Parameter(description = "Pet object that needs to be added to the store", required = true) Pet pet) {
     petData.addPet(pet);
     return Response.ok().entity("SUCCESS").build();
   }
 
   @PUT
-  @ApiOperation(value = "Update an existing pet")
-  @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid ID supplied"),
-      @ApiResponse(code = 404, message = "Pet not found"),
-      @ApiResponse(code = 405, message = "Validation exception") })
+  @Operation(summary = "Update an existing pet",
+          responses = {
+                  @ApiResponse(responseCode = "400", description = "Invalid ID supplied"),
+                  @ApiResponse(responseCode = "404", description = "Pet not found"),
+                  @ApiResponse(responseCode = "405", description = "Validation exception") })
   public Response updatePet(
-      @ApiParam(value = "Pet object that needs to be added to the store", required = true) Pet pet) {
+      @Parameter(description = "Pet object that needs to be added to the store", required = true) Pet pet) {
     petData.addPet(pet);
     return Response.ok().entity("SUCCESS").build();
   }
 
   @GET
   @Path("/findByStatus")
-  @ApiOperation(value = "Finds Pets by status", 
-    notes = "Multiple status values can be provided with comma separated strings", 
-    response = Pet.class, 
-    responseContainer = "List")
-  @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid status value") })
+  @Operation(summary = "Finds Pets by status",
+    description = "Multiple status values can be provided with comma seperated strings",
+          responses = {
+                  @ApiResponse(
+                          content = @Content(mediaType = "application/json",
+                                  schema = @Schema(implementation = Pet.class))),
+                  @ApiResponse(
+                          responseCode = "400", description = "Invalid status value"
+                  )}
+          )
   public Response findPetsByStatus(
-      @ApiParam(value = "Status values that need to be considered for filter", required = true, defaultValue = "available", allowableValues = "available,pending,sold", allowMultiple = true) @QueryParam("status") String status,
+      @Parameter(description = "Status values that need to be considered for filter", required = true/*, defaultValue = "available", allowableValues = "available,pending,sold", allowMultiple = true*/) @QueryParam("status") String status,
       @BeanParam QueryResultBean qr
 ){
     return Response.ok(petData.findPetByStatus(status)).build();
@@ -83,14 +107,18 @@ public class PetResource {
 
   @GET
   @Path("/findByTags")
-  @ApiOperation(value = "Finds Pets by tags",
-    notes = "Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.", 
-    response = Pet.class, 
-    responseContainer = "List")
-  @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid tag value") })
+  @Operation(summary = "Finds Pets by tags",
+    description = "Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.",
+    responses = {
+            @ApiResponse(description = "Pets matching criteria",
+              content = @Content(mediaType = "application/json",
+              schema = @Schema(implementation = Pet.class))
+            ),
+            @ApiResponse(description = "Invalid tag value", responseCode = "400")
+    })
   @Deprecated
   public Response findPetsByTags(
-      @ApiParam(value = "Tags to filter by", required = true, allowMultiple = true) @QueryParam("tags") String tags) {
+      @Parameter(description = "Tags to filter by", required = true/*, allowMultiple = true*/) @QueryParam("tags") String tags) {
     return Response.ok(petData.findPetByTags(tags)).build();
   }
 }
