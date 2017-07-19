@@ -1,10 +1,6 @@
 package io.swagger.sample;
 
-import io.swagger.jaxrs2.Reader;
 import io.swagger.oas.models.OpenAPI;
-import io.swagger.sample.resource.Metadata;
-import io.swagger.sample.resource.PetResource;
-import io.swagger.sample.resource.UserResource;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -15,6 +11,8 @@ public class Bootstrap extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         OpenAPI oas = new OpenAPI();
 
+    /*
+
         Reader reader = new Reader(oas, null);
 
         reader.read(Metadata.class);
@@ -23,7 +21,11 @@ public class Bootstrap extends HttpServlet {
 
         config.getServletContext().setAttribute("oas", reader.getOpenAPI());
 
-    /*
+        SwaggerContextService ctx = new SwaggerContextService();
+
+
+//        ctx.setScanner();
+
     Info info = new Info()
       .title("Swagger Sample App")
       .description("This is a sample server Petstore server.  You can find out more about Swagger " + 

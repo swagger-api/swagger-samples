@@ -11,7 +11,7 @@
       <param-value>
         com.fasterxml.jackson.jaxrs.json,
         io.swagger.sample.util,
-        io.swagger.sample.resource
+        io.swagger.jaxrs2.listing
       </param-value>
     </init-param>
     <init-param>
@@ -26,9 +26,9 @@
     <url-pattern>/api/*</url-pattern>
   </servlet-mapping>
 
-  <!--servlet>
+  <servlet>
     <servlet-name>Jersey2Config</servlet-name>
-    <servlet-class>io.swagger.jersey.config.JerseyJaxrsConfig</servlet-class>
+    <servlet-class>io.swagger.jaxrs2.config.DefaultJaxrsConfig</servlet-class>
     <init-param>
       <param-name>api.version</param-name>
       <param-value>1.0.0</param-value>
@@ -37,12 +37,12 @@
       <param-name>swagger.api.basepath</param-name>
       <param-value>http://localhost:8002/api</param-value>
     </init-param>
-    <init-param>
-      <param-name>swagger.filter</param-name>
-      <param-value>io.swagger.sample.util.ApiAuthorizationFilterImpl</param-value>
-    </init-param>
+    <!--<init-param>-->
+      <!--<param-name>swagger.filter</param-name>-->
+      <!--<param-value>io.swagger.sample.util.ApiAuthorizationFilterImpl</param-value>-->
+    <!--</init-param>-->
     <load-on-startup>2</load-on-startup>
-  </servlet-->
+  </servlet>
 
   <filter>
     <filter-name>ApiOriginFilter</filter-name>

@@ -78,7 +78,7 @@
               <goal>wget</goal>
             </goals>
             <configuration>
-              <skipCache>true</skipCache>
+              <skipCache>false</skipCache>
               <url>https://github.com/swagger-api/swagger-ui/archive/master.tar.gz</url>
               <unpack>true</unpack>
               <outputDirectory>${project.build.directory}</outputDirectory>
