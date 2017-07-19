@@ -73,7 +73,7 @@ public class PetResource {
 	@Path("/findByStatus")
 	@ApiOperation(
 		value = "Finds Pets by status", 
-		notes = "Multiple status values can be provided with comma seperated strings", 
+		notes = "Multiple status values can be provided with comma separated strings", 
 		response = Pet.class,
 		responseContainer = "List")
 	@ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid status value") })

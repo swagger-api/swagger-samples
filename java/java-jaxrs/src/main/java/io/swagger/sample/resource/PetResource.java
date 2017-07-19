@@ -245,6 +245,7 @@ public class PetResource {
 								  schema = @Schema(type = "list", implementation = Pet.class))	
 					      )
 		  })
+
   public Response findPetsByStatus(
       @Parameter(
     		  name = "status",
@@ -275,6 +276,7 @@ public class PetResource {
 
   @GET
   @Path("/findByTags")
+
   @Callback(operation = 
   @Operation(
 		  method = "GET",

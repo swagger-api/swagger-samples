@@ -84,7 +84,7 @@ public class PetResource {
   @GET
   @Path("/findByTags")
   @ApiOperation(value = "Finds Pets by tags",
-    notes = "Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.", 
+    notes = "Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.", 
     response = Pet.class, 
     responseContainer = "List")
   @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid tag value") })

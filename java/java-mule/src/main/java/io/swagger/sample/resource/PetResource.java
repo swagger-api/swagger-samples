@@ -99,7 +99,7 @@ public class PetResource {
   @GET
   @Path("/findByStatus")
   @ApiOperation(value = "Finds Pets by status", 
-    notes = "Multiple status values can be provided with comma seperated strings", 
+    notes = "Multiple status values can be provided with comma separated strings", 
     response = Pet.class, 
     responseContainer = "List")
   @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid status value") })
@@ -111,7 +111,7 @@ public class PetResource {
   @GET
   @Path("/findByTags")
   @ApiOperation(value = "Finds Pets by tags",
-    notes = "Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.", 
+    notes = "Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.", 
     response = Pet.class, 
     responseContainer = "List")
   @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid tag value") })
