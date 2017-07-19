@@ -88,11 +88,24 @@ public class PetResource {
 
   @GET
   @Path("/findByStatus")
+<<<<<<< HEAD
   @ApiOperation(value = "Finds Pets by status", 
     notes = "Multiple status values can be provided with comma separated strings", 
     response = Pet.class, 
     responseContainer = "List")
   @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid status value") })
+=======
+  @Operation(summary = "Finds Pets by status",
+    description = "Multiple status values can be provided with comma seperated strings",
+          responses = {
+                  @ApiResponse(
+                          content = @Content(mediaType = "application/json",
+                                  schema = @Schema(implementation = Pet.class))),
+                  @ApiResponse(
+                          responseCode = "400", description = "Invalid status value"
+                  )}
+          )
+>>>>>>> e22cf1d12d8fa88fd74cdc20cea9456f960a2aee
   public Response findPetsByStatus(
       @Parameter(description = "Status values that need to be considered for filter", required = true/*, defaultValue = "available", allowableValues = "available,pending,sold", allowMultiple = true*/) @QueryParam("status") String status,
       @BeanParam QueryResultBean qr
@@ -102,11 +115,23 @@ public class PetResource {
 
   @GET
   @Path("/findByTags")
+<<<<<<< HEAD
   @ApiOperation(value = "Finds Pets by tags",
     notes = "Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.", 
     response = Pet.class, 
     responseContainer = "List")
   @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid tag value") })
+=======
+  @Operation(summary = "Finds Pets by tags",
+    description = "Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.",
+    responses = {
+            @ApiResponse(description = "Pets matching criteria",
+              content = @Content(mediaType = "application/json",
+              schema = @Schema(implementation = Pet.class))
+            ),
+            @ApiResponse(description = "Invalid tag value", responseCode = "400")
+    })
+>>>>>>> e22cf1d12d8fa88fd74cdc20cea9456f960a2aee
   @Deprecated
   public Response findPetsByTags(
       @Parameter(description = "Tags to filter by", required = true/*, allowMultiple = true*/) @QueryParam("tags") String tags) {
