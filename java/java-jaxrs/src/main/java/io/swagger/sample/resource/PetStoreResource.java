@@ -46,10 +46,7 @@ public class PetStoreResource {
 		  responses = {
 				  @ApiResponse(
 						  responseCode = "200", 
-						  description = "successful operation",
-						  content = @Content(
-									schema = @Schema(type = "map", implementation = Integer.class)
-								  	)
+						  description = "successful operation"
 						  	)
 		  			}
 		  )
@@ -62,7 +59,7 @@ public class PetStoreResource {
   @Operation(
 		  method = "get",
 		  summary = "Find purchase order by ID",
-		  description = "For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions",
+		  description = "For valid response try integer IDs with value between the integers of 1 and 10. Other values will generated exceptions",
 		  responses = { 
 				  @ApiResponse(
 						  responseCode = "200", 
@@ -87,7 +84,10 @@ public class PetStoreResource {
       @Parameter(
     		  name = "orderId",
     		  description = "ID of pet that needs to be fetched", 
-    		  schema = @Schema(type = "integer", minimum = "1", maximum = "10"), 
+    		  schema = @Schema(
+    				  type = "long", 
+    				  minimum = "1", 
+    				  maximum = "10"), 
     		  required = true
     		  )
       @PathParam("orderId") Long orderId)
@@ -145,7 +145,10 @@ public class PetStoreResource {
       @Parameter(
     		  name = "orderId",
     		  description = "ID of the order that needs to be deleted",  
-    		  schema = @Schema(type = "integer", minimum = "1", maximum = "inifinity"), 
+    		  schema = @Schema(
+    				  type = "long", 
+    				  minimum = "1"
+    				  ), 
     		  required = true
     		  )
       @PathParam("orderId") Long orderId) {
