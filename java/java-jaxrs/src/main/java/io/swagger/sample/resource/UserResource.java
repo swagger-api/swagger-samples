@@ -46,10 +46,12 @@ public class UserResource {
 		  })
   public Response createUser(
       @Parameter(
+    		  name = "user",
     		  description = "Created user object",
     		  schema = @Schema(implementation = User.class),
     		  required = true
-    		  ) User user) {
+    		  ) 
+      User user) {
     userData.addUser(user);
     return Response.ok().entity("").build();
   }
@@ -61,6 +63,7 @@ public class UserResource {
 		  summary = "Creates list of users with given input array",
 		  responses = {
 				  @ApiResponse(
+						  responseCode = "200",
 						  description = "successful operation"
 						  )
 		  })
@@ -82,6 +85,7 @@ public class UserResource {
 		  summary = "Creates list of users with given input array",
 		  responses = {
 				  @ApiResponse(
+						  responseCode = "200",
 						  description = "successful operation"
 						  )
 		  })
@@ -208,19 +212,11 @@ public class UserResource {
 				  
 				  @ApiResponse(
 						  responseCode = "200", 
-						  description = "successful operation",
-						  content = @Content(
-									schema = @Schema(implementation = String.class)
-							)),
-				  
+						  description = "successful operation"),
 				  @ApiResponse(
 						  responseCode = "400", 
-						  description = "Invalid username/password supplied",
-						  content = @Content(
-									schema = @Schema(implementation = String.class)
-							))
+						  description = "Invalid username/password supplied")
 				  })
-		
   public Response loginUser(
       @Parameter(
     		  name = "username",
