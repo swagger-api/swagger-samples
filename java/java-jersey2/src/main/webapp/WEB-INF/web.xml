@@ -9,11 +9,23 @@
     <init-param>
       <param-name>jersey.config.server.provider.packages</param-name>
       <param-value>
-        com.fasterxml.jackson.jaxrs.json,
-        io.swagger.sample.util,
+        com.fasterxml.jackson.jaxrs.json,io.swagger.jaxrs2.integration.listing,io.swagger.sample.resource
+      </param-value>
+<!--
+      <param-value>
+        com.fasterxml.jackson.jaxrs.json,io.swagger.jaxrs2.integration.listing,
+        //io.swagger.sample.util,
+
         io.swagger.sample.resource
       </param-value>
+-->
+
     </init-param>
+    <init-param>
+      <param-name>openApi.configuration.location</param-name>
+      <param-value>/openapi-configuration.json</param-value>
+    </init-param>
+
     <init-param>
       <param-name>jersey.config.server.wadl.disableWadl</param-name>
       <param-value>true</param-value>
@@ -48,11 +60,13 @@
     <filter-name>ApiOriginFilter</filter-name>
     <filter-class>io.swagger.sample.util.ApiOriginFilter</filter-class>
   </filter>
+<!--
   <servlet>
     <servlet-name>Bootstrap</servlet-name>
     <servlet-class>io.swagger.sample.Bootstrap</servlet-class>
     <load-on-startup>2</load-on-startup>
   </servlet>
+-->
   <filter-mapping>
     <filter-name>ApiOriginFilter</filter-name>
     <url-pattern>/*</url-pattern>

@@ -35,6 +35,27 @@
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-maven-plugin</artifactId>
         <version>${jetty-version}</version>
+        <dependencies>
+<!--
+          <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback-version}</version>
+          </dependency>
+-->
+<!--
+          <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-access</artifactId>
+            <version>${logback-version}</version>
+          </dependency>
+-->
+          <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j-version}</version>
+          </dependency>
+        </dependencies>
         <configuration>
           <webApp>
             <contextPath>/</contextPath>
@@ -46,6 +67,16 @@
             <port>8002</port>
             <idleTimeout>60000</idleTimeout>
           </httpConnector>
+          <systemProperties>
+            <systemProperty>
+              <name>org.eclipse.jetty.util.log.Log</name>
+              <value>org.eclipse.jetty.util.log.Slf4jLog</value>
+            </systemProperty>
+            <systemProperty>
+              <name>logback.configurationFile</name>
+              <value>src/main/resources/logback.xml</value>
+            </systemProperty>
+          </systemProperties>
         </configuration>
         <executions>
           <execution>

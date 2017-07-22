@@ -26,6 +26,7 @@ public class Bootstrap extends HttpServlet {
         .url("http://www.apache.org/licenses/LICENSE-2.0.html"));
 
     ServletContext context = config.getServletContext();
+    System.out.println("XXXXXXXXXXXXXXXXXXXXXX " + context.getContextPath());
     Swagger swagger = new Swagger().info(info);
     swagger.securityDefinition("api_key", new ApiKeyAuthDefinition("api_key", In.HEADER));
     swagger.securityDefinition("petstore_auth", 
