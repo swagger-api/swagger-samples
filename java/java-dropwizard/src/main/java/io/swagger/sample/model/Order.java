@@ -16,7 +16,7 @@
 
 package io.swagger.sample.model;
 
-import io.swagger.annotations.*;
+import io.swagger.oas.annotations.media.Schema;
 
 import java.util.Date;
 
@@ -68,7 +68,7 @@ public class Order {
 	}
 
 	@XmlElement(name = "status")
-	@ApiModelProperty(value = "Order Status", allowableValues = "placed, approved, delivered")
+	@Schema(title = "Order Status", _enum = "placed, approved, delivered")
 	public String getStatus() {
 		return status;
 	}

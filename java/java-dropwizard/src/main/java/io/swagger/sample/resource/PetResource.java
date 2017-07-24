@@ -16,7 +16,11 @@
 
 package io.swagger.sample.resource;
 
-import io.swagger.annotations.*;
+import io.swagger.oas.annotations.Operation;
+import io.swagger.oas.annotations.Parameter;
+import io.swagger.oas.annotations.media.Content;
+import io.swagger.oas.annotations.media.Schema;
+import io.swagger.oas.annotations.responses.ApiResponse;
 import io.swagger.sample.data.PetData;
 import io.swagger.sample.model.Pet;
 import io.swagger.sample.exception.NotFoundException;
@@ -25,21 +29,35 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.*;
 
 @Path("/pet")
-@Api(value = "/pet", description = "Operations about pets")
 @Produces({"application/json"})
 public class PetResource {
 	static PetData petData = new PetData();
 
 	@GET
 	@Path("/{petId}")
-	@ApiOperation(
-		value = "Find pet by ID", 
-		notes = "Returns a pet when 0 < ID <= 10. ID > 10 or nonintegers will simulate API error conditions",
-		response = Pet.class)
-	@ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid ID supplied"),
-			@ApiResponse(code = 404, message = "Pet not found") })
+	@Operation(summary = "Find pet by ID",
+		description = "Returns a pet when 0 < ID <= 10. ID > 10 or nonintegers will simulate API error conditions",
+		responses = {
+				@ApiResponse(
+						responseCode = "400",
+						description = "Invalid ID supplied"
+				),
+				@ApiResponse(
+						responseCode = "404",
+						description = "Pet not found"
+				),
+				@ApiResponse(
+						responseCode = "default",
+						description = "boo",
+						content = @Content(
+								mediaType = "application/json",
+								schema = @Schema(implementation = Pet.class)
+						)
+				)
+		}
+	)
 	public Response getPetById(
-			@ApiParam(value = "ID of pet that needs to be fetched", allowableValues = "range[1,10]", required = true) @PathParam("petId") Long petId)
+			@Parameter(description = "ID of pet that needs to be fetched", schema = @Schema(_enum = ""), required = true) @PathParam("petId") Long petId)
 			throws NotFoundException {
 		Pet pet = petData.getPetById(petId);
 		if (null != pet) {
@@ -49,6 +67,7 @@ public class PetResource {
 		}
 	}
 
+/*
 	@POST
 	@ApiOperation(value = "Add a new pet to the store")
 	@ApiResponses(value = { @ApiResponse(code = 405, message = "Invalid input") })
@@ -94,5 +113,5 @@ public class PetResource {
 	public Response findPetsByTags(
 			@ApiParam(value = "Tags to filter by", required = true, allowMultiple = true) @QueryParam("tags") String tags) {
 		return Response.ok(petData.findPetByTags(tags)).build();
-	}
+	}*/
 }

@@ -16,7 +16,7 @@
 
 package io.swagger.sample.model;
 
-import io.swagger.annotations.*;
+import io.swagger.oas.annotations.media.Schema;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -80,7 +80,7 @@ public class Pet {
 	}
 
 	@XmlElement(name = "status")
-	@ApiModelProperty(value = "pet status in the store", allowableValues = "available,pending,sold")
+	@Schema(title = "pet status in the store", _enum = "available,pending,sold")
 	public String getStatus() {
 		return status;
 	}

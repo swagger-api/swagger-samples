@@ -16,7 +16,7 @@
 
 package io.swagger.sample.model;
 
-import io.swagger.annotations.*;
+import io.swagger.oas.annotations.media.Schema;
 
 import javax.xml.bind.annotation.*;
 
@@ -95,7 +95,7 @@ public class User {
 	}
 
 	@XmlElement(name = "userStatus")
-	@ApiModelProperty(value = "User Status", allowableValues = "1-registered,2-active,3-closed")
+	@Schema(title = "User Status", _enum = "1-registered,2-active,3-closed")
 	public int getUserStatus() {
 		return userStatus;
 	}

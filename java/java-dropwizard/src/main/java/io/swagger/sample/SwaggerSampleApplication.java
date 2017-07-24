@@ -1,14 +1,16 @@
 package io.swagger.sample;
 
-import io.swagger.jaxrs.config.*;
-import io.swagger.jaxrs.listing.ApiListingResource;
-import io.swagger.config.*;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.swagger.jaxrs2.integration.listing.OpenApiListingResource;
+import io.swagger.oas.integration.OpenApiConfiguration;
+import io.swagger.oas.models.OpenAPI;
+import io.swagger.oas.models.info.Contact;
+import io.swagger.oas.models.info.Info;
+import io.swagger.oas.models.info.License;
 import io.swagger.sample.resource.PetResource;
 
 public class SwaggerSampleApplication extends Application <SwaggerSampleConfiguration> {
@@ -26,14 +28,41 @@ public class SwaggerSampleApplication extends Application <SwaggerSampleConfigur
 
   @Override
   public void run(SwaggerSampleConfiguration configuration, Environment environment) {
-    environment.jersey().register(new ApiListingResource());
+
+    // TODO use swagger-web, implement OpenApiConfig in SwaggerSampleConfiguration
+
+    // TODO maybe use openApiConfigBuilder
+    OpenAPI oas = new OpenAPI();
+    Info info = new Info()
+            .title("Swagger Sample App")
+            .description("This is a sample server Petstore server.  You can find out more about Swagger " +
+                    "at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, " +
+                    "you can use the api key `special-key` to test the authorization filters.")
+            .termsOfService("http://swagger.io/terms/")
+            .contact(new Contact()
+                    .email("apiteam@swagger.io"))
+            .license(new License()
+                    .name("Apache 2.0")
+                    .url("http://www.apache.org/licenses/LICENSE-2.0.html"));
+
+    oas.info(info);
+    OpenApiConfiguration oasConfig = new OpenApiConfiguration()
+            .openApi(oas)
+            .withResourcePackage("io.swagger.sample.resource");
+
+    // eg.
+    //ContextUtils.getOrBuildContext(oasConfig);
+    // or
+    environment.jersey().register(new OpenApiListingResource().openApiConfiguration(oasConfig));
+    // or
+    //environment.jersey().register(new OpenApiListingResource().configLocation("/integration/openapi-configuration.json"));
+    // or
+    //environment.jersey().register(new OpenApiListingResource().resourcePackage("io.swagger.sample.resource"));
+    // or TODO
+    //environment.jersey().register(new OpenApiListingResource().classes("io.swagger.sample.resource.PetResource"));
+
     environment.jersey().register(new PetResource());
     environment.getObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
 
-    BeanConfig config = new BeanConfig();
-    config.setTitle("Swagger sample app");
-    config.setVersion("1.0.0");
-    config.setResourcePackage("io.swagger.sample.resource");
-    config.setScan(true);
   }
 }

@@ -7,9 +7,9 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.swagger</groupId>
-  <artifactId>swagger-java-jersey-multi-sample-app</artifactId>
+  <artifactId>swagger-java-jersey-multi-sample-app-basepath</artifactId>
   <packaging>war</packaging>
-  <name>swagger-java-jersey-jaxrs-multi-app</name>
+  <name>swagger-java-jersey-jaxrs-multi-app-basepath</name>
   <version>1.0.0</version>
   <build>
     <sourceDirectory>src/main/java</sourceDirectory>
