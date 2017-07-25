@@ -1,6 +1,6 @@
 [
     {
-        "resourcePackage": "io.swagger.sample.resource",
+        "resourcePackageNames": "io.swagger.sample.resource",
         "openApi": {
             "info": {
                 "version": "1.0",

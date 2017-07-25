@@ -33,7 +33,7 @@
     </init-param>
     <!-- specify resource package
     <init-param>
-      <param-name>openApi.configuration.resourcePackage</param-name>
+      <param-name>openApi.configuration.resourcePackageNames</param-name>
       <param-value>com.fasterxml.jackson.jaxrs.json,io.swagger.sample.resource</param-value>
     </init-param>
 -->
@@ -57,7 +57,7 @@
 
 <!-- specify resource package
     <init-param>
-      <param-name>openApi.configuration.resourcePackage</param-name>
+      <param-name>openApi.configuration.resourcePackageNames</param-name>
       <param-value>com.fasterxml.jackson.jaxrs.json,io.swagger.sample.resource</param-value>
     </init-param>
 -->

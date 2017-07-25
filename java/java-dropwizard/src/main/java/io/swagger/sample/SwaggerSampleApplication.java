@@ -48,7 +48,7 @@ public class SwaggerSampleApplication extends Application <SwaggerSampleConfigur
     oas.info(info);
     OpenApiConfiguration oasConfig = new OpenApiConfiguration()
             .openApi(oas)
-            .withResourcePackage("io.swagger.sample.resource");
+            .withResourcePackageNames("io.swagger.sample.resource");
 
     // eg.
     //ContextUtils.getOrBuildContext(oasConfig);
@@ -57,9 +57,9 @@ public class SwaggerSampleApplication extends Application <SwaggerSampleConfigur
     // or
     //environment.jersey().register(new OpenApiListingResource().configLocation("/integration/openapi-configuration.json"));
     // or
-    //environment.jersey().register(new OpenApiListingResource().resourcePackage("io.swagger.sample.resource"));
-    // or TODO
-    //environment.jersey().register(new OpenApiListingResource().classes("io.swagger.sample.resource.PetResource"));
+    //environment.jersey().register(new OpenApiListingResource().resourcePackageNames("io.swagger.sample.resource"));
+    // or
+    //environment.jersey().register(new OpenApiListingResource().resourceClassNames("io.swagger.sample.resource.PetResource"));
 
     environment.jersey().register(new PetResource());
     environment.getObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);

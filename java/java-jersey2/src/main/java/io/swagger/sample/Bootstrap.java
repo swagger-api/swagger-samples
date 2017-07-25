@@ -31,7 +31,7 @@ public class Bootstrap extends HttpServlet {
     oas.info(info);
     OpenApiConfiguration oasConfig = new OpenApiConfiguration()
             .openApi(oas)
-            .withResourcePackage("io.swagger.sample.resource");
+            .withResourcePackageNames("io.swagger.sample.resource");
 
     // TODO or get from serviceLoader etc..
     new JaxrsOpenApiContextBuilder()
