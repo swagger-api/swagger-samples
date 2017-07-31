@@ -2,6 +2,7 @@ package io.swagger.sample;
 
 import io.swagger.jaxrs2.integration.JaxrsOpenApiContextBuilder;
 import io.swagger.oas.integration.OpenApiConfiguration;
+import io.swagger.oas.integration.OpenApiConfigurationException;
 import io.swagger.oas.models.OpenAPI;
 import io.swagger.oas.models.info.Contact;
 import io.swagger.oas.models.info.Info;
@@ -10,11 +11,13 @@ import io.swagger.oas.models.info.License;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Bootstrap extends HttpServlet {
   @Override
   public void init(ServletConfig config) throws ServletException {
-    // TODO maybe use openApiConfigBuilder
+
     OpenAPI oas = new OpenAPI();
     Info info = new Info()
       .title("Swagger Sample App")
@@ -31,12 +34,27 @@ public class Bootstrap extends HttpServlet {
     oas.info(info);
     OpenApiConfiguration oasConfig = new OpenApiConfiguration()
             .openApi(oas)
-            .resourcePackageNames("io.swagger.sample.resource");
+            .resourcePackages(Stream.of("io.swagger.sample.resource").collect(Collectors.toSet()));
 
-    // TODO or get from serviceLoader etc..
-    new JaxrsOpenApiContextBuilder()
-            .servletConfig(config)
-            .openApiConfiguration(oasConfig)
-            .buildContext(true);
+
+    // or
+/*
+    try {
+      new GenericOpenApiContext().openApiConfiguration(oasConfig).init();
+    } catch (OpenApiConfigurationException e) {
+      e.printStackTrace();
+    }
+*/
+
+
+    try {
+      new JaxrsOpenApiContextBuilder()
+              .servletConfig(config)
+              .openApiConfiguration(oasConfig)
+              .buildContext(true);
+    } catch (OpenApiConfigurationException e) {
+      throw new ServletException(e.getMessage(), e);
+    }
+
   }
 }
