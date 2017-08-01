@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import io.swagger.jaxrs2.integration.listing.OpenApiListingResource;
+import io.swagger.jaxrs2.integration.resources.OpenApiResource;
 import io.swagger.oas.integration.OpenApiConfiguration;
 import io.swagger.oas.models.OpenAPI;
 import io.swagger.oas.models.info.Contact;
@@ -55,7 +55,7 @@ public class SwaggerSampleApplication extends Application <SwaggerSampleConfigur
     environment.getObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
 
     // eg.
-    environment.jersey().register(new OpenApiListingResource().openApiConfiguration(oasConfig));
+    environment.jersey().register(new OpenApiResource().openApiConfiguration(oasConfig));
 
     // or
 /*
@@ -67,15 +67,15 @@ public class SwaggerSampleApplication extends Application <SwaggerSampleConfigur
 */
 
     // or
-    //environment.jersey().register(new OpenApiListingResource().configLocation("/integration/openapi-configuration.json"));
+    //environment.jersey().register(new OpenApiResource().configLocation("/integration/openapi-configuration.json"));
 
     // or provide a openapi-configuration.json or yaml in classpath
 
     // or
-    //environment.jersey().register(new OpenApiListingResource().resourcePackage("io.swagger.sample.resource"));
+    //environment.jersey().register(new OpenApiResource().resourcePackage("io.swagger.sample.resource"));
 
     // or
-    //environment.jersey().register(new OpenApiListingResource().resourceClasses("io.swagger.sample.resource.PetResource"));
+    //environment.jersey().register(new OpenApiResource().resourceClasses("io.swagger.sample.resource.PetResource"));
 
 
   }
