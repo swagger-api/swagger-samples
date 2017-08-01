@@ -42,6 +42,7 @@ public class UserResource {
 
   @POST
   @Operation(summary = "Create user",
+    tags = {"users"},
     description = "This can only be done by the logged in user.")
   public Response createUser(
       @Parameter(description = "Created user object", required = true) User user) {
@@ -51,7 +52,8 @@ public class UserResource {
 
   @POST
   @Path("/createWithArray")
-  @Operation(summary = "Creates list of users with given input array")
+  @Operation(summary = "Creates list of users with given input array",
+          tags = {"users"})
   public Response createUsersWithArrayInput(@Parameter(description = "List of user object", required = true) User[] users) {
       for (User user : users) {
           userData.addUser(user);
@@ -61,7 +63,8 @@ public class UserResource {
 
   @POST
   @Path("/createWithList")
-  @Operation(summary = "Creates list of users with given input array")
+  @Operation(summary = "Creates list of users with given input array",
+          tags = {"users"})
   public Response createUsersWithListInput(@Parameter(description = "List of user object", required = true) java.util.List<User> users) {
       for (User user : users) {
           userData.addUser(user);
@@ -73,6 +76,7 @@ public class UserResource {
   @Path("/{username}")
   @Operation(summary = "Updated user",
     description = "This can only be done by the logged in user.",
+          tags = {"users"},
     responses = {
             @ApiResponse(responseCode = "200", description = "user updated"),
             @ApiResponse(responseCode = "400", description = "Invalid user supplied"),
@@ -88,6 +92,7 @@ public class UserResource {
   @Path("/{username}")
   @Operation(summary = "Delete user",
     description = "This can only be done by the logged in user.",
+          tags = {"users"},
     responses = {
             @ApiResponse(responseCode = "200", description = "user deteled"),
             @ApiResponse(responseCode = "400", description = "Invalid username supplied"),
@@ -104,6 +109,7 @@ public class UserResource {
   @GET
   @Path("/{username}")
   @Operation(summary = "Get user by user name",
+          tags = {"users"},
     responses = {
             @ApiResponse(description = "The user",
                     content = @Content(mediaType = "application/json",
@@ -124,6 +130,7 @@ public class UserResource {
   @GET
   @Path("/login")
   @Operation(summary = "Logs user into the system",
+          tags = {"users"},
     responses = {
             @ApiResponse(description = "Successfully logged in",
                     content = @Content(schema = @Schema(implementation = String.class))),
@@ -138,7 +145,8 @@ public class UserResource {
 
   @GET
   @Path("/logout")
-  @Operation(summary = "Logs out current logged in user session")
+  @Operation(summary = "Logs out current logged in user session",
+          tags = {"users"})
   public Response logoutUser() {
     return Response.ok().entity("").build();
   }

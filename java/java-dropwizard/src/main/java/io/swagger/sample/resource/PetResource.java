@@ -36,6 +36,7 @@ public class PetResource {
 	@GET
 	@Path("/{petId}")
 	@Operation(summary = "Find pet by ID",
+		tags = {"pets", "store"},
 		description = "Returns a pet when 0 < ID <= 10. ID > 10 or nonintegers will simulate API error conditions",
 		responses = {
 				@ApiResponse(

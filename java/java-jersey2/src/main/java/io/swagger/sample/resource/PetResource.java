@@ -43,6 +43,7 @@ public class PetResource {
   @GET
   @Path("/{petId}")
   @Operation(summary = "Find pet by ID",
+    tags = {"pets"},
     description = "Returns a pet when 0 < ID <= 10.  ID > 10 or nonintegers will simulate API error conditions",
     responses = {
             @ApiResponse(description = "The pet", content = @Content(
@@ -65,6 +66,7 @@ public class PetResource {
   @POST
   @Consumes("application/json")
   @Operation(summary = "Add a new pet to the store",
+    tags = {"pets"},
     responses = {
           @ApiResponse(responseCode = "405", description = "Invalid input")
   })
@@ -76,6 +78,7 @@ public class PetResource {
 
   @PUT
   @Operation(summary = "Update an existing pet",
+          tags = {"pets"},
           responses = {
                   @ApiResponse(responseCode = "400", description = "Invalid ID supplied"),
                   @ApiResponse(responseCode = "404", description = "Pet not found"),
@@ -89,6 +92,7 @@ public class PetResource {
   @GET
   @Path("/findByStatus")
   @Operation(summary = "Finds Pets by status",
+          tags = {"pets"},
     description = "Multiple status values can be provided with comma seperated strings",
           responses = {
                   @ApiResponse(
@@ -108,6 +112,7 @@ public class PetResource {
   @GET
   @Path("/findByTags")
   @Operation(summary = "Finds Pets by tags",
+          tags = {"pets"},
     description = "Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.",
     responses = {
             @ApiResponse(description = "Pets matching criteria",

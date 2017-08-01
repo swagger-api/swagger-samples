@@ -7,4 +7,4 @@ java -jar target/swagger-java-dropwizard-sample-app-2.0.0.jar server conf/swagge
 
 ```
 
-You can then access swagger at http://localhost:8080/swagger.json
+You can then access swagger at http://localhost:8080/openApi.json or http://localhost:8080/openApi.yaml
