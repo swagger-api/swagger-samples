@@ -3,7 +3,7 @@
         "io.swagger.sample.resource"
     ],
     "prettyPrint" : true,
-    "openApi": {
+    "openAPI": {
         "info": {
             "version": "1.0",
             "title": "Swagger Pet Sample App",
