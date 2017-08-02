@@ -6,7 +6,7 @@ import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.swagger.jaxrs2.integration.resources.OpenApiResource;
-import io.swagger.oas.integration.OpenApiConfigurationImpl;
+import io.swagger.oas.integration.SwaggerConfiguration;
 import io.swagger.oas.models.OpenAPI;
 import io.swagger.oas.models.info.Contact;
 import io.swagger.oas.models.info.Info;
@@ -46,7 +46,7 @@ public class SwaggerSampleApplication extends Application <SwaggerSampleConfigur
                     .url("http://www.apache.org/licenses/LICENSE-2.0.html"));
 
     oas.info(info);
-    OpenApiConfigurationImpl oasConfig = new OpenApiConfigurationImpl()
+    SwaggerConfiguration oasConfig = new SwaggerConfiguration()
             .openAPI(oas)
             .prettyPrint(true)
             .resourcePackages(Stream.of("io.swagger.sample.resource").collect(Collectors.toSet()));

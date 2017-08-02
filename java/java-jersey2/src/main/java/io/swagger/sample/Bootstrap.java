@@ -1,7 +1,7 @@
 package io.swagger.sample;
 
 import io.swagger.jaxrs2.integration.JaxrsOpenApiContextBuilder;
-import io.swagger.oas.integration.OpenApiConfigurationImpl;
+import io.swagger.oas.integration.SwaggerConfiguration;
 import io.swagger.oas.integration.OpenApiConfigurationException;
 import io.swagger.oas.models.OpenAPI;
 import io.swagger.oas.models.info.Contact;
@@ -32,7 +32,7 @@ public class Bootstrap extends HttpServlet {
         .url("http://www.apache.org/licenses/LICENSE-2.0.html"));
 
     oas.info(info);
-    OpenApiConfigurationImpl oasConfig = new OpenApiConfigurationImpl()
+    SwaggerConfiguration oasConfig = new SwaggerConfiguration()
             .openAPI(oas)
             .resourcePackages(Stream.of("io.swagger.sample.resource").collect(Collectors.toSet()));
 
