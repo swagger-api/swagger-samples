@@ -119,20 +119,59 @@ public class SampleServlet extends HttpServlet implements OpenAPIConfigBuilder {
 		
 		Operation operation = new Operation();
 		operation.setDescription("Resource to get a user");
-		ApiResponses responses = new ApiResponses();
-		ApiResponse item = new ApiResponse();
-		item.setDescription("Successful");
-		Content content = new Content();
-		MediaType mediaType = new MediaType();
-		Schema schema = new Schema();
-		schema.set$ref("#/components/schemas/User");
-		mediaType.setSchema(schema);
-		content.addMediaType("application/json", mediaType);
-		item.setContent(content);
 		
-		operation.setDescription("Resource to get a user");
+                ApiResponses responses = new ApiResponses();
+		
+                ApiResponse item = new ApiResponse();
+		item.setDescription("Successful");
+		
+                Content content = new Content();
+                MediaType mediaType = new MediaType();
+		
+                Schema schema = new Schema();
+		schema.set$ref("#/components/schemas/User");
+		
+                mediaType.setSchema(schema);
+                content.addMediaType("application/json", mediaType);
+		
+                item.setContent(content);
+		
 		operation.setResponses(responses);
-		pathItem.get(operation);
+
+                List<Parameter> parameters = new ArrayList<Parameter>();
+		parameters.add(new Parameter()
+				.name("name")
+				.required(true)
+				.in("query")
+				.description("Name of the user")
+				.schema(new Schema()
+						.type("string")));
+		parameters.add(new Parameter()
+                        .name("id")
+                        .required(true)
+                        .in("query")
+                        .description("Id of the user")
+                        .schema(new Schema()
+                                .type("integer")
+                                .format("int32")));
+		parameters.add(new Parameter()
+                        .name("email")
+                        .required(true)
+                        .in("query")
+                        .description("Email of the user")
+                        .schema(new Schema()
+                                .type("string")));
+		parameters.add(new Parameter()
+                        .name("age")
+                        .required(true)
+                        .in("query")
+                        .description("Age of the user")
+                        .schema(new Schema()
+                                .type("integer")
+                                .format("int32")));
+		operation.setParameters(parameters);
+		
+                pathItem.get(operation);
 		paths.addPathItem("/sample/users", pathItem);
 		oai.setPaths(paths);
 		
