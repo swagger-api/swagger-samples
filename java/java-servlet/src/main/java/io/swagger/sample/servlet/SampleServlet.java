@@ -140,12 +140,12 @@ public class SampleServlet extends HttpServlet implements OpenAPIConfigBuilder {
 
                 List<Parameter> parameters = new ArrayList<Parameter>();
 		parameters.add(new Parameter()
-				.name("name")
-				.required(true)
-				.in("query")
-				.description("Name of the user")
-				.schema(new Schema()
-						.type("string")));
+                        .name("name")
+                        .required(true)
+                        .in("query")
+                        .description("Name of the user")
+                        .schema(new Schema()
+                                .type("string")));
 		parameters.add(new Parameter()
                         .name("id")
                         .required(true)
