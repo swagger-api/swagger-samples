@@ -15,7 +15,7 @@
  */
 
 package io.swagger.sample.resource;
-//import io.swagger.annotations.Api;
+
 import io.swagger.oas.annotations.Operation;
 import io.swagger.oas.annotations.Parameter;
 import io.swagger.oas.annotations.callbacks.Callback;
@@ -24,8 +24,8 @@ import io.swagger.oas.annotations.info.License;
 import io.swagger.oas.annotations.info.Contact;
 import io.swagger.oas.annotations.media.Content;
 import io.swagger.oas.annotations.media.Schema;
+import io.swagger.oas.annotations.parameters.RequestBody;
 import io.swagger.oas.annotations.media.ExampleObject;
-//import io.swagger.oas.annotations.parameters.Parameters;
 import io.swagger.oas.annotations.responses.ApiResponse;
 
 import io.swagger.sample.data.PetData;
@@ -40,8 +40,9 @@ import javax.ws.rs.core.StreamingOutput;
 import javax.ws.rs.*;
 
 @Path("/pet")
-
-@Api(value = "/pet", description = "Operations about pets", tags = "pet")
+@Schema(
+		name = "/pet",
+		description = "Operations about pets")
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 @Info(
 		title = "Pets Operations",
@@ -59,21 +60,25 @@ public class PetResource {
   @Operation(
 		  method = "GET",
 		  summary = "Find pet by ID",
-		  description = "Returns a pet when ID <= 10.  ID > 10 or nonintegers will simulate API error conditions",
+		  description = "Returns a pet when ID is less than or equal to 10. If ID is greater than 10 or nonintegers, will simulate API error conditions",
 		  responses = {
 				  @ApiResponse(
 						  responseCode = "400",
-						  description = "Invalid ID supplied"
+						  description = "Invalid ID supplied",
+						  content = @Content(
+								  mediaType = "none")
 				  ),
 				  @ApiResponse(
 						  responseCode = "404",
-						  description = "Pet not found"
+						  description = "Pet not found",
+						  content = @Content(
+								  mediaType = "none")
 				  ),
 				  @ApiResponse(
 						  responseCode = "200",
 						  content = @Content(
-						  mediaType = "application/json",
-						  schema = @Schema(type = "array", implementation = Pet.class))	
+								  mediaType = "application/json",
+								  schema = @Schema(type = "array", implementation = Pet.class))	
 			      )
 		  }
   )
@@ -82,7 +87,11 @@ public class PetResource {
 				   name = "petId",
 				   description = "ID of pet that needs to be fetched",
 				   required = true,
-				   schema = @Schema(implementation = Long.class, maximum = "10", minimum = "1")) @PathParam("petId") Long petId)
+				   schema = @Schema(
+						   implementation = Long.class, 
+						   maximum = "10", 
+						   minimum = "1")) 
+		   @PathParam("petId") Long petId)
       throws NotFoundException {
     Pet pet = petData.getPetById(petId);
     if (pet != null) {
@@ -97,15 +106,17 @@ public class PetResource {
   @Operation(
 		  method = "GET",
 		  summary = "Find pet by ID and download it", 
-		  description = "Downloads a pet when ID <= 10.  ID > 10 or nonintegers will simulate API error conditions",
+		  description = "Returns a pet when ID is less than or equal to 10. If ID is greater than 10 or nonintegers, will simulate API error conditions",
 		  responses = {
 				  @ApiResponse(
 						  responseCode = "400",
-						  description = "Invalid ID supplied"
+						  description = "Invalid ID supplied",
+						  content = @Content(mediaType = "none")
 				  ),
 				  @ApiResponse(
 						  responseCode = "404",
-						  description = "Pet not found"
+						  description = "Pet not found",
+						  content = @Content(mediaType = "none")
 				  )
 		  }
   )
@@ -114,7 +125,10 @@ public class PetResource {
     		  name = "petId",
     		  description = "ID of pet that needs to be fetched",
     		  required = true,
-    		  schema = @Schema(implementation = Long.class, maximum = "10", minimum = "1")
+    		  schema = @Schema(
+    				  implementation = Long.class, 
+    				  maximum = "10", 
+    				  minimum = "1")
       ) @PathParam("petId") Long petId)
       throws NotFoundException {
       StreamingOutput stream = new StreamingOutput() {
@@ -139,7 +153,7 @@ public class PetResource {
   @Operation(
 		  method = "DELETE",
 		  summary = "Deletes a pet by ID",
-		  description = "Deletes a pet when ID <= 10.  ID > 10 or nonintegers will simulate API error conditions",
+		  description = "Returns a pet when ID is less than or equal to 10. If ID is greater than 10 or nonintegers, will simulate API error conditions",
 		  responses = {
 				  @ApiResponse(
 						  responseCode = "400",
@@ -155,14 +169,17 @@ public class PetResource {
 	   		  @Parameter(
 					  name = "apiKey",
 					  description = "authentication key to access this method",
-					  schema = @Schema(type = "String", implementation = String.class)
-			  ) @HeaderParam("api_key") String apiKey,
+					  schema = @Schema(type = "String", implementation = String.class)) 
+	   		  @HeaderParam("api_key") String apiKey,
 			  @Parameter(
 					  name = "petId",
 		    		  description = "ID of pet that needs to be fetched",
 		    		  required = true,
-		    		  schema = @Schema(implementation = Long.class, maximum = "10", minimum = "1")
-			  ) @PathParam("petId") Long petId) {
+		    		  schema = @Schema(
+		    				  implementation = Long.class, 
+		    				  maximum = "10", 
+		    				  minimum = "1")) 
+	   		  @PathParam("petId") Long petId) {
       if (petData.deletePet(petId)) {
         return Response.ok().build();
       } else {
@@ -172,6 +189,7 @@ public class PetResource {
 
   @POST
   @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+  @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
   @Operation(
 		  method = "POST",
 		  summary = "Add pet to store",
@@ -184,11 +202,18 @@ public class PetResource {
 								  mediaType = "application/json",
 								  schema = @Schema(implementation = ApiResponse.class))
 				  )
-		  }
+		  },
+		  requestBody = @RequestBody(
+				  content = @Content(
+						  mediaType = "application/json",
+						  schema = @Schema(implementation = Pet.class)),
+				  required = true,
+				  description = "example of a new pet to add"
+				  )
   )
   public Response addPet(
 		  @Parameter(
-	    		  name ="pet",
+	    		  name ="addPet",
 	    		  description = "Pet to add",
 	    		  required = true,
 	    		  schema = @Schema(implementation = Pet.class)) Pet pet) {
@@ -205,21 +230,24 @@ public class PetResource {
 		  responses = {
 				  @ApiResponse(
 						  responseCode = "400",
-						  description = "Invalid ID supplied"
+						  description = "Invalid ID supplied",
+						  content = @Content(mediaType = "application/json")
 				  ),
 				  @ApiResponse(
 						  responseCode = "404",
-						  description = "Pet not found"
+						  description = "Pet not found",
+						  content = @Content(mediaType = "application/json")
 				  ),
 				  @ApiResponse(
 						  responseCode = "405",
-						  description = "Validation exception"
+						  description = "Validation exception",
+						  content = @Content(mediaType = "application/json")
 			      )
 		  })
    public Response updatePet(
       @Parameter(
-    		  name ="pet",
-    		  description = "Pet to update with",
+    		  name ="petAttribute",
+    		  description = "Attribute to update existing pet record",
     		  required = true,
     		  schema = @Schema(implementation = Pet.class)) Pet pet) {
     Pet updatedPet = petData.addPet(pet);
@@ -236,7 +264,8 @@ public class PetResource {
 		  responses = {
 				  @ApiResponse(
 						  responseCode = "400",
-						  description = "Invalid status value"
+						  description = "Invalid status value",
+						  content = @Content(mediaType = "none")
 				  ),
 				  @ApiResponse(
 						  responseCode = "200",
@@ -245,7 +274,6 @@ public class PetResource {
 								  schema = @Schema(type = "list", implementation = Pet.class))	
 					      )
 		  })
-
   public Response findPetsByStatus(
       @Parameter(
     		  name = "status",
@@ -270,22 +298,23 @@ public class PetResource {
     						  }
     						  )
     		  },
-    		  allowEmptyValue = true) String statttus) {
-    return Response.ok(petData.findPetByStatus(statttus)).build();
+    		  allowEmptyValue = true) String status) {
+    return Response.ok(petData.findPetByStatus(status)).build();
   }
 
   @GET
   @Path("/findByTags")
-
   @Callback(operation = 
   @Operation(
 		  method = "GET",
 		  summary = "Finds Pets by tags",
+		  deprecated = true,
 		  description = "Find Pets by tags; Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.",
 		  responses = {
 				  @ApiResponse(
 						  responseCode = "400",
-						  description = "Invalid tag value"
+						  description = "Invalid tag value",
+						  content = @Content(mediaType = "none")
 				  ),
 				  @ApiResponse(
 						  responseCode = "200",
@@ -297,7 +326,12 @@ public class PetResource {
   @Deprecated
   public Response findPetsByTags(
     @HeaderParam("api_key") String api_key,
-      @Parameter(name = "tags", description = "Tags to filter by", required = true) @QueryParam("tags") String tags) {
+      @Parameter(
+    		  name = "tags", 
+    		  description = "Tags to filter by", 
+    		  required = true,
+    		  deprecated = true) 
+    @QueryParam("tags") String tags) {
     return Response.ok(petData.findPetByTags(tags)).build();
   }
 
@@ -310,13 +344,24 @@ public class PetResource {
 		  responses = {
 				  @ApiResponse(
 						  responseCode = "405",
-						  description = "Validation exception"
+						  description = "Validation exception",
+						  content = @Content(mediaType = "none")
 			      )
 		  })
   public Response updatePetWithForm (
-   @Parameter(name = "petId", description = "ID of pet that needs to be updated", required = true) @PathParam("petId") Long petId,
-   @Parameter(name = "name", description = "Updated name of the pet") @FormParam("name") String name,
-   @Parameter(name = "status", description = "Updated status of the pet") @FormParam("status") String status) {
+   @Parameter(
+		   name = "petId", 
+		   description = "ID of pet that needs to be updated", 
+		   required = true) 
+   @PathParam("petId") Long petId,
+   @Parameter(
+		   name = "name", 
+		   description = "Updated name of the pet") 
+   @FormParam("name") String name,
+   @Parameter(
+		   name = "status", 
+		   description = "Updated status of the pet") 
+   @FormParam("status") String status) {
     Pet pet = petData.getPetById(petId);
     if(pet != null) {
       if(name != null && !"".equals(name))
