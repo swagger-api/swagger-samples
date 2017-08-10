@@ -89,7 +89,7 @@ class PetApiController extends BaseApiController {
 
   @ApiOperation(nickname = "findPetByStatus",
     value = "Finds Pets by status",
-    notes = "Multiple status values can be provided with comma seperated strings",
+    notes = "Multiple status values can be provided with comma separated strings",
     response = classOf[models.Pet], responseContainer = "List", httpMethod = "GET")
   @ApiResponses(Array(
     new ApiResponse(code = 400, message = "Invalid status value")))
@@ -103,7 +103,7 @@ class PetApiController extends BaseApiController {
 
   @ApiOperation(nickname = "findPetsByTags",
     value = "Finds Pets by tags",
-    notes = "Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.",
+    notes = "Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.",
     response = classOf[models.Pet], responseContainer = "List", httpMethod = "GET")
   @ApiResponses(Array(
     new ApiResponse(code = 400, message = "Invalid tag value")))

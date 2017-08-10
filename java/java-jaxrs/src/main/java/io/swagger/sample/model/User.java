@@ -1,5 +1,5 @@
 /**
- *  Copyright 2016 SmartBear Software
+ *  Copyright 2015 SmartBear Software
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package io.swagger.sample.model;
 
 import io.swagger.annotations.*;
+import io.swagger.oas.annotations.media.Schema;
 
 import javax.xml.bind.annotation.*;
 
@@ -95,7 +96,14 @@ public class User {
   }
 
   @XmlElement(name = "userStatus")
-  @ApiModelProperty(value = "User Status", allowableValues = "1-registered,2-active,3-closed")
+  @Schema(
+		  name = "userStatus",
+		  title = "User Status",
+		  _enum = {"1-registered", "2-active", "3-closed"}
+		  )
+    
+
+  
   public int getUserStatus() {
     return userStatus;
   }
