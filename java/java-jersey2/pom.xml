@@ -2,7 +2,7 @@
   <parent>
     <groupId>io.swagger</groupId>
     <artifactId>swagger-samples-project</artifactId>
-    <version>1.0.0</version>
+    <version>2.0.0</version>
     <relativePath>../..</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
@@ -10,7 +10,7 @@
   <artifactId>swagger-jersey2-sample-app</artifactId>
   <packaging>war</packaging>
   <name>swagger-jersey2-jaxrs-app</name>
-  <version>1.0.0</version>
+  <version>2.0.0</version>
   <build>
     <sourceDirectory>src/main/java</sourceDirectory>
     <plugins>
@@ -50,11 +50,13 @@
             <version>${logback-version}</version>
           </dependency>
 -->
+<!--
           <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j-version}</version>
           </dependency>
+-->
         </dependencies>
         <configuration>
           <webApp>
@@ -83,7 +85,8 @@
             <id>start-jetty</id>
             <phase>pre-integration-test</phase>
             <goals>
-              <goal>run</goal>
+              <goal>stop</goal>
+              <goal>start</goal>
             </goals>
             <configuration>
               <scanIntervalSeconds>0</scanIntervalSeconds>
@@ -157,7 +160,7 @@
       <groupId>io.swagger</groupId>
       <artifactId>swagger-jaxrs2</artifactId>
       <scope>compile</scope>
-      <version>${swagger-core-version}</version>
+      <version>${swagger-version}</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.jaxrs</groupId>
@@ -198,9 +201,4 @@
       <version>${jersey2-version}</version>
     </dependency>
   </dependencies>
-  <properties>
-    <jetty-version>9.2.14.v20151106</jetty-version>
-    <jersey2-version>2.24</jersey2-version>
-    <swagger-core-version>2.0.0-SNAPSHOT</swagger-core-version>
-  </properties>
 </project>
