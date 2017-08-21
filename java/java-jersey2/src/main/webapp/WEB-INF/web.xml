@@ -22,17 +22,28 @@
         com.fasterxml.jackson.jaxrs.json,io.swagger.jaxrs2.integration.resources,io.swagger.sample.resource
       </param-value>
 
-<!--
-      <param-value>
-        com.fasterxml.jackson.jaxrs.json,io.swagger.sample.resource
-      </param-value>
--->
+      <!--
+            <param-value>
+              com.fasterxml.jackson.jaxrs.json,io.swagger.sample.resource
+            </param-value>
+      -->
     </init-param>
-<!-- alternatively specify config location
+    <!-- alternatively specify resources classes
     <init-param>
-      <param-name>openApi.configuration.location</param-name>
-      <param-value>/openapi-configuration.json</param-value>
+      <param-name>jersey.config.server.provider.classnames</param-name>
+
+      <param-value>
+        io.swagger.jaxrs2.integration.resources.OpenApiResource,
+        io.swagger.sample.resource.PetResource,
+        io.swagger.sample.resource.UserResource
+      </param-value>
     </init-param>
+    -->
+<!-- alternatively specify config location
+<init-param>
+  <param-name>openApi.configuration.location</param-name>
+  <param-value>/openapi-configuration.json</param-value>
+</init-param>
 -->
     <!-- alternatively include a file openapi-configuration.json or openapi-configuration.yaml in classpath -->
     <!-- alternatively specify openApi.configuration.builder class implementing OpenApiConfigBuilder -->
