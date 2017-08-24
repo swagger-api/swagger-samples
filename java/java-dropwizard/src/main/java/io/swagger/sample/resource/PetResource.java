@@ -58,7 +58,7 @@ public class PetResource {
 		}
 	)
 	public Response getPetById(
-			@Parameter(description = "ID of pet that needs to be fetched", schema = @Schema(_enum = ""), required = true) @PathParam("petId") Long petId)
+			@Parameter(description = "ID of pet that needs to be fetched", schema = @Schema(allowableValues = ""), required = true) @PathParam("petId") Long petId)
 			throws NotFoundException {
 		Pet pet = petData.getPetById(petId);
 		if (null != pet) {

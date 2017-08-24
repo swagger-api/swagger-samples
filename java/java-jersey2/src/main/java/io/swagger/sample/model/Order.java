@@ -68,7 +68,7 @@ public class Order {
   }
 
   @XmlElement(name = "status")
-  @Schema(description = "Order Status", _enum = "placed, approved, delivered")
+  @Schema(description = "Order Status", allowableValues = "placed, approved, delivered")
   public String getStatus() {
     return status;
   }
