@@ -16,8 +16,8 @@
 
 package io.swagger.samples.inflector.dropwizard.controllers;
 
-import io.swagger.inflector.models.RequestContext;
-import io.swagger.inflector.models.ResponseContext;
+import io.swagger.oas.inflector.models.RequestContext;
+import io.swagger.oas.inflector.models.ResponseContext;
 import io.swagger.samples.inflector.dropwizard.models.Pet;
 import org.apache.commons.io.IOUtils;
 

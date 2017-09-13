@@ -20,11 +20,12 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import io.swagger.inflector.SwaggerInflector;
-import io.swagger.inflector.config.Configuration;
-import io.swagger.inflector.processors.JsonNodeExampleSerializer;
-import io.swagger.inflector.processors.XMLExampleProvider;
-import io.swagger.jaxrs.listing.SwaggerSerializers;
+
+import io.swagger.jaxrs2.SwaggerSerializers;
+import io.swagger.oas.inflector.OpenAPIInflector;
+import io.swagger.oas.inflector.config.Configuration;
+import io.swagger.oas.inflector.processors.JsonNodeExampleSerializer;
+import io.swagger.oas.inflector.processors.XMLExampleProvider;
 import io.swagger.util.Json;
 import io.swagger.util.Yaml;
 import org.eclipse.jetty.servlets.CrossOriginFilter;
@@ -55,7 +56,7 @@ public class InflectorServer extends Application<InflectorServerConfiguration> {
         final FilterRegistration.Dynamic cors = environment.servlets().addFilter("crossOriginRequsts", CrossOriginFilter.class);
         cors.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
 
-        SwaggerInflector inflector = new SwaggerInflector(Configuration.read(configuration.getConfig()));
+        OpenAPIInflector inflector = new OpenAPIInflector(Configuration.read(configuration.getConfig()));
         environment.jersey().getResourceConfig().registerResources(inflector.getResources());
         
         // add serializers for swagger
