@@ -25,9 +25,9 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <properties>
-        <dropwizard-version>0.8.2</dropwizard-version>
-        <inflector-version>1.0.14</inflector-version>
-        <jackson.version>2.5.1</jackson.version>
+        <dropwizard-version>1.0.2</dropwizard-version>
+        <inflector-version>2.0.0-SNAPSHOT</inflector-version>
+        <jackson.version>2.8.7</jackson.version>
     </properties>
 
     <dependencies>
