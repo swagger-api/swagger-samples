@@ -26,7 +26,7 @@
 
     <properties>
         <dropwizard-version>0.8.2</dropwizard-version>
-        <inflector-version>1.0.2</inflector-version>
+        <inflector-version>1.0.14</inflector-version>
         <jackson.version>2.5.1</jackson.version>
     </properties>
 

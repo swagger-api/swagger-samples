@@ -16,7 +16,7 @@
 
 package io.swagger.samples.inflector.dropwizard.models;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.oas.annotations.media.Schema;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
@@ -81,7 +81,7 @@ public class Pet {
     }
 
     @XmlElement(name = "status")
-    @ApiModelProperty(value = "pet status in the store", allowableValues = "available,pending,sold")
+    @Schema(defaultValue = "pet status in the store", allowableValues = "available,pending,sold")
     public String getStatus() {
         return status;
     }

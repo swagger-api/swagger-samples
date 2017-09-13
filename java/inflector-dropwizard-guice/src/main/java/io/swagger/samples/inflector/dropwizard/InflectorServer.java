@@ -23,12 +23,14 @@ import com.hubspot.dropwizard.guice.GuiceBundle;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import io.swagger.inflector.SwaggerInflector;
-import io.swagger.inflector.config.Configuration;
-import io.swagger.inflector.config.ControllerFactory;
-import io.swagger.inflector.processors.JsonNodeExampleSerializer;
-import io.swagger.inflector.processors.XMLExampleProvider;
-import io.swagger.jaxrs.listing.SwaggerSerializers;
+
+import io.swagger.jaxrs2.SwaggerSerializers;
+import io.swagger.oas.inflector.OpenAPIInflector;
+import io.swagger.oas.inflector.config.Configuration;
+import io.swagger.oas.inflector.config.ControllerFactory;
+import io.swagger.oas.inflector.processors.JsonNodeExampleSerializer;
+import io.swagger.oas.inflector.processors.XMLExampleProvider;
+import io.swagger.oas.models.Operation;
 import io.swagger.util.Json;
 import io.swagger.util.Yaml;
 import org.eclipse.jetty.servlets.CrossOriginFilter;
@@ -57,8 +59,9 @@ public class InflectorServer extends Application<InflectorServerConfiguration> {
             .addModule(new InflectorServerModule())
             .setConfigClass(InflectorServerConfiguration.class)
             .build(Stage.DEVELOPMENT);
-
+        System.out.println("*************************"+guiceBundle);
         bootstrap.addBundle(guiceBundle);
+
     }
 
     @Override
@@ -67,8 +70,9 @@ public class InflectorServer extends Application<InflectorServerConfiguration> {
         cors.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
 
         Configuration config = Configuration.read(configuration.getConfig());
+        System.out.println("*************************"+guiceBundle.getInjector());
         config.setControllerFactory(new GuiceControllerFactory(guiceBundle.getInjector()));
-        SwaggerInflector inflector = new SwaggerInflector(config);
+        OpenAPIInflector inflector = new OpenAPIInflector(config);
         environment.jersey().getResourceConfig().registerResources(inflector.getResources());
         
         // add serializers for swagger
@@ -91,7 +95,9 @@ public class InflectorServer extends Application<InflectorServerConfiguration> {
             this.injector = injector;
         }
 
-        public Object instantiateController(Class cls) throws IllegalAccessException, InstantiationException {
+
+
+        public Object instantiateController(Class cls, Operation operation  ) throws IllegalAccessException, InstantiationException {
             return this.injector.getInstance(cls);
         }
     }
