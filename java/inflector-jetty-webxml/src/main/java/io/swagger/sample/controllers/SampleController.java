@@ -1,7 +1,7 @@
 package io.swagger.sample.controllers;
 
-import io.swagger.inflector.models.RequestContext;
-import io.swagger.inflector.models.ResponseContext;
+import io.swagger.oas.inflector.models.RequestContext;
+import io.swagger.oas.inflector.models.ResponseContext;
 import io.swagger.sample.models.Pet;
 import org.apache.commons.io.IOUtils;
 
