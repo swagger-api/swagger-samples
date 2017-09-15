@@ -15,8 +15,8 @@
  */
 package io.swagger.samples.inflector.springboot.config;
 
-import io.swagger.inflector.SwaggerInflector;
-import io.swagger.inflector.config.Configuration;
+import io.swagger.oas.inflector.OpenAPIInflector;
+import io.swagger.oas.inflector.config.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-public class InflectorConfig extends SwaggerInflector {
+public class InflectorConfig extends OpenAPIInflector {
 
     @Autowired
     public InflectorConfig(Configuration configuration) {

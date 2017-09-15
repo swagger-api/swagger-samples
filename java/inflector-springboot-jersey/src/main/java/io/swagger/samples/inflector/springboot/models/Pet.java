@@ -17,7 +17,7 @@
 package io.swagger.samples.inflector.springboot.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.oas.annotations.media.Schema;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
@@ -92,7 +92,7 @@ public class Pet {
     }
 
     @JsonProperty("status")
-    @ApiModelProperty(value = "pet status in the store", allowableValues = "available,pending,sold")
+    @Schema(defaultValue = "pet status in the store", allowableValues = "available,pending,sold")
     public String getStatus() {
         return status;
     }

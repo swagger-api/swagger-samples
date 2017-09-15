@@ -17,8 +17,8 @@
 package io.swagger.samples.inflector.springboot.controllers;
 
 import com.github.javafaker.Faker;
-import io.swagger.inflector.models.RequestContext;
-import io.swagger.inflector.models.ResponseContext;
+import io.swagger.oas.inflector.models.RequestContext;
+import io.swagger.oas.inflector.models.ResponseContext;
 import io.swagger.samples.inflector.springboot.models.Category;
 import io.swagger.samples.inflector.springboot.models.Pet;
 import io.swagger.samples.inflector.springboot.models.Tag;
