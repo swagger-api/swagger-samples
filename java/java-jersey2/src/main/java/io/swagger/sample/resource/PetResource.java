@@ -53,7 +53,15 @@ public class PetResource {
             @ApiResponse(responseCode = "404", description = "Pet not found")
     })
   public Response getPetById(
-      @Parameter(description = "ID of pet that needs to be fetched"/*, _enum = "range[1,10]"*/, required = true)
+      @Parameter(
+              description = "ID of pet that needs to be fetched",
+              schema = @Schema(
+                      type = "integer",
+                      format = "int64",
+                      description = "param ID of pet that needs to be fetched",
+                      allowableValues = {"1","2","3"}
+              ),
+              required = true)
       @PathParam("petId") Long petId) throws io.swagger.sample.exception.NotFoundException {
     Pet pet = petData.getPetById(petId);
     if (null != pet) {
@@ -103,7 +111,15 @@ public class PetResource {
                   )}
           )
   public Response findPetsByStatus(
-      @Parameter(description = "Status values that need to be considered for filter", required = true/*, defaultValue = "available", allowableValues = "available,pending,sold", allowMultiple = true*/) @QueryParam("status") String status,
+      @Parameter(
+              description = "Status values that need to be considered for filter",
+              required = true,
+              schema = @Schema(
+                      allowableValues =  {"available","pending","sold"},
+                      defaultValue = "available"
+              )
+      )
+      @QueryParam("status") String status,
       @BeanParam QueryResultBean qr
 ){
     return Response.ok(petData.findPetByStatus(status)).build();
@@ -123,7 +139,7 @@ public class PetResource {
     })
   @Deprecated
   public Response findPetsByTags(
-      @Parameter(description = "Tags to filter by", required = true/*, allowMultiple = true*/) @QueryParam("tags") String tags) {
+      @Parameter(description = "Tags to filter by", required = true) @QueryParam("tags") String tags) {
     return Response.ok(petData.findPetByTags(tags)).build();
   }
 }

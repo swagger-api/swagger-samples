@@ -16,7 +16,11 @@
 
 package io.swagger.sample.resource;
 
-import io.swagger.annotations.*;
+import io.swagger.oas.annotations.Operation;
+import io.swagger.oas.annotations.Parameter;
+import io.swagger.oas.annotations.media.Content;
+import io.swagger.oas.annotations.media.Schema;
+import io.swagger.oas.annotations.responses.ApiResponse;
 import io.swagger.sample.data.StoreData;
 import io.swagger.sample.model.AuthenticationInfo;
 import io.swagger.sample.model.Order;
@@ -25,21 +29,24 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.*;
 
 @Path("/store")
-@Api(value="/store" , description = "Operations about store")
 @Produces({"application/json", "application/xml"})
 public class PetStoreResource {
   static StoreData storeData = new StoreData();
 
   @GET
   @Path("/order/{orderId}")
-  @ApiOperation(value = "Find purchase order by ID",
-    notes = "For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions",
-    response = Order.class)
-  @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid ID supplied"),
-      @ApiResponse(code = 404, message = "Order not found") })
+  @Operation(
+          summary = "Find purchase order by ID",
+          description = "For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions",
+          responses = {
+                  @ApiResponse(content = @Content(schema = @Schema(implementation = Order.class))),
+                  @ApiResponse(responseCode = "400", description = "Invalid ID supplied"),
+                  @ApiResponse(responseCode = "404", description = "Order not found")
+          }
+  )
   public Response getOrderById(
       @BeanParam AuthenticationInfo info,
-      @ApiParam(value = "ID of order to fetch") @PathParam("orderId") Long orderId)
+      @Parameter(description = "ID of order to fetch") @PathParam("orderId") Long orderId)
       throws io.swagger.sample.exception.NotFoundException {
     Order order = storeData.findOrderById(orderId);
     if (null != order) {
@@ -51,24 +58,32 @@ public class PetStoreResource {
 
   @POST
   @Path("/order")
-  @ApiOperation(value = "Place an order for a pet",
-    response = Order.class)
-  @ApiResponses({ @ApiResponse(code = 400, message = "Invalid Order") })
+  @Operation(
+          summary = "Place an order for a pet",
+          responses = {
+                  @ApiResponse(content = @Content(schema = @Schema(implementation = Order.class))),
+                  @ApiResponse(responseCode = "400", description = "Invalid Order")
+          }
+  )
   public Response placeOrder(
       @BeanParam AuthenticationInfo info,
-      @ApiParam(value = "order placed for purchasing the pet", required = true) Order order) {
+      @Parameter(description = "order placed for purchasing the pet", required = true) Order order) {
     storeData.placeOrder(order);
     return Response.ok().entity("").build();
   }
 
   @DELETE
   @Path("/order/{orderId}")
-  @ApiOperation(value = "Delete purchase order by ID")
-  @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid ID supplied"),
-    @ApiResponse(code = 404, message = "Order not found") })
+  @Operation(
+          summary = "Delete purchase order by ID",
+          responses = {
+                  @ApiResponse(responseCode = "400", description = "Invalid ID supplied"),
+                  @ApiResponse(responseCode = "404", description = "Order not found")
+          }
+  )
   public Response deleteOrder(
       @BeanParam AuthenticationInfo info,
-      @ApiParam(value = "ID of order to delete") @PathParam("orderId") Long orderId) {
+      @Parameter(description = "ID of order to delete") @PathParam("orderId") Long orderId) {
     if (storeData.deleteOrder(orderId)) {
       return Response.ok().entity("").build();
     } else {
