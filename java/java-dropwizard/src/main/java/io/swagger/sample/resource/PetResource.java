@@ -23,96 +23,122 @@ import io.swagger.oas.annotations.media.Schema;
 import io.swagger.oas.annotations.responses.ApiResponse;
 import io.swagger.sample.data.PetData;
 import io.swagger.sample.model.Pet;
-import io.swagger.sample.exception.NotFoundException;
 
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.*;
 
 @Path("/pet")
-@Produces({"application/json"})
+@Produces({"application/json", "application/xml"})
 public class PetResource {
 	static PetData petData = new PetData();
 
 	@GET
 	@Path("/{petId}")
 	@Operation(summary = "Find pet by ID",
-		tags = {"pets", "store"},
-		description = "Returns a pet when 0 < ID <= 10. ID > 10 or nonintegers will simulate API error conditions",
-		responses = {
-				@ApiResponse(
-						responseCode = "400",
-						description = "Invalid ID supplied"
-				),
-				@ApiResponse(
-						responseCode = "404",
-						description = "Pet not found"
-				),
-				@ApiResponse(
-						responseCode = "default",
-						description = "boo",
-						content = @Content(
-								mediaType = "application/json",
-								schema = @Schema(implementation = Pet.class)
-						)
-				)
-		}
-	)
+			tags = {"pets"},
+			description = "Returns a pet when 0 < ID <= 10.  ID > 10 or nonintegers will simulate API error conditions",
+			responses = {
+					@ApiResponse(description = "The pet", content = @Content(
+							mediaType = "application/json",
+							schema = @Schema(implementation = Pet.class)
+					)),
+					@ApiResponse(responseCode = "400", description = "Invalid ID supplied"),
+					@ApiResponse(responseCode = "404", description = "Pet not found")
+			})
 	public Response getPetById(
-			@Parameter(description = "ID of pet that needs to be fetched", schema = @Schema(allowableValues = ""), required = true) @PathParam("petId") Long petId)
-			throws NotFoundException {
+			@Parameter(
+					description = "ID of pet that needs to be fetched",
+					schema = @Schema(
+							type = "integer",
+							format = "int64",
+							description = "param ID of pet that needs to be fetched",
+							allowableValues = {"1","2","3"}
+					),
+					required = true)
+			@PathParam("petId") Long petId) throws io.swagger.sample.exception.NotFoundException {
 		Pet pet = petData.getPetById(petId);
 		if (null != pet) {
 			return Response.ok().entity(pet).build();
 		} else {
-			throw new NotFoundException(404, "Pet not found");
+			throw new io.swagger.sample.exception.NotFoundException(404, "Pet not found");
 		}
 	}
 
-/*
 	@POST
-	@ApiOperation(value = "Add a new pet to the store")
-	@ApiResponses(value = { @ApiResponse(code = 405, message = "Invalid input") })
+	@Consumes("application/json")
+	@Operation(summary = "Add a new pet to the store",
+			tags = {"pets"},
+			responses = {
+					@ApiResponse(responseCode = "405", description = "Invalid input")
+			})
 	public Response addPet(
-			@ApiParam(value = "Pet object that needs to be added to the store", required = true) Pet pet) {
+			@Parameter(description = "Pet object that needs to be added to the store", required = true) Pet pet) {
 		petData.addPet(pet);
 		return Response.ok().entity("SUCCESS").build();
 	}
 
 	@PUT
-	@ApiOperation(value = "Update an existing pet")
-	@ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid ID supplied"),
-			@ApiResponse(code = 404, message = "Pet not found"),
-			@ApiResponse(code = 405, message = "Validation exception") })
+	@Operation(summary = "Update an existing pet",
+			tags = {"pets"},
+			responses = {
+					@ApiResponse(responseCode = "400", description = "Invalid ID supplied"),
+					@ApiResponse(responseCode = "404", description = "Pet not found"),
+					@ApiResponse(responseCode = "405", description = "Validation exception") })
 	public Response updatePet(
-			@ApiParam(value = "Pet object that needs to be added to the store", required = true) Pet pet) {
+			@Parameter(description = "Pet object that needs to be added to the store", required = true) Pet pet) {
 		petData.addPet(pet);
 		return Response.ok().entity("SUCCESS").build();
 	}
 
 	@GET
 	@Path("/findByStatus")
-	@ApiOperation(
-		value = "Finds Pets by status", 
-		notes = "Multiple status values can be provided with comma seperated strings", 
-		response = Pet.class,
-		responseContainer = "List")
-	@ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid status value") })
+	@Operation(summary = "Finds Pets by status",
+			tags = {"pets"},
+			description = "Multiple status values can be provided with comma seperated strings",
+			responses = {
+					@ApiResponse(
+							content = @Content(mediaType = "application/json",
+									schema = @Schema(implementation = Pet.class))),
+					@ApiResponse(
+							responseCode = "400", description = "Invalid status value"
+					)}
+	)
 	public Response findPetsByStatus(
-			@ApiParam(value = "Status values that need to be considered for filter", required = true, defaultValue = "available", allowableValues = "available,pending,sold", allowMultiple = true) @QueryParam("status") String status) {
+			@Parameter(
+					description = "Status values that need to be considered for filter",
+					required = true,
+					schema = @Schema(
+							allowableValues =  {"available","pending","sold"},
+							defaultValue = "available"
+					)
+			)
+			@QueryParam("status") String status
+	){
 		return Response.ok(petData.findPetByStatus(status)).build();
 	}
 
 	@GET
 	@Path("/findByTags")
-	@ApiOperation(
-		value = "Finds Pets by tags", 
-		notes = "Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.",
-		response = Pet.class, 
-		responseContainer = "List")
-	@ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid tag value") })
+	@Operation(summary = "Finds Pets by tags",
+			tags = {"pets"},
+			description = "Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.",
+			responses = {
+					@ApiResponse(description = "Pets matching criteria",
+							content = @Content(mediaType = "application/json",
+									schema = @Schema(implementation = Pet.class))
+					),
+					@ApiResponse(description = "Invalid tag value", responseCode = "400")
+			})
 	@Deprecated
 	public Response findPetsByTags(
-			@ApiParam(value = "Tags to filter by", required = true, allowMultiple = true) @QueryParam("tags") String tags) {
+			@Parameter(description = "Tags to filter by", required = true) @QueryParam("tags") String tags) {
 		return Response.ok(petData.findPetByTags(tags)).build();
-	}*/
+	}
 }
