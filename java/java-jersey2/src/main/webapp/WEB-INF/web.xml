@@ -13,10 +13,10 @@
     <init-param>
       <param-name>jersey.config.server.provider.packages</param-name>
       <!-- adding 'io.swagger.jaxrs2.integration.resources' is sufficent on it own to register the following paths:
-      /OpenApi.json : OpenApi spec in json
-      /OpenApi.yaml : OpenApi spec in yaml
-      /openApi (Accept:  : "application/json" : OpenApi spec in json
-      /openApi (Accept:  : "application/yaml" : OpenApi spec in yaml
+      /openapi.json : OpenApi spec in json
+      /openapi.yaml : OpenApi spec in yaml
+      /openapi (Accept:  : "application/json" : OpenApi spec in json
+      /openapi (Accept:  : "application/yaml" : OpenApi spec in yaml
       -->
       <param-value>
         com.fasterxml.jackson.jaxrs.json,io.swagger.jaxrs2.integration.resources,io.swagger.sample.resource
