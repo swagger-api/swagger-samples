@@ -12,14 +12,14 @@
     </init-param>
     <init-param>
       <param-name>jersey.config.server.provider.packages</param-name>
-      <!-- adding 'io.swagger.jaxrs2.integration.resources' is sufficent on it own to register the following paths:
+      <!-- adding 'io.swagger.v3.jaxrs2.integration.resources' is sufficent on it own to register the following paths:
       /openapi.json : OpenApi spec in json
       /openapi.yaml : OpenApi spec in yaml
       /openapi (Accept:  : "application/json" : OpenApi spec in json
       /openapi (Accept:  : "application/yaml" : OpenApi spec in yaml
       -->
       <param-value>
-        com.fasterxml.jackson.jaxrs.json,io.swagger.jaxrs2.integration.resources,io.swagger.sample.resource
+        com.fasterxml.jackson.jaxrs.json,io.swagger.v3.jaxrs2.integration.resources,io.swagger.sample.resource
       </param-value>
 
       <!--
@@ -28,12 +28,18 @@
             </param-value>
       -->
     </init-param>
+<!--
+    <init-param>
+      <param-name>javax.ws.rs.Application</param-name>
+      <param-value>io.swagger.sample.MyApplication</param-value>
+    </init-param>
+-->
     <!-- alternatively specify resources classes
     <init-param>
       <param-name>jersey.config.server.provider.classnames</param-name>
 
       <param-value>
-        io.swagger.jaxrs2.integration.resources.OpenApiResource,
+        io.swagger.v3.jaxrs2.integration.resources.OpenApiResource,
         io.swagger.sample.resource.PetResource,
         io.swagger.sample.resource.UserResource
       </param-value>
@@ -64,7 +70,7 @@
   <servlet>
     <!-- use OpenApi servlet to serve spec -->
     <servlet-name>OpenApi</servlet-name>
-    <servlet-class>io.swagger.jaxrs2.integration.OpenApiServlet</servlet-class>
+    <servlet-class>io.swagger.v3.jaxrs2.integration.OpenApiServlet</servlet-class>
 
 <!-- alternatively specify resource package
     <init-param>

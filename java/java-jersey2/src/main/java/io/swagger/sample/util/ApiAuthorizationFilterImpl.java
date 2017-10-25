@@ -16,9 +16,9 @@
 
 package io.swagger.sample.util;
 
-import io.swagger.core.filter.AbstractSpecFilter;
-import io.swagger.model.ApiDescription;
-import io.swagger.oas.models.Operation;
+import io.swagger.v3.core.filter.AbstractSpecFilter;
+import io.swagger.v3.core.model.ApiDescription;
+import io.swagger.v3.oas.models.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

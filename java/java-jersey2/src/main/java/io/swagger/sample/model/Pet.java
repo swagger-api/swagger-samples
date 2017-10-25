@@ -16,7 +16,7 @@
 
 package io.swagger.sample.model;
 
-import io.swagger.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
@@ -32,6 +32,17 @@ public class Pet {
   private List<String> photoUrls = new ArrayList<String>();
   private List<Tag> tags = new ArrayList<Tag>();
   private String status;
+
+  @Schema(required = true, example = "[2, 3]")
+  private int[] lorem;
+
+  public int[] getLorem() {
+    return lorem;
+  }
+
+  public void setLorem(int[] lorem) {
+    this.lorem = lorem;
+  }
 
   @XmlElement(name = "id")
   public long getId() {
