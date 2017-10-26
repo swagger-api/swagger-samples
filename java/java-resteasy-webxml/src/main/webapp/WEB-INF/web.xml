@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+
+  <servlet>
+    <servlet-name>Resteasy</servlet-name>
+    <servlet-class>
+      org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
+    </servlet-class>
+    <init-param>
+      <param-name>javax.ws.rs.Application</param-name>
+      <param-value>io.swagger.sample.MyApplication</param-value>
+    </init-param>
+    <!-- specify resource classes to scan -->
+    <init-param>
+      <param-name>openApi.configuration.resourceClasses</param-name>
+      <param-value>io.swagger.sample.resource.UserResource</param-value>
+    </init-param>
+    <!-- specify scanner implementation,
+    e.g JaxrsAnnotationScanner scanning resourceClasses defined above (or resourcePackages)
+    but not considering resources defined by custom application
+
+    or JaxrsApplicationAndAnnotationScanner also considering resources defined by custom application
+    or JaxrsApplicationScanner only considering resources defined by custom application
+    -->
+    <init-param>
+      <param-name>openApi.configuration.scannerClass</param-name>
+      <param-value>io.swagger.v3.jaxrs2.integration.JaxrsAnnotationScanner</param-value>
+    </init-param>
+
+    <init-param>
+      <param-name>openApi.configuration.prettyPrint</param-name>
+      <param-value>true</param-value>
+    </init-param>
+    <!-- alternatively specify config location
+    <init-param>
+      <param-name>openApi.configuration.location</param-name>
+      <param-value>/openapi-configuration.json</param-value>
+    </init-param>
+    -->
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>Resteasy</servlet-name>
+    <url-pattern>/sample/*</url-pattern>
+  </servlet-mapping>
+  <context-param>
+    <param-name>resteasy.servlet.mapping.prefix</param-name>
+    <param-value>/sample</param-value>
+  </context-param>
+  <filter>
+    <filter-name>ApiOriginFilter</filter-name>
+    <filter-class>io.swagger.sample.util.ApiOriginFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>ApiOriginFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+</web-app>
