@@ -1,6 +1,6 @@
 package io.swagger.sample.model;
 
-import io.swagger.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.ws.rs.HeaderParam;
 

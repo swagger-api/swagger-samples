@@ -1,12 +1,12 @@
 package io.swagger.sample;
 
-import io.swagger.jaxrs2.integration.JaxrsOpenApiContextBuilder;
-import io.swagger.oas.integration.SwaggerConfiguration;
-import io.swagger.oas.integration.OpenApiConfigurationException;
-import io.swagger.oas.models.OpenAPI;
-import io.swagger.oas.models.info.Contact;
-import io.swagger.oas.models.info.Info;
-import io.swagger.oas.models.info.License;
+import io.swagger.v3.jaxrs2.integration.JaxrsOpenApiContextBuilder;
+import io.swagger.v3.oas.integration.SwaggerConfiguration;
+import io.swagger.v3.oas.integration.OpenApiConfigurationException;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
