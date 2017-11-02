@@ -20,7 +20,7 @@ public class Bootstrap extends HttpServlet {
 
     OpenAPI oas = new OpenAPI();
     Info info = new Info()
-      .title("Swagger Sample App")
+      .title("Swagger Sample App - independent config exposed by dedicated servlet")
       .description("This is a sample server Petstore server.  You can find out more about Swagger " + 
         "at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, " +
         "you can use the api key `special-key` to test the authorization filters.")
@@ -50,6 +50,7 @@ public class Bootstrap extends HttpServlet {
     try {
       new JaxrsOpenApiContextBuilder()
               .servletConfig(config)
+              //.ctxId(config.getServletName())
               .openApiConfiguration(oasConfig)
               .buildContext(true);
     } catch (OpenApiConfigurationException e) {

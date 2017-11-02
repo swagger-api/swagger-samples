@@ -10,30 +10,19 @@
       <param-name>jersey.config.server.wadl.disableWadl</param-name>
       <param-value>true</param-value>
     </init-param>
+    <!-- adding 'io.swagger.v3.jaxrs2.integration.resources' is sufficent on it own to register the following paths:
+    /openapi.json : OpenApi spec in json
+    /openapi.yaml : OpenApi spec in yaml
+    /openapi (Accept:  : "application/json" : OpenApi spec in json
+    /openapi (Accept:  : "application/yaml" : OpenApi spec in yaml
+    -->
     <init-param>
       <param-name>jersey.config.server.provider.packages</param-name>
-      <!-- adding 'io.swagger.v3.jaxrs2.integration.resources' is sufficent on it own to register the following paths:
-      /openapi.json : OpenApi spec in json
-      /openapi.yaml : OpenApi spec in yaml
-      /openapi (Accept:  : "application/json" : OpenApi spec in json
-      /openapi (Accept:  : "application/yaml" : OpenApi spec in yaml
-      -->
       <param-value>
-        com.fasterxml.jackson.jaxrs.json,io.swagger.v3.jaxrs2.integration.resources,io.swagger.sample.resource
+        io.swagger.v3.jaxrs2.integration.resources,io.swagger.sample.resource
       </param-value>
+    </init-param>
 
-      <!--
-            <param-value>
-              com.fasterxml.jackson.jaxrs.json,io.swagger.sample.resource
-            </param-value>
-      -->
-    </init-param>
-<!--
-    <init-param>
-      <param-name>javax.ws.rs.Application</param-name>
-      <param-value>io.swagger.sample.MyApplication</param-value>
-    </init-param>
--->
     <!-- alternatively specify resources classes
     <init-param>
       <param-name>jersey.config.server.provider.classnames</param-name>
@@ -45,12 +34,12 @@
       </param-value>
     </init-param>
     -->
-<!-- alternatively specify config location
-<init-param>
-  <param-name>openApi.configuration.location</param-name>
-  <param-value>/openapi-configuration.json</param-value>
-</init-param>
--->
+    <!-- alternatively specify config location
+    <init-param>
+      <param-name>openApi.configuration.location</param-name>
+      <param-value>/openapi-configuration.json</param-value>
+    </init-param>
+    -->
     <!-- alternatively include a file openapi-configuration.json or openapi-configuration.yaml in classpath -->
     <!-- alternatively specify openApi.configuration.builder class implementing OpenApiConfigBuilder -->
     <!-- alternatively specify resource package
@@ -58,17 +47,23 @@
       <param-name>openApi.configuration.resourcePackages</param-name>
       <param-value>com.fasterxml.jackson.jaxrs.json,io.swagger.sample.resource</param-value>
     </init-param>
--->
-    <load-on-startup>1</load-on-startup>
-  </servlet>
+    -->
+    <!-- alternatively specify a custom application
+    <init-param>
+      <param-name>javax.ws.rs.Application</param-name>
+      <param-value>io.swagger.sample.MyApplication</param-value>
+    </init-param>
+    -->
+<load-on-startup>1</load-on-startup>
+</servlet>
 
-  <servlet-mapping>
-    <servlet-name>jersey</servlet-name>
-    <url-pattern>/api/*</url-pattern>
-  </servlet-mapping>
+<servlet-mapping>
+<servlet-name>jersey</servlet-name>
+<url-pattern>/api/*</url-pattern>
+</servlet-mapping>
 
-  <servlet>
-    <!-- use OpenApi servlet to serve spec -->
+<servlet>
+<!-- use OpenApi servlet to serve spec -->
     <servlet-name>OpenApi</servlet-name>
     <servlet-class>io.swagger.v3.jaxrs2.integration.OpenApiServlet</servlet-class>
 
