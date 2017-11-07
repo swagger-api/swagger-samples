@@ -4,6 +4,8 @@
 This is a java project to build a stand-alone server which implements the OpenAPI Spec.  You can find out 
 more about both the spec and the framework at http://swagger.io.
 
+This sample is based on RESTEasy, and provides an example of integration of swagger into a RESTEasy based app, with resources to be scanned provided by `swagger-jaxrs2-servlet-initializer` (`ServletContainerInitializer` implementation), with config file based configuration.
+
 ### To run (with Maven)
 To run the server, run this task:
 
