@@ -283,16 +283,20 @@
   </profiles>
   <modules>
     <module>java/java-dropwizard</module>
-    <module>java/java-jersey2</module>
     <module>java/java-jersey2-webxml</module>
-    <module>java/java-resteasy</module>
+    <module>java/java-jersey2-webxml-configfile</module>
+    <module>java/java-jersey2-configfile</module>
+    <module>java/java-jersey2-initializer</module>
+    <module>java/java-jersey2-initializer-configfile</module>
+    <module>java/java-jersey2-appclasses</module>
+    <module>java/java-jersey2-codeinit</module>
+    <module>java/java-jersey2-alternatives</module>
     <module>java/java-resteasy-configfile</module>
     <module>java/java-resteasy-appclasses</module>
     <module>java/java-resteasy-initializer</module>
     <module>java/java-resteasy-initializer-configfile</module>
     <module>java/java-resteasy-codeinit</module>
     <module>java/java-resteasy-webxml</module>
-
     <!--
     <module>java/inflector-dropwizard-guice</module>
     <module>java/inflector-dropwizard</module>
