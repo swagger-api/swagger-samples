@@ -21,7 +21,7 @@ import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
-import io.swagger.jaxrs2.SwaggerSerializers;
+import io.swagger.v3.jaxrs2.SwaggerSerializers;
 import io.swagger.oas.inflector.OpenAPIInflector;
 import io.swagger.oas.inflector.config.Configuration;
 import io.swagger.oas.inflector.processors.JsonNodeExampleSerializer;

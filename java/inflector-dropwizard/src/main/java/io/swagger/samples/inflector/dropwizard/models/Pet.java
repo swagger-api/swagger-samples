@@ -16,7 +16,7 @@
 
 package io.swagger.samples.inflector.dropwizard.models;
 
-import io.swagger.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
