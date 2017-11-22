@@ -1,11 +1,8 @@
-controllerPackage: io.swagger.sample.controllers
-modelPackage: io.swagger.sample.models
+controllerPackage: io.swagger.samples.inflector.dropwizard.controllers
+modelPackage: io.swagger.samples.inflector.dropwizard.models
 swaggerUrl: ./src/main/swagger/swagger.yaml
 modelMappings:
-  Pet: io.swagger.sample.models.Pet
-# allows environment to be develop, staging, production.  Production will not start if
-# unimplemented models or methods are detected
-environment: development
+  Pet: io.swagger.samples.inflector.dropwizard.models.Pet
 
 # loads all by default, or pick and choose
 entityProcessors:

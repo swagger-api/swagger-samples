@@ -14,18 +14,35 @@
  *  limitations under the License.
  */
 
-package io.swagger.samples.inflector.dropwizard;
+package sample.models;
 
-import io.dropwizard.Configuration;
+public class User {
+    private Long id;
+    private String user;
 
-public class InflectorServerConfiguration extends Configuration {
-    private String config;
-
-    public String getConfig() {
-        return config;
+    public User id(Long id) {
+        this.id = id;
+        return this;
     }
 
-    public void setConfig(String config) {
-        this.config = config;
+    public User user(String user) {
+        this.user = user;
+        return this;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 }

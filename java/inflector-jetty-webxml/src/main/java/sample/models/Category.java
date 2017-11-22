@@ -14,18 +14,31 @@
  *  limitations under the License.
  */
 
-package io.swagger.samples.inflector.dropwizard;
+package sample.models;
 
-import io.dropwizard.Configuration;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
-public class InflectorServerConfiguration extends Configuration {
-    private String config;
+@XmlRootElement(name = "Category")
+public class Category {
+    private long id;
+    private String name;
 
-    public String getConfig() {
-        return config;
+    @XmlElement(name = "id")
+    public long getId() {
+        return id;
     }
 
-    public void setConfig(String config) {
-        this.config = config;
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    @XmlElement(name = "name")
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

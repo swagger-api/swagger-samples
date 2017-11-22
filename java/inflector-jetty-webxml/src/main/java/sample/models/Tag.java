@@ -13,19 +13,31 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+package sample.models;
 
-package io.swagger.samples.inflector.dropwizard;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
-import io.dropwizard.Configuration;
+@XmlRootElement(name = "Tag")
+public class Tag {
+    private long id;
+    private String name;
 
-public class InflectorServerConfiguration extends Configuration {
-    private String config;
-
-    public String getConfig() {
-        return config;
+    @XmlElement(name = "id")
+    public long getId() {
+        return id;
     }
 
-    public void setConfig(String config) {
-        this.config = config;
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    @XmlElement(name = "name")
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
