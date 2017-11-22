@@ -1,1 +1,0 @@
-java-jersey2-appclasses (copy)
