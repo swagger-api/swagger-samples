@@ -95,7 +95,7 @@
                     <monitoredDirName>.</monitoredDirName>
                     <scanTargets>
                         <scanTarget>inflector.yaml</scanTarget>
-                        <scanTarget>src/main/swagger/swagger.yaml</scanTarget>
+                        <scanTarget>src/main/swagger/openapi.yaml</scanTarget>
                     </scanTargets>
                     <scanIntervalSeconds>1</scanIntervalSeconds>
                     <webApp>
