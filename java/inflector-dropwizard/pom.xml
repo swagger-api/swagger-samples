@@ -28,6 +28,7 @@
         <dropwizard-version>1.0.2</dropwizard-version>
         <inflector-version>2.0.0-SNAPSHOT</inflector-version>
         <jackson.version>2.8.9</jackson.version>
+        <jersey2.version>2.23.1</jersey2.version>
     </properties>
 
     <dependencies>
@@ -39,9 +40,21 @@
         </dependency>
 
         <dependency>
-            <groupId>org.glassfish.jersey.bundles.repackaged</groupId>
-            <artifactId>jersey-guava</artifactId>
-            <version>2.26-b03</version>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>${jersey2.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-servlet-core</artifactId>
+            <version>${jersey2.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-multipart</artifactId>
+            <version>${jersey2.version}</version>
         </dependency>
 
         <dependency>

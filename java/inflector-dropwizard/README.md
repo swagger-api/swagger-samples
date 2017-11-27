@@ -17,7 +17,7 @@ java -jar ./target/inflector-dropwizard-sample-1.0.0-SNAPSHOT.jar server server.
 You can get to the swagger file at:
 
 ```
-http://localhost:8080/v2/swagger.json
+http://localhost:8080/v2/openapi.json
 ```
 
 Have fun!
