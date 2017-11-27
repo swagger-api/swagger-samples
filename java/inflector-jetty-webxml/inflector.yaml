@@ -1,0 +1,11 @@
+controllerPackage: sample.controllers
+modelPackage: sample.models
+swaggerUrl: ./src/main/swagger/openapi.yaml
+modelMappings:
+  Pet: sample.models
+
+# loads all by default, or pick and choose
+entityProcessors:
+  - json
+  - xml
+  - yaml

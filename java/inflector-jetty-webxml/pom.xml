@@ -1,0 +1,127 @@
+<!--
+  ~  Copyright 2016 SmartBear Software
+  ~
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~  you may not use this file except in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~
+  ~  http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  See the License for the specific language governing permissions and
+  ~  limitations under the License.
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>5</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>io.swagger</groupId>
+    <artifactId>jetty-webxml-sample</artifactId>
+    <packaging>jar</packaging>
+    <name>jetty-webxml-sample</name>
+    <version>1.0.0-SNAPSHOT</version>
+    <prerequisites>
+        <maven>2.2.0</maven>
+    </prerequisites>
+    <developers>
+        <developer>
+            <id>fehguy</id>
+            <name>Tony Tam</name>
+            <email>fehguy@gmail.com</email>
+        </developer>
+    </developers>
+    <mailingLists>
+        <mailingList>
+            <name>swagger-swaggersocket</name>
+            <archive>https://groups.google.com/forum/#!forum/swagger-swaggersocket</archive>
+        </mailingList>
+    </mailingLists>
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <build>
+        <defaultGoal>install</defaultGoal>
+        <directory>target</directory>
+        <finalName>${project.artifactId}-${project.version}</finalName>
+        <plugins>
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <excludes>
+                        <exclude>**/logback.xml</exclude>
+                    </excludes>
+                    <archive>
+                        <manifestEntries>
+                            <mode>development</mode>
+                            <url>${project.url}</url>
+                            <implementation-version>${project.version}</implementation-version>
+                            <package>io.swagger</package>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>${jetty-version}</version>
+                <configuration>
+                    <monitoredDirName>.</monitoredDirName>
+                    <scanTargets>
+                        <scanTarget>inflector.yaml</scanTarget>
+                        <scanTarget>src/main/swagger/openapi.yaml</scanTarget>
+                    </scanTargets>
+                    <scanIntervalSeconds>1</scanIntervalSeconds>
+                    <webApp>
+                        <contextPath>/*</contextPath>
+                    </webApp>
+                    <httpConnector>
+                        <port>8080</port>
+                        <idleTimeout>60000</idleTimeout>
+                    </httpConnector>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-inflector</artifactId>
+            <version>${inflector-version}</version>
+        </dependency>
+    </dependencies>
+    <properties>
+        <maven-plugin-version>1.0.0</maven-plugin-version>
+        <jetty-version>9.2.9.v20150224</jetty-version>
+        <logback-version>1.0.1</logback-version>
+        <inflector-version>2.0.0-SNAPSHOT</inflector-version>
+        <junit-version>4.8.2</junit-version>
+        <slf4j-version>1.6.3</slf4j-version>
+    </properties>
+</project>
