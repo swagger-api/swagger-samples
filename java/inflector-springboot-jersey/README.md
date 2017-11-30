@@ -13,7 +13,7 @@ You can also run the app using the [Spring Boot Gradle Plugin](http://docs.sprin
 
 The swagger definition will be available at the following URI:
 
-[http://localhost:8080/api/v2/swagger.json](http://localhost:8080/api/v2/swagger.json)
+[http://localhost:8080/api/v2/openapi.json](http://localhost:8080/api/v2/openapi.json)
 
 The Spring Boot Actuator endpoints are avilable here:
 
