@@ -1,0 +1,78 @@
+buildscript {
+	ext {
+		springBootVersion = '1.4.2.RELEASE'
+	}
+	repositories {
+        mavenLocal()
+        jcenter()
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath('gradle.plugin.com.gorylenko.gradle-git-properties:gradle-git-properties:1.4.17')
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'maven'
+apply plugin: 'org.springframework.boot'
+
+group = 'io.swagger'
+project.version = '1.0.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    jcenter()
+	mavenCentral()
+}
+
+springBoot  {
+    buildInfo()
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
+dependencies {
+    compile('org.glassfish.jersey.core:jersey-server:2.26')
+    compile('org.glassfish.jersey.bundles.repackaged:jersey-guava:2.26-b03')
+    compile 'org.glassfish.jersey.containers:jersey-container-servlet:2.26'
+    compile 'org.glassfish.jersey.media:jersey-media-multipart:2.26'
+    compile 'org.glassfish.jersey.inject:jersey-hk2:2.26'
+    compile 'org.glassfish.jersey.containers:jersey-container-servlet-core:2.26'
+    compile 'org.glassfish.jersey.ext:jersey-spring4:2.26'
+    compile('org.glassfish.jersey.core:jersey-common:2.26')
+	compile('io.swagger:swagger-inflector:2.0.0-SNAPSHOT')
+    compile('com.github.javafaker:javafaker:0.11') {
+        exclude group: 'com.github.bmoliveira'
+    }
+    compile('com.fasterxml.jackson.core:jackson-annotations')
+    compile('com.fasterxml.jackson.core:jackson-databind')
+    compile('com.fasterxml.jackson.datatype:jackson-datatype-jdk8')
+    compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('org.springframework.boot:spring-boot-starter-jersey')
+    compile('org.springframework.boot:spring-boot-starter-web')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+
+}
