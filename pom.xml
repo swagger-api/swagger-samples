@@ -302,6 +302,8 @@
     <module>java/java-mule</module>
     <module>java/java-jersey-jaxrs</module>
     <module>java/java-jersey-jaxrs-multi</module>
+    <module>java/java-jersey-jaxrs-multi-simple-servlet</module>
+    <module>java/java-jersey-jaxrs-multi-simple-webxml</module>
     <module>java/java-jersey-jaxrs-multi-use-basepath</module>
     <module>java/java-jaxrs-no-annotations</module>
     <module>java/java-resteasy</module>
