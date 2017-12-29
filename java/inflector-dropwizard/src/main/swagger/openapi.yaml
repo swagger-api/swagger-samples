@@ -29,6 +29,25 @@ tags:
       description: Find out more about our store
       url: 'http://swagger.io'
 paths:
+  /formdataTest:
+    post:
+      operationId: "formDataTest"
+      summary: Returns the POSTed data
+      x-swagger-router-controller: SampleController
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                description:
+                  type: string
+      responses:
+        '200':
+          description: OK
   /pet:
     post:
       tags:

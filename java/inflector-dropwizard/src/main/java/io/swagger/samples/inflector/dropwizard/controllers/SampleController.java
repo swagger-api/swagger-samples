@@ -45,4 +45,12 @@ public class SampleController {
 
         return null;
     }
+
+    public ResponseContext formDataTest(RequestContext request, String description, java.io.InputStream file) {
+
+        return new ResponseContext()
+                .status(Status.OK)
+                .entity("OK");
+    }
+
 }
