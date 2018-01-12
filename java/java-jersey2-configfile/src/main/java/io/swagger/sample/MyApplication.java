@@ -32,6 +32,8 @@ public class MyApplication extends ResourceConfig {
          * 4.7.2.3.2. JAX-RS application with a custom Application subclass
          * this could result in non existing operations being added if served by subresource classes.
          *
+         * see https://github.com/jersey/jersey/issues/3756
+         *
          * To avoid this behaviour provide own packages/classes/resources/singleton here
          */
         super.packages("io.swagger.sample.resource", "io.swagger.v3.jaxrs2.integration.resources");
