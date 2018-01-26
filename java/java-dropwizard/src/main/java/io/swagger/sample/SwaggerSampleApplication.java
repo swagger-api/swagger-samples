@@ -28,6 +28,8 @@ public class SwaggerSampleApplication extends Application <SwaggerSampleConfigur
   public void run(SwaggerSampleConfiguration configuration, Environment environment) {
     environment.jersey().register(new ApiListingResource());
     environment.jersey().register(new PetResource());
+    //the next line will become obsolet with the next release of swagger-jaxrs
+    //see https://github.com/swagger-api/swagger-core/pull/2106
     environment.getObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
 
     BeanConfig config = new BeanConfig();
