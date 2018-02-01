@@ -33,6 +33,11 @@ public class MyApplication extends ResourceConfig {
          */
         super.packages("io.swagger.sample.petstore",
                 "io.swagger.sample.petstore.operation",
+                "io.swagger.sample.petstore.security",
+                "io.swagger.sample.petstore.parameter",
+                "io.swagger.sample.petstore.example",
+                "io.swagger.sample.petstore.link",
+                "io.swagger.sample.petstore.tags",
                 "io.swagger.sample.petstore.openapidefinition",
                 "io.swagger.v3.jaxrs2.integration.resources");
     }

@@ -2,6 +2,11 @@
     "resourcePackages": [
         "io.swagger.sample.petstore",
         "io.swagger.sample.petstore.operation",
+        "io.swagger.sample.petstore.security",
+        "io.swagger.sample.petstore.example",
+        "io.swagger.sample.petstore.link",
+        "io.swagger.sample.petstore.parameter",
+        "io.swagger.sample.petstore.tags",
         "io.swagger.sample.petstore.openapidefinition"
     ],
     "prettyPrint" : true,
