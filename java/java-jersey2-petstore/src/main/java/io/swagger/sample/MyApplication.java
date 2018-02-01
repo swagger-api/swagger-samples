@@ -3,11 +3,8 @@ package io.swagger.sample;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
-import java.util.Collections;
-import java.util.Set;
 
-@ApplicationPath("/sample")
+@ApplicationPath("/petstore")
 public class MyApplication extends ResourceConfig {
 //public class MyApplication extends Application {
 
@@ -24,7 +21,7 @@ public class MyApplication extends ResourceConfig {
 */
 
     public MyApplication() {
-    //public MyApplication(@Context ServletConfig servletConfig) {
+        //public MyApplication(@Context ServletConfig servletConfig) {
         super();
         /*
          * It seems that Jersey (at least 2.26) incorrectly registers also non root resources (available via getClasses())
@@ -34,6 +31,9 @@ public class MyApplication extends ResourceConfig {
          *
          * To avoid this behaviour provide own packages/classes/resources/singleton here
          */
-        super.packages("io.swagger.sample.resource", "io.swagger.v3.jaxrs2.integration.resources");
+        super.packages("io.swagger.sample.petstore",
+                "io.swagger.sample.petstore.operation",
+                "io.swagger.sample.petstore.openapidefinition",
+                "io.swagger.v3.jaxrs2.integration.resources");
     }
 }
