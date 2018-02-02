@@ -1,5 +1,6 @@
 package io.swagger.sample.petstore.link;
 
+import io.swagger.sample.model.User;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.links.Link;
 import io.swagger.v3.oas.annotations.links.LinkParameter;
@@ -14,8 +15,8 @@ import javax.ws.rs.QueryParam;
 /**
  * Class with Links
  */
+@Path("/links")
 public class LinksResource {
-    @Path("/links")
     @Operation(operationId = "getUserWithAddress",
             responses = {
                     @ApiResponse(description = "test description",
@@ -37,7 +38,7 @@ public class LinksResource {
                             })}
     )
     @GET
-    public String getUser(@QueryParam("userId")final String userId) {
+    public User getUser(@QueryParam("userId")final String userId) {
         return null;
     }
 
