@@ -9,6 +9,7 @@ import javax.ws.rs.Path;
 /**
  * Class with a single not annotated parameter.
  */
+@Path("/parameter")
 public class SingleNotAnnotatedParameter {
     @GET
     @Path("/singlenoannotatedparameter")

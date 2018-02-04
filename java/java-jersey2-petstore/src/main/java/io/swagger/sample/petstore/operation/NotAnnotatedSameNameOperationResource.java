@@ -6,6 +6,7 @@ import javax.ws.rs.Path;
 /**
  * Resource With a Default Operation without Annotation
  */
+@Path("/operations")
 public class NotAnnotatedSameNameOperationResource {
     @Path("/notannotatedoperation")
     @GET

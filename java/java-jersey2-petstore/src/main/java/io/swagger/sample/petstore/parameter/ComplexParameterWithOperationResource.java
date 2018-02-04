@@ -13,6 +13,7 @@ import javax.ws.rs.QueryParam;
 /**
  * Class with a multiple annotated.
  */
+@Path("/parameter")
 public class ComplexParameterWithOperationResource {
 
     @Parameter(description = "Phone definied in Field")
@@ -23,7 +24,7 @@ public class ComplexParameterWithOperationResource {
     }
 
     @GET
-    @Path("/complexparameter")
+    @Path("/complexoperationparameter")
     @Operation(operationId = "create User",
             parameters = {
                     @Parameter(description = "Phone", name = "phone", in = ParameterIn.PATH)

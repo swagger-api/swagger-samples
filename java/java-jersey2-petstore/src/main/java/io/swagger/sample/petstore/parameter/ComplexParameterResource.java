@@ -12,6 +12,7 @@ import javax.ws.rs.QueryParam;
 /**
  * Class with a multiple annotated.
  */
+@Path("/parameter")
 public class ComplexParameterResource {
 
     @Parameter(description = "Phone definied in Field")

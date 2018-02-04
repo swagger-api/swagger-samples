@@ -19,6 +19,7 @@ import javax.ws.rs.core.Response;
 /**
  * Resource with Complete Operations Examples
  */
+@Path("/operation")
 public class OperationResource implements InterfaceResource {
     @Override
     @Operation(summary = "Find pet by ID Operation in SubResource",

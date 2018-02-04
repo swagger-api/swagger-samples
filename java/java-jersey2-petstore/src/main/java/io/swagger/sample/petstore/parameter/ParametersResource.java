@@ -19,7 +19,7 @@ import javax.ws.rs.core.Response;
 /**
  * Resource with some Parameters examples
  */
-@Path("/parameters")
+@Path("/parameter")
 public class ParametersResource {
     @POST
     @Operation(

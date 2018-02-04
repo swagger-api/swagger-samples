@@ -11,6 +11,7 @@ import javax.ws.rs.QueryParam;
 /**
  * Class with a single parameter annotated with jaxrs and open api annotation.
  */
+@Path("/parameter")
 public class OpenAPIJaxRSAnnotatedParameter {
     @GET
     @Path("/openapijaxrsannotatedparameter")

@@ -13,6 +13,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
+@Path("/parameter")
 public class ArraySchemaResource {
     @Path("/arrayschema")
     @POST

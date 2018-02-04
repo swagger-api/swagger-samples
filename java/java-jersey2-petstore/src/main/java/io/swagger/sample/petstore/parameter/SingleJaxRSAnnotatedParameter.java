@@ -10,6 +10,7 @@ import javax.ws.rs.QueryParam;
 /**
  * Class with a single parameter annotated with jaxrs.
  */
+@Path("/parameter")
 public class SingleJaxRSAnnotatedParameter {
     @GET
     @Path("/singlejaxrsannotatedparameter")
