@@ -19,7 +19,6 @@ import javax.ws.rs.core.Response;
 /**
  * Resource with RequestBody examples
  */
-//@Path("/requestbody")
 public class RequestBodyResource {
     @GET
     @Path("/methodWithRequestBodyWithoutContent")
