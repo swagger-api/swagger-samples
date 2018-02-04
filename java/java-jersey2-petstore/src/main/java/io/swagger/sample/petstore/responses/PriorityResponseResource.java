@@ -12,6 +12,7 @@ import javax.ws.rs.core.Response;
 /**
  * Resource with a Response at Method Level and Operation Level.
  */
+@Path("/responses")
 public class PriorityResponseResource {
     @GET
     @Path("/priorityresponses")

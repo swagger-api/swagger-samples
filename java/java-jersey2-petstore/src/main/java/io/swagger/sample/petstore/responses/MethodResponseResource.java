@@ -12,6 +12,7 @@ import javax.ws.rs.core.Response;
 /**
  * Resource with a Response at Method Level
  */
+@Path("/responses")
 public class MethodResponseResource {
     @GET
     @Path("/responseinmethod")

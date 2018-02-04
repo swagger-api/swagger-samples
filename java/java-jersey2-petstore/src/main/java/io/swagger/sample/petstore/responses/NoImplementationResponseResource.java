@@ -12,6 +12,7 @@ import javax.ws.rs.QueryParam;
 /**
  * Resource with a Response at Method Level
  */
+@Path("/responses")
 public class NoImplementationResponseResource {
     @Path("/noimplementationresponseresource")
     @Operation(operationId = "getUser",

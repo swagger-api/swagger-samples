@@ -17,8 +17,8 @@ import javax.ws.rs.Path;
 /**
  * Examples Resource Scenario
  */
+@Path("/example")
 public class ExamplesResource {
-    @Path("/example")
     @POST
     @Operation(
             operationId = "subscribe",

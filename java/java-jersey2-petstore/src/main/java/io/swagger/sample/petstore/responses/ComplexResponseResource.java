@@ -13,6 +13,7 @@ import javax.ws.rs.Path;
 /**
  * Resource with some responses
  */
+@Path("/responses")
 public class ComplexResponseResource {
     @GET
     @Path("/complexresponse")

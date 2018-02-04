@@ -10,6 +10,7 @@ import javax.ws.rs.Path;
 /**
  * Resource with a Response at Method Level
  */
+@Path("/responses")
 public class NoResponseResource {
     @GET
     @Path("/noresponse")

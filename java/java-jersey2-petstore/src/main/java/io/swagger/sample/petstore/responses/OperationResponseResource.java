@@ -12,6 +12,7 @@ import javax.ws.rs.core.Response;
 /**
  * Resource with the response in the Operation Annotation
  */
+@Path("/responses")
 public class OperationResponseResource {
     @GET
     @Path("/responseinoperation")
