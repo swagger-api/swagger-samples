@@ -293,6 +293,7 @@
     <module>java/java-jersey2-codeinit</module>
     <module>java/java-jersey2-resourceinit</module>
     <module>java/java-jersey2-alternatives</module>
+    <module>java/java-jersey2-guice</module>
     <module>java/java-resteasy-configfile</module>
     <module>java/java-resteasy-appclasses</module>
     <module>java/java-resteasy-initializer</module>
