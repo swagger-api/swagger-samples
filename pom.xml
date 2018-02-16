@@ -286,6 +286,7 @@
     <module>java/java-jersey2-webxml</module>
     <module>java/java-jersey2-webxml-configfile</module>
     <module>java/java-jersey2-configfile</module>
+    <module>java/java-jersey2-petstore</module>
     <module>java/java-jersey2-initializer</module>
     <module>java/java-jersey2-initializer-configfile</module>
     <module>java/java-jersey2-appclasses</module>
