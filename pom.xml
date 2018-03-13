@@ -288,6 +288,7 @@
     <module>java/java-jersey2-configfile</module>
     <module>java/java-jersey2-petstore</module>
     <module>java/java-jersey2-initializer</module>
+    <module>java/java-jersey2-minimal</module>
     <module>java/java-jersey2-initializer-configfile</module>
     <module>java/java-jersey2-appclasses</module>
     <module>java/java-jersey2-codeinit</module>
@@ -296,32 +297,11 @@
     <module>java/java-jersey2-guice</module>
     <module>java/java-resteasy-configfile</module>
     <module>java/java-resteasy-appclasses</module>
+    <module>java/java-resteasy-minimal</module>
     <module>java/java-resteasy-initializer</module>
     <module>java/java-resteasy-initializer-configfile</module>
     <module>java/java-resteasy-codeinit</module>
     <module>java/java-resteasy-webxml</module>
-    <!--
-    <module>java/inflector-dropwizard-guice</module>
-    <module>java/inflector-dropwizard</module>
-    <module>java/inflector-jetty-webxml</module>
-    <module>java/java-grails2</module>
-    <module>java/java-resteasy-spring</module>
-    <module>java/java-jaxrs</module>
-    <module>java/java-jaxrs-subresource</module>
-    <module>java/java-jaxrs-no-webxml</module>
-    <module>java/java-mule</module>
-    <module>java/java-jersey-jaxrs</module>
-    <module>java/java-jersey-jaxrs-multi</module>
-    <module>java/java-jersey-jaxrs-multi-use-basepath</module>
-    <module>java/java-jaxrs-no-annotations</module>
-    <module>java/java-resteasy-filter</module>
-    <module>java/java-jersey-spring</module>
-    <module>java/java-jersey-governator</module>
-    <module>java/java-jersey2-guice</module>
-    <module>java/java-jaxrs-wink</module>
-    <module>java/java-jaxrs-cxf</module>
-    <module>java/java-servlet</module>
--->
   </modules>
   <reporting>
     <outputDirectory>target/site</outputDirectory>

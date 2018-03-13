@@ -16,8 +16,10 @@
 
 package io.swagger.sample.resource;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -28,6 +30,7 @@ import io.swagger.sample.model.Order;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.*;
 
+@OpenAPIDefinition(info = @Info(title = "My API", version = "1.2.3", description = "A sample API"))
 @Path("/store")
 @Produces({"application/json", "application/xml"})
 public class PetStoreResource {
