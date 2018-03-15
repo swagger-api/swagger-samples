@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package io.swagger.sample.resource;
+package io.swagger.sample.resource.user;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
