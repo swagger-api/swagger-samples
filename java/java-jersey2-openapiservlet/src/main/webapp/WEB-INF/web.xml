@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+<servlet>
+<!-- use OpenApi servlet to serve spec -->
+    <servlet-name>OpenApi</servlet-name>
+    <servlet-class>io.swagger.v3.jaxrs2.integration.OpenApiServlet</servlet-class>
+
+    <init-param>
+      <param-name>openApi.configuration.resourcePackages</param-name>
+      <param-value>io.swagger.sample.resource</param-value>
+    </init-param>
+
+  <!-- alternatively include a file openapi-configuration.json or openapi-configuration.yaml in classpath -->
+
+  <!-- alternatively include a configuration file in the location specified below -->
+<!--
+    <init-param>
+      <param-name>openApi.configuration.location</param-name>
+      <param-value>/openapi-configuration.json</param-value>
+    </init-param>
+-->
+
+
+    <load-on-startup>2</load-on-startup>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>OpenApi</servlet-name>
+    <url-pattern>/openapi/*</url-pattern>
+  </servlet-mapping>
+
+  <filter>
+    <filter-name>ApiOriginFilter</filter-name>
+    <filter-class>io.swagger.sample.util.ApiOriginFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>ApiOriginFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+</web-app>
