@@ -7,9 +7,9 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.swagger.samples.v3</groupId>
-  <artifactId>swagger-jersey2-openapiservlet-sample-app</artifactId>
+  <artifactId>swagger-jaxrs2-openapiservlet-sample-app</artifactId>
   <packaging>war</packaging>
-  <name>swagger-jersey2-openapiservlet-sample-app</name>
+  <name>swagger-jaxrs2-openapiservlet-sample-app</name>
   <version>2.0.0</version>
   <build>
     <sourceDirectory>src/main/java</sourceDirectory>
