@@ -283,6 +283,9 @@
   </profiles>
   <modules>
     <module>java/java-dropwizard</module>
+    <module>java/java-jaxrs2-resources</module>
+    <module>java/java-jaxrs2-openapiservlet</module>
+    <module>java/java-jaxrs2-openapiservlet-resourceslib</module>
     <module>java/java-jersey2-webxml</module>
     <module>java/java-jersey2-webxml-configfile</module>
     <module>java/java-jersey2-configfile</module>
