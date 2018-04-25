@@ -25,7 +25,6 @@ import io.swagger.sample.data.PetData;
 import io.swagger.sample.model.Pet;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.NotNull;
 import javax.ws.rs.BeanParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -46,7 +45,27 @@ public class PetResource {
 
   @GET
   @Path("/{petId}")
-  public Pet getPetById(@PathParam("petId") Long petId) throws io.swagger.sample.exception.NotFoundException {
+  @Operation(summary = "Find pet by ID",
+          tags = {"pets"},
+          description = "Returns a pet when 0 < ID <= 10.  ID > 10 or nonintegers will simulate API error conditions",
+          responses = {
+                  @ApiResponse(description = "The pet", content = @Content(
+                          schema = @Schema(implementation = Pet.class)
+                  )),
+                  @ApiResponse(responseCode = "400", description = "Invalid ID supplied"),
+                  @ApiResponse(responseCode = "404", description = "Pet not found")
+          })
+  public Pet getPetById(
+          @Parameter(
+                  description = "ID of pet that needs to be fetched",
+                  schema = @Schema(
+                          type = "integer",
+                          format = "int64",
+                          description = "param ID of pet that needs to be fetched",
+                          allowableValues = {"1","2","3"}
+                  ),
+                  required = true)
+          @PathParam("petId") Long petId) throws io.swagger.sample.exception.NotFoundException {
     Pet pet = petData.getPetById(petId);
     if (null != pet) {
       return pet;
@@ -57,41 +76,73 @@ public class PetResource {
 
   @POST
   @Consumes("application/json")
+  @Operation(summary = "Add a new pet to the store",
+          tags = {"pets"},
+          responses = {
+                  @ApiResponse(responseCode = "405", description = "Invalid input")
+          })
   public Response addPet(
-      @Parameter(description = "Pet object that needs to be added to the store", required = true) Pet pet) {
+          @Parameter(description = "Pet object that needs to be added to the store", required = true) Pet pet) {
     petData.addPet(pet);
     return Response.ok().entity("SUCCESS").build();
   }
 
   @PUT
+  @Operation(summary = "Update an existing pet",
+          tags = {"pets"},
+          responses = {
+                  @ApiResponse(responseCode = "400", description = "Invalid ID supplied"),
+                  @ApiResponse(responseCode = "404", description = "Pet not found"),
+                  @ApiResponse(responseCode = "405", description = "Validation exception") })
   public Response updatePet(
-      @Parameter(description = "Pet object that needs to be added to the store", required = true) Pet pet) {
+          @Parameter(description = "Pet object that needs to be added to the store", required = true) Pet pet) {
     petData.addPet(pet);
     return Response.ok().entity("SUCCESS").build();
   }
 
   @GET
   @Path("/findByStatus")
+  @Operation(summary = "Finds Pets by status",
+          tags = {"pets"},
+          description = "Multiple status values can be provided with comma seperated strings",
+          responses = {
+                  @ApiResponse(
+                          content = @Content(mediaType = "application/json",
+                                  schema = @Schema(implementation = Pet.class))),
+                  @ApiResponse(
+                          responseCode = "400", description = "Invalid status value"
+                  )}
+  )
   public List<Pet> findPetsByStatus(
-      @Parameter(
-              description = "Status values that need to be considered for filter",
-              required = true,
-              schema = @Schema(
-                      allowableValues =  {"available","pending","sold"},
-                      defaultValue = "available"
-              )
-      )
-      @QueryParam("status") String status,
-      @BeanParam QueryResultBean qr
-){
+          @Parameter(
+                  description = "Status values that need to be considered for filter",
+                  required = true,
+                  schema = @Schema(
+                          allowableValues =  {"available","pending","sold"},
+                          defaultValue = "available"
+                  )
+          )
+          @QueryParam("status") String status,
+          @BeanParam QueryResultBean qr
+  ){
     return petData.findPetByStatus(status);
   }
 
   @GET
   @Path("/findByTags")
+  @Operation(summary = "Finds Pets by tags",
+          tags = {"pets"},
+          description = "Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.",
+          responses = {
+                  @ApiResponse(description = "Pets matching criteria",
+                          content = @Content(mediaType = "application/json",
+                                  schema = @Schema(implementation = Pet.class))
+                  ),
+                  @ApiResponse(description = "Invalid tag value", responseCode = "400")
+          })
   @Deprecated
   public List<Pet> findPetsByTags(
-      @NotNull @QueryParam("tags") String tags) {
+          @Parameter(description = "Tags to filter by", required = true) @QueryParam("tags") String tags) {
     return petData.findPetByTags(tags);
   }
 }
