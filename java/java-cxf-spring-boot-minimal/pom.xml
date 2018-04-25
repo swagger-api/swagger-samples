@@ -74,5 +74,9 @@
       <artifactId>cxf-rt-rs-service-description-openapi-v3</artifactId>
       <version>${cxf.version}</version>
     </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.jaxrs</groupId>
+      <artifactId>jackson-jaxrs-json-provider</artifactId>
+    </dependency>
   </dependencies>
 </project>

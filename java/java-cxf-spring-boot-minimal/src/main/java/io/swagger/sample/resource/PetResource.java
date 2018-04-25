@@ -16,13 +16,16 @@
 
 package io.swagger.sample.resource;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.sample.data.PetData;
 import io.swagger.sample.model.Pet;
+import io.swagger.v3.oas.annotations.servers.Server;
 import org.springframework.stereotype.Service;
 
 import javax.ws.rs.BeanParam;
@@ -34,12 +37,15 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Service
+@OpenAPIDefinition(
+        info = @Info(title = "Petstore", version = "2.0.0", description = "This is a sample Petstore server."))
 @Path("/pet")
-@Produces({"application/json", "application/xml"})
+@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public class PetResource {
   static PetData petData = new PetData();
 
@@ -75,7 +81,7 @@ public class PetResource {
   }
 
   @POST
-  @Consumes("application/json")
+  @Consumes(MediaType.APPLICATION_JSON)
   @Operation(summary = "Add a new pet to the store",
           tags = {"pets"},
           responses = {
@@ -88,6 +94,7 @@ public class PetResource {
   }
 
   @PUT
+  @Consumes(MediaType.APPLICATION_JSON)
   @Operation(summary = "Update an existing pet",
           tags = {"pets"},
           responses = {
@@ -107,7 +114,7 @@ public class PetResource {
           description = "Multiple status values can be provided with comma seperated strings",
           responses = {
                   @ApiResponse(
-                          content = @Content(mediaType = "application/json",
+                          content = @Content(mediaType = MediaType.APPLICATION_JSON,
                                   schema = @Schema(implementation = Pet.class))),
                   @ApiResponse(
                           responseCode = "400", description = "Invalid status value"
@@ -135,7 +142,7 @@ public class PetResource {
           description = "Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.",
           responses = {
                   @ApiResponse(description = "Pets matching criteria",
-                          content = @Content(mediaType = "application/json",
+                          content = @Content(mediaType = MediaType.APPLICATION_JSON,
                                   schema = @Schema(implementation = Pet.class))
                   ),
                   @ApiResponse(description = "Invalid tag value", responseCode = "400")
