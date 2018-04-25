@@ -1,0 +1,4 @@
+cxf:
+  jaxrs:
+    component-scan: true
+    classes-scan-packages: org.apache.cxf.jaxrs.openapi,org.apache.cxf.metrics
