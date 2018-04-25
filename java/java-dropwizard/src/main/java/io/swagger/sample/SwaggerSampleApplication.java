@@ -3,6 +3,7 @@ package io.swagger.sample;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import io.dropwizard.Application;
+import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.swagger.v3.jaxrs2.integration.resources.OpenApiResource;
@@ -22,7 +23,10 @@ public class SwaggerSampleApplication extends Application <SwaggerSampleConfigur
   }
 
   @Override
-  public void initialize(Bootstrap<SwaggerSampleConfiguration> bootstrap) { }
+  public void initialize(Bootstrap<SwaggerSampleConfiguration> bootstrap) {
+    // UI
+    bootstrap.addBundle(new AssetsBundle("/app", "/", "index.html", "static"));
+  }
 
   @Override   
   public String getName() {
@@ -77,7 +81,6 @@ public class SwaggerSampleApplication extends Application <SwaggerSampleConfigur
 
     // or
     //environment.jersey().register(new OpenApiResource().resourceClasses("io.swagger.sample.resource.PetResource"));
-
 
   }
 }
