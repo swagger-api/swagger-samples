@@ -3,7 +3,7 @@
 set -e
 
 # use default URL if none supplied
-if [ -z $SWAGGER_URL ]; then SWAGGER_URL=http://localhost:8002; fi
+if [ -z $SWAGGER_URL ]; then SWAGGER_URL=http://localhost:8080; fi
 
 # make it safe for sed
 URL=$(sed -e 's,/,\\/,g' <<< $SWAGGER_URL)

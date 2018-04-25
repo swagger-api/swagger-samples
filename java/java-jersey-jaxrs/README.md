@@ -1,6 +1,6 @@
 # Swagger Sample App
 
-This is the pet store sample hosted at http://petstore.swagger.io!
+This is the pet store sample hosted at https://petstore.swagger.io!
 
 ## Overview
 This is a java project to build a stand-alone server which implements the OpenAPI Spec.  You can find out 
