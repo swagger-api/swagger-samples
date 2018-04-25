@@ -266,7 +266,7 @@
 
   <properties>
     <java-version>1.7</java-version>
-    <springframework-version>4.3.9.RELEASE</springframework-version>
-    <cxf-version>3.1.12</cxf-version>
+    <springframework-version>4.3.16.RELEASE</springframework-version>
+    <cxf-version>3.1.15</cxf-version>
   </properties>
 </project>
