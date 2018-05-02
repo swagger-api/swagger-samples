@@ -1,4 +1,6 @@
 defaultName: Swagger-sample
+server:
+  rootPath: /api/
 logging:
   level: ERROR
   appenders:

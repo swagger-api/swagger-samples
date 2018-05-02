@@ -25,10 +25,13 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <properties>
-        <dropwizard-version>1.0.2</dropwizard-version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <dropwizard-version>1.3.1</dropwizard-version>
         <inflector-version>2.0.0-SNAPSHOT</inflector-version>
-        <jackson.version>2.8.9</jackson.version>
-        <jersey2.version>2.23.1</jersey2.version>
+        <jackson.version>2.9.5</jackson.version>
+        <jersey2.version>2.25.1</jersey2.version>
     </properties>
 
     <dependencies>
@@ -37,12 +40,6 @@
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-core</artifactId>
             <version>${dropwizard-version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
-            <artifactId>jersey-server</artifactId>
-            <version>${jersey2.version}</version>
         </dependency>
 
         <dependency>
@@ -107,6 +104,12 @@
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-yaml</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-afterburner</artifactId>
             <version>${jackson.version}</version>
         </dependency>
 

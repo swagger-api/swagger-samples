@@ -147,7 +147,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.10.4</version>
+        <version>3.0.0</version>
         <configuration>
           <aggregate>true</aggregate>
           <source>1.8</source>
@@ -312,7 +312,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.9</version>
+        <version>3.0.0</version>
         <configuration>
           <aggregate>true</aggregate>
           <debug>true</debug>
@@ -418,18 +418,43 @@
         <artifactId>jersey-servlet</artifactId>
         <version>${jersey2-version}</version>
       </dependency>
+      <dependency>
+        <groupId>javax.activation</groupId>
+        <artifactId>javax.activation-api</artifactId>
+        <version>1.2.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.sun.xml.bind</groupId>
+        <artifactId>jaxb-impl</artifactId>
+        <version>2.3.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.sun.xml.bind</groupId>
+        <artifactId>jaxb-core</artifactId>
+        <version>2.3.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.sun.xml.bind</groupId>
+        <artifactId>jaxb-jxc</artifactId>
+        <version>2.3.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.sun.xml.bind</groupId>
+        <artifactId>jaxb-xjc</artifactId>
+        <version>2.3.0</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <properties>
     <joda-version>1.2</joda-version>
     <joda-time-version>2.2</joda-time-version>
-    <swagger-version>2.0.0-SNAPSHOT</swagger-version>
+    <swagger-version>2.0.1</swagger-version>
     <swagger-ui-version>2.1.4</swagger-ui-version>
     <scala-version>2.10.4</scala-version>
     <felix-version>2.3.4</felix-version>
     <servlet-api-version>3.1.0</servlet-api-version>
     <jersey2-version>2.26</jersey2-version>
-    <jetty-version>9.4.6.v20170531</jetty-version>
+    <jetty-version>9.4.9.v20180320</jetty-version>
     <jackson-version>2.9.1</jackson-version>
     <logback-version>1.0.1</logback-version>
 
