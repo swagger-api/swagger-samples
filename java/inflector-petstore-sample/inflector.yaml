@@ -1,0 +1,11 @@
+controllerPackage: io.swagger.sample.petstore
+modelPackage: io.swagger.sample.model
+swaggerUrl: ./src/main/swagger/openapi.yaml
+modelMappings:
+  Pet: io.swagger.model
+
+# loads all by default, or pick and choose
+entityProcessors:
+  - json
+  - xml
+  - yaml
