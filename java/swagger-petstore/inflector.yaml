@@ -1,4 +1,4 @@
-controllerPackage: io.swagger.handler
+controllerPackage: io.swagger.petstore.controller
 modelPackage:  io.swagger.v3.core.model
 swaggerUrl: ./src/main/swagger/openapi.yaml
 

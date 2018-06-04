@@ -16,12 +16,12 @@
 
 package io.swagger.petstore.data;
 
-
 import io.swagger.petstore.model.Category;
 import io.swagger.petstore.model.Pet;
 import io.swagger.petstore.model.Tag;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PetData {
@@ -60,7 +60,7 @@ public class PetData {
     }
 
     public Pet getPetById(final long petId) {
-        for (Pet pet : pets) {
+        for (final Pet pet : pets) {
             if (pet.getId() == petId) {
                 return pet;
             }
@@ -72,7 +72,7 @@ public class PetData {
         final String[] statues = status.split(",");
         final List<Pet> result = new ArrayList<>();
         for (final Pet pet : pets) {
-            for (String s : statues) {
+            for (final String s : statues) {
                 if (s.equals(pet.getStatus())) {
                     result.add(pet);
                 }
@@ -81,13 +81,12 @@ public class PetData {
         return result;
     }
 
-    public List<Pet> findPetByTags(final String tags) {
-        final String[] tagList = tags.split(",");
+    public List<Pet> findPetByTags(final List<String> tags) {
         final List<Pet> result = new ArrayList<>();
         for (final Pet pet : pets) {
             if (null != pet.getTags()) {
                 for (final Tag tag : pet.getTags()) {
-                    for (final String tagListString : tagList) {
+                    for (final String tagListString : tags) {
                         if (tagListString.equals(tag.getName())) {
                             result.add(pet);
                         }
@@ -109,17 +108,24 @@ public class PetData {
         pets.add(pet);
     }
 
+    public void deletePetById(final Long petId) {
+        if (pets.size() > 0) {
+            for (int i = pets.size() - 1; i >= 0; i--) {
+                if (pets.get(i).getId() == petId) {
+                    pets.remove(i);
+                }
+            }
+        }
+    }
+
     private static Pet createPet(final long id, final Category cat, final String name, final String[] urls,
-                         final String[] tags, final String status) {
+                                 final String[] tags, final String status) {
         final Pet pet = new Pet();
         pet.setId(id);
         pet.setCategory(cat);
         pet.setName(name);
         if (null != urls) {
-            final List<String> urlObjs = new ArrayList<>();
-            for (final String urlString : urls) {
-                urlObjs.add(urlString);
-            }
+            final List<String> urlObjs = new ArrayList<>(Arrays.asList(urls));
             pet.setPhotoUrls(urlObjs);
         }
         final List<Tag> tagObjs = new ArrayList<>();

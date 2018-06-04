@@ -1,4 +1,4 @@
-package io.swagger.handler;
+package io.swagger.petstore.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import io.swagger.oas.inflector.models.RequestContext;

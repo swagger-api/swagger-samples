@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.swagger.petstore.controllers;
+package io.swagger.petstore.controller;
 
 import io.swagger.petstore.data.PetData;
 import io.swagger.petstore.model.Pet;
@@ -33,7 +33,7 @@ import javax.ws.rs.core.Response;
 @Path("/pet")
 @Produces({"application/json", "application/xml"})
 public class PetResource {
-    static PetData petData = new PetData();
+    private static PetData petData = new PetData();
 
     @GET
     @Path("/{petId}")
@@ -57,7 +57,7 @@ public class PetResource {
 
         throw new io.swagger.petstore.exception.NotFoundException(404, "Pet not found");
     }
-
+/*
     @POST
     @Consumes({"application/json", "application/xml"})
     @Operation(summary = "Add a new pet to the store",
@@ -139,7 +139,7 @@ public class PetResource {
     }
 
     @GET
-    @Path("/findByTags")
+    @Path("/find")
     @Produces("application/json")
     @Operation(summary = "Finds Pets by tags",
             description = "Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.",
@@ -154,4 +154,6 @@ public class PetResource {
             @Parameter(description = "Tags to filter by", required = true) @QueryParam("tags") final String tags) {
         return Response.ok(petData.findPetByTags(tags)).build();
     }
+
+*/
 }
