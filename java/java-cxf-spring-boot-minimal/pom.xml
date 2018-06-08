@@ -13,7 +13,7 @@
   <version>2.0.0</version>
   <properties>
     <cxf.version>3.2.4</cxf.version>
-    <spring-boot.version>2.0.1.RELEASE</spring-boot.version>
+    <spring-boot.version>2.0.2.RELEASE</spring-boot.version>
   </properties>
   <build>
     <sourceDirectory>src/main/java</sourceDirectory>
