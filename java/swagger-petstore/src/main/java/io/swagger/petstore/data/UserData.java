@@ -70,7 +70,7 @@ public class UserData {
         users.add(user);
     }
 
-    public boolean removeUser(final String username) {
+    public boolean deleteUser(final String username) {
         if (users.size() > 0) {
             for (int i = users.size() - 1; i >= 0; i--) {
                 if (users.get(i).getUsername().equals(username)) {
