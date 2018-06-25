@@ -3,15 +3,15 @@ package io.swagger.petstore.data;
 import io.swagger.petstore.model.Order;
 import io.swagger.petstore.model.Pet;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class OrderData {
     private static List<Order> orders = new ArrayList<>();
 
     static {
         orders.add(createOrder(1, 1, 100, new Date(), "placed", true));
+        orders.add(createOrder(2, 1, 50, new Date(), "approved", true));
+        orders.add(createOrder(3, 1, 50, new Date(), "delivered", true));
     }
 
     public Order getOrderById(final long orderId) {
@@ -21,6 +21,22 @@ public class OrderData {
             }
         }
         return null;
+    }
+
+    public Map<String, Integer> getCountByStatus() {
+
+        final Map<String, Integer> countByStatus = new HashMap<>();
+
+        for (final Order order : orders) {
+            final String status = order.getStatus();
+            if (countByStatus.containsKey(status)) {
+                countByStatus.put(status, countByStatus.get(status) + order.getQuantity());
+            } else {
+                countByStatus.put(status, order.getQuantity());
+            }
+        }
+
+        return countByStatus;
     }
 
     public void addOrder(final Order order) {

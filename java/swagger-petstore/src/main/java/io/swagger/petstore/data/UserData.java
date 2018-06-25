@@ -71,7 +71,7 @@ public class UserData {
     }
 
     public void deleteUser(final String username) {
-        users.removeIf(user -> user.getUsername() == username);
+        users.removeIf(user -> user.getUsername().equals(username));
     }
 
     private static User createUser(final long id, final String username, final String firstName,

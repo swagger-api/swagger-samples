@@ -11,11 +11,21 @@ import io.swagger.petstore.utils.Util;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaInflectorServerCodegen", date = "2017-04-08T15:48:56.501Z")
 public class OrderController {
 
     private static OrderData orderData = new OrderData();
+
+    public ResponseContext getInventory(final RequestContext request) {
+        final MediaType outputType = Util.getMediaType(request);
+        return new ResponseContext()
+                .contentType(outputType)
+                .entity(orderData.getCountByStatus());
+    }
 
     public ResponseContext getOrderById(final RequestContext request, final Long orderId) {
         if (orderId == null) {
