@@ -75,6 +75,18 @@ paths:
       description: Update an existing pet by Id
       operationId: updatePet
       responses:
+        '200':
+          description: Successful operation
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Pet'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+            application/x-www-form-urlencoded:
+              schema:
+                $ref: '#/components/schemas/Pet'
         '400':
           description: Invalid ID supplied
         '404':
@@ -331,31 +343,35 @@ paths:
       tags:
         - store
       summary: Place an order for a pet
-      description: ''
+      description: Place a new order in the store
       operationId: placeOrder
+      x-swagger-router-controller: io.swagger.petstore.controller.OrderController
       responses:
         '200':
           description: successful operation
           content:
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Order'
             application/json:
               schema:
                 $ref: '#/components/schemas/Order'
-        '400':
-          description: Invalid Order
+            application/x-www-form-urlencoded:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '405':
+          description: Invalid input
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Order'
-        description: order placed for purchasing the pet
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Order'
   '/store/order/{orderId}':
     get:
       tags:
         - store
       summary: Find purchase order by ID
+      x-swagger-router-controller: io.swagger.petstore.controller.OrderController
       description: >-
         For valid response try integer IDs with value <= 5 or > 10. Other values
         will generated exceptions
@@ -363,10 +379,11 @@ paths:
       parameters:
         - name: orderId
           in: path
-          description: ID of pet that needs to be fetched
+          description: ID of order that needs to be fetched
           required: true
           schema:
-            type: string
+            type: integer
+            format: int64
       responses:
         '200':
           description: successful operation
@@ -385,6 +402,7 @@ paths:
       tags:
         - store
       summary: Delete purchase order by ID
+      x-swagger-router-controller: io.swagger.petstore.controller.OrderController
       description: >-
         For valid response try integer IDs with value < 1000. Anything above
         1000 or nonintegers will generate API errors
@@ -395,7 +413,8 @@ paths:
           description: ID of the order that needs to be deleted
           required: true
           schema:
-            type: string
+            type: integer
+            format: int64
       responses:
         '400':
           description: Invalid ID supplied
@@ -422,9 +441,19 @@ paths:
       tags:
         - user
       summary: Creates list of users with given input array
-      description: ''
+      description: 'Creates list of users with given input array'
+      x-swagger-router-controller: io.swagger.petstore.controller.UserController
       operationId: createUsersWithArrayInput
       responses:
+        '200':
+          description: successful operation
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
         default:
           description: successful operation
       requestBody:
@@ -436,13 +465,14 @@ paths:
       tags:
         - user
       summary: Creates list of users with given input array
-      description: ''
+      description: 'Creates list of users with given input array'
+      x-swagger-router-controller: io.swagger.petstore.controller.UserController
       operationId: createUsersWithListInput
       responses:
         default:
           description: successful operation
       requestBody:
-        $ref: '#/components/schemas/UserArray'
+        $ref: '#/components/schemas/User'
   /user/login:
     get:
       tags:
@@ -527,9 +557,9 @@ paths:
     put:
       tags:
         - user
-      summary: Updated user
+      summary: Update user
       description: This can only be done by the logged in user.
-      operationId: Jejejejeje
+      operationId: updateUser
       parameters:
         - name: username
           in: query
@@ -538,12 +568,21 @@ paths:
           schema:
             type: string
       responses:
+        '200':
+          description: successful operation
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
         '400':
           description: Invalid user supplied
         '404':
           description: User not found
       requestBody:
-           description: Update an existent usertore in the store
+           description: Update an existent user in the store
            required: true
            content:
              application/json:
@@ -605,8 +644,6 @@ components:
           example: approved
         complete:
           type: boolean
-        customer:
-          $ref: Customer
       xml:
         name: order
       type: object

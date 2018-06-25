@@ -109,13 +109,7 @@ public class PetData {
     }
 
     public void deletePetById(final Long petId) {
-        if (pets.size() > 0) {
-            for (int i = pets.size() - 1; i >= 0; i--) {
-                if (pets.get(i).getId() == petId) {
-                    pets.remove(i);
-                }
-            }
-        }
+        pets.removeIf(pet -> pet.getId() == petId);
     }
 
     private static Pet createPet(final long id, final Category cat, final String name, final String[] urls,

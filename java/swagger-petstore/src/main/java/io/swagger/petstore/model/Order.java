@@ -29,7 +29,7 @@ public class Order {
   private int quantity;
   private Date shipDate;
   private String status;
-    private boolean complete;
+  private boolean complete;
 
   @XmlElement(name = "id")
   public long getId() {

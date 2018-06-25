@@ -6,6 +6,7 @@ import io.swagger.oas.inflector.models.RequestContext;
 import io.swagger.oas.inflector.models.ResponseContext;
 import io.swagger.petstore.data.PetData;
 import io.swagger.petstore.model.Pet;
+import io.swagger.petstore.utils.Util;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -22,7 +23,7 @@ public class PetController {
         if (status == null) {
             return new ResponseContext()
                     .status(Response.Status.BAD_REQUEST)
-                    .entity("No status provided.  Try again?");
+                    .entity("No status provided. Try again?");
         }
 
         final List<Pet> petByStatus = petData.findPetByStatus(status);
@@ -32,7 +33,7 @@ public class PetController {
         }
 
 
-        final MediaType outputType = getMediaType(request);
+        final MediaType outputType = Util.getMediaType(request);
 
         return new ResponseContext()
                 .contentType(outputType)
@@ -43,40 +44,36 @@ public class PetController {
         if (petId == null) {
             return new ResponseContext()
                     .status(Response.Status.BAD_REQUEST)
-                    .entity("No petId provided.  Try again?");
-        }
-
-        if (petId == null) {
-            return new ResponseContext().status(Response.Status.BAD_REQUEST).entity("Invalid Status");
+                    .entity("No petId provided. Try again?");
         }
 
         final Pet pet = petData.getPetById(petId);
 
-        final MediaType outputType = getMediaType(request);
-        if (null != pet) {
+        final MediaType outputType = Util.getMediaType(request);
+
+        if (pet != null) {
             return new ResponseContext()
                     .contentType(outputType)
                     .entity(pet);
-        } else {
-            return new ResponseContext().status(Response.Status.NOT_FOUND).entity("Pet not found");
         }
 
+        return new ResponseContext().status(Response.Status.NOT_FOUND).entity("Pet not found");
     }
 
     public ResponseContext updatePetWithForm(final RequestContext request, final Long petId, final String name, final String status) {
         if (petId == null) {
             return new ResponseContext()
                     .status(Response.Status.BAD_REQUEST)
-                    .entity("No Pet provided.  Try again?");
+                    .entity("No Pet provided. Try again?");
         }
 
         if (name == null) {
             return new ResponseContext()
                     .status(Response.Status.BAD_REQUEST)
-                    .entity("No Name provided.  Try again?");
+                    .entity("No Name provided. Try again?");
         }
 
-        final MediaType outputType = getMediaType(request);
+        final MediaType outputType = Util.getMediaType(request);
         final ObjectMapper objectMapper = new ObjectMapper();
 
         final Pet existingPet = petData.getPetById(petId);
@@ -99,16 +96,12 @@ public class PetController {
         if (petId == null) {
             return new ResponseContext()
                     .status(Response.Status.BAD_REQUEST)
-                    .entity("No petId provided.  Try again?");
-        }
-
-        if (petId == null) {
-            return new ResponseContext().status(Response.Status.BAD_REQUEST).entity("Invalid Status");
+                    .entity("No petId provided. Try again?");
         }
 
         petData.deletePetById(petId);
 
-        final MediaType outputType = getMediaType(request);
+        final MediaType outputType = Util.getMediaType(request);
 
         final Pet pet = petData.getPetById(petId);
 
@@ -126,11 +119,11 @@ public class PetController {
         if (petId == null) {
             return new ResponseContext()
                     .status(Response.Status.BAD_REQUEST)
-                    .entity("No petId provided.  Try again?");
+                    .entity("No petId provided. Try again?");
         }
 
-        if (petId == null) {
-            return new ResponseContext().status(Response.Status.BAD_REQUEST).entity("Invalid Status");
+        if (file == null) {
+            return new ResponseContext().status(Response.Status.BAD_REQUEST).entity("No file uploaded");
         }
 
         final Pet existingPet = petData.getPetById(petId);
@@ -142,16 +135,16 @@ public class PetController {
         petData.deletePetById(existingPet.getId());
         petData.addPet(existingPet);
 
-        final MediaType outputType = getMediaType(request);
+        final MediaType outputType = Util.getMediaType(request);
 
         final Pet pet = petData.getPetById(petId);
 
-        if (null == pet) {
+        if (null != pet) {
             return new ResponseContext()
                     .contentType(outputType)
                     .entity(pet);
         } else {
-            return new ResponseContext().status(Response.Status.NOT_MODIFIED).entity("Pet couldn't be deleted.");
+            return new ResponseContext().status(Response.Status.NOT_MODIFIED).entity("Pet couldn't be updated.");
         }
 
     }
@@ -160,10 +153,10 @@ public class PetController {
         if (pet == null) {
             return new ResponseContext()
                     .status(Response.Status.BAD_REQUEST)
-                    .entity("No Pet provided.  Try again?");
+                    .entity("No Pet provided. Try again?");
         }
 
-        final MediaType outputType = getMediaType(request);
+        final MediaType outputType = Util.getMediaType(request);
         final ObjectMapper objectMapper = new ObjectMapper();
 
         try {
@@ -172,7 +165,7 @@ public class PetController {
 
             return new ResponseContext()
                     .contentType(outputType)
-                    .entity(pet);
+                    .entity(convertedPet);
         } catch (IOException e) {
             return new ResponseContext().status(Response.Status.BAD_REQUEST).entity(pet);
         }
@@ -182,10 +175,10 @@ public class PetController {
         if (pet == null) {
             return new ResponseContext()
                     .status(Response.Status.BAD_REQUEST)
-                    .entity("No Pet provided.  Try again?");
+                    .entity("No Pet provided. Try again?");
         }
 
-        final MediaType outputType = getMediaType(request);
+        final MediaType outputType = Util.getMediaType(request);
         final ObjectMapper objectMapper = new ObjectMapper();
 
         try {
@@ -210,38 +203,16 @@ public class PetController {
         if (tags == null || tags.size() == 0) {
             return new ResponseContext()
                     .status(Response.Status.BAD_REQUEST)
-                    .entity("No tags provided.  Try again?");
+                    .entity("No tags provided. Try again?");
         }
 
         final List<Pet> petByStatus = petData.findPetByTags(tags);
-        final MediaType outputType = getMediaType(request);
+        final MediaType outputType = Util.getMediaType(request);
 
         return new ResponseContext()
                 .contentType(outputType)
                 .entity(petByStatus);
     }
-
-    private MediaType getMediaType(RequestContext request) {
-        MediaType outputType = MediaType.APPLICATION_JSON_TYPE;
-
-        boolean isJsonOK = false;
-        boolean isYamlOK = false;
-
-        final MediaType yamlMediaType = new MediaType("application", "yaml");
-
-        for (final MediaType mediaType : request.getAcceptableMediaTypes()) {
-            if (mediaType.equals(MediaType.APPLICATION_JSON_TYPE)) {
-                isJsonOK = true;
-            } else if (mediaType.equals(yamlMediaType)) {
-                isYamlOK = true;
-            }
-        }
-
-        if (isYamlOK && !isJsonOK) {
-            outputType = yamlMediaType;
-        }
-
-        return outputType;
-    }
+    
 }
 

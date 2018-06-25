@@ -6,6 +6,7 @@ import io.swagger.oas.inflector.models.RequestContext;
 import io.swagger.oas.inflector.models.ResponseContext;
 import io.swagger.petstore.data.UserData;
 import io.swagger.petstore.model.User;
+import io.swagger.petstore.utils.Util;
 import org.apache.commons.lang.math.RandomUtils;
 
 import javax.ws.rs.core.MediaType;
@@ -24,7 +25,7 @@ public class UserController {
                     .entity("No User provided. Try again?");
         }
 
-        final MediaType outputType = getMediaType(request);
+        final MediaType outputType = Util.getMediaType(request);
         final ObjectMapper objectMapper = new ObjectMapper();
 
         try {
@@ -50,7 +51,7 @@ public class UserController {
         if (user == null) {
             return new ResponseContext().status(Response.Status.NOT_FOUND).entity("User not found");
         }
-        final MediaType outputType = getMediaType(request);
+        final MediaType outputType = Util.getMediaType(request);
 
         return new ResponseContext()
                 .contentType(outputType)
@@ -64,7 +65,7 @@ public class UserController {
                     .entity("No User provided. Try again?");
         }
 
-        final MediaType outputType = getMediaType(request);
+        final MediaType outputType = Util.getMediaType(request);
         final ObjectMapper objectMapper = new ObjectMapper();
 
         try {
@@ -86,7 +87,7 @@ public class UserController {
                     .entity("No username provided. Try again?");
         }
 
-        final MediaType outputType = getMediaType(request);
+        final MediaType outputType = Util.getMediaType(request);
         final User user = userData.findUserByName(username);
 
         if (user == null) {
@@ -103,7 +104,7 @@ public class UserController {
     }
 
     public ResponseContext logoutUser(final RequestContext request) {
-        final MediaType outputType = getMediaType(request);
+        final MediaType outputType = Util.getMediaType(request);
 
         return new ResponseContext()
                 .contentType(outputType)
@@ -120,7 +121,7 @@ public class UserController {
 
         userData.deleteUser(username);
 
-        final MediaType outputType = getMediaType(request);
+        final MediaType outputType = Util.getMediaType(request);
 
         final User user = userData.findUserByName(username);
 
@@ -140,7 +141,7 @@ public class UserController {
                     .entity("No User provided. Try again?");
         }
 
-        final MediaType outputType = getMediaType(request);
+        final MediaType outputType = Util.getMediaType(request);
         final ObjectMapper objectMapper = new ObjectMapper();
 
         try {
@@ -160,29 +161,6 @@ public class UserController {
         } catch (IOException e) {
             return new ResponseContext().status(Response.Status.BAD_REQUEST).entity(user);
         }
-    }
-
-    private MediaType getMediaType(RequestContext request) {
-        MediaType outputType = MediaType.APPLICATION_JSON_TYPE;
-
-        boolean isJsonOK = false;
-        boolean isYamlOK = false;
-
-        final MediaType yamlMediaType = new MediaType("application", "yaml");
-
-        for (final MediaType mediaType : request.getAcceptableMediaTypes()) {
-            if (mediaType.equals(MediaType.APPLICATION_JSON_TYPE)) {
-                isJsonOK = true;
-            } else if (mediaType.equals(yamlMediaType)) {
-                isYamlOK = true;
-            }
-        }
-
-        if (isYamlOK && !isJsonOK) {
-            outputType = yamlMediaType;
-        }
-
-        return outputType;
     }
 }
 
