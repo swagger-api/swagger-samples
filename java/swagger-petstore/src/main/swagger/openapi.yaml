@@ -473,10 +473,24 @@ paths:
       x-swagger-router-controller: io.swagger.petstore.controller.UserController
       operationId: createUsersWithListInput
       responses:
+        '200':
+          description: Successful operation
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
         default:
           description: successful operation
       requestBody:
-        $ref: '#/components/schemas/User'
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/User'
   /user/login:
     get:
       tags:
