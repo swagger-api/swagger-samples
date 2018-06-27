@@ -1,7 +1,6 @@
 package io.swagger.petstore.data;
 
 import io.swagger.petstore.model.Order;
-import io.swagger.petstore.model.Pet;
 
 import java.util.*;
 

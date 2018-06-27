@@ -58,8 +58,8 @@ public class UserController {
                 .entity(user);
     }
 
-    public ResponseContext createUsersWithArrayInput(final RequestContext request, final JsonNode user) {
-        if (user == null) {
+    public ResponseContext createUsersWithArrayInput(final RequestContext request, final JsonNode users) {
+        if (users == null) {
             return new ResponseContext()
                     .status(Response.Status.BAD_REQUEST)
                     .entity("No User provided. Try again?");
@@ -69,14 +69,14 @@ public class UserController {
         final ObjectMapper objectMapper = new ObjectMapper();
 
         try {
-            final User convertedUser = objectMapper.readValue(user.toString(), User.class);
+            final User convertedUser = objectMapper.readValue(users.toString(), User.class);
             userData.addUser(convertedUser);
 
             return new ResponseContext()
                     .contentType(outputType)
-                    .entity(user);
+                    .entity(users);
         } catch (IOException e) {
-            return new ResponseContext().status(Response.Status.BAD_REQUEST).entity(user);
+            return new ResponseContext().status(Response.Status.BAD_REQUEST).entity(users);
         }
     }
 
