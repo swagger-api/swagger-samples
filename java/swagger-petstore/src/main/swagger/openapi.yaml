@@ -326,7 +326,7 @@ paths:
       summary: Returns pet inventories by status
       description: Returns a map of status codes to quantities
       operationId: getInventory
-      x-swagger-router-controller: io.swagger.petstore.controller.OrderController
+      x-swagger-router-controller: OrderController
       responses:
         '200':
           description: successful operation
@@ -346,7 +346,7 @@ paths:
       summary: Place an order for a pet
       description: Place a new order in the store
       operationId: placeOrder
-      x-swagger-router-controller: io.swagger.petstore.controller.OrderController
+      x-swagger-router-controller: OrderController
       responses:
         '200':
           description: successful operation
@@ -372,7 +372,7 @@ paths:
       tags:
         - store
       summary: Find purchase order by ID
-      x-swagger-router-controller: io.swagger.petstore.controller.OrderController
+      x-swagger-router-controller: OrderController
       description: >-
         For valid response try integer IDs with value <= 5 or > 10. Other values
         will generated exceptions
@@ -403,7 +403,7 @@ paths:
       tags:
         - store
       summary: Delete purchase order by ID
-      x-swagger-router-controller: io.swagger.petstore.controller.OrderController
+      x-swagger-router-controller: OrderController
       description: >-
         For valid response try integer IDs with value < 1000. Anything above
         1000 or nonintegers will generate API errors
@@ -443,7 +443,7 @@ paths:
         - user
       summary: Creates list of users with given input array
       description: 'Creates list of users with given input array'
-      x-swagger-router-controller: io.swagger.petstore.controller.UserController
+      x-swagger-router-controller: UserController
       operationId: createUsersWithArrayInput
       responses:
         '200':
@@ -470,7 +470,7 @@ paths:
         - user
       summary: Creates list of users with given input array
       description: 'Creates list of users with given input array'
-      x-swagger-router-controller: io.swagger.petstore.controller.UserController
+      x-swagger-router-controller: UserController
       operationId: createUsersWithListInput
       responses:
         '200':
@@ -576,40 +576,23 @@ paths:
       tags:
         - user
       summary: Update user
+      x-swagger-router-controller: UserController
       description: This can only be done by the logged in user.
       operationId: updateUser
       parameters:
         - name: username
-          in: query
+          in: path
           description: name that need to be deleted
           required: true
           schema:
             type: string
       responses:
-        '200':
+        default:
           description: successful operation
-          content:
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/User'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-        '400':
-          description: Invalid user supplied
-        '404':
-          description: User not found
       requestBody:
            description: Update an existent user in the store
-           required: true
            content:
              application/json:
-               schema:
-                 $ref: '#/components/schemas/User'
-             application/xml:
-               schema:
-                 $ref: '#/components/schemas/User'
-             application/x-www-form-urlencoded:
                schema:
                  $ref: '#/components/schemas/User'
     delete:
