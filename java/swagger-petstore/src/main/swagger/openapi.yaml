@@ -619,6 +619,7 @@ externalDocs:
 components:
   schemas:
     Order:
+      x-swagger-router-model: io.swagger.petstore.model.Order
       properties:
         id:
           type: integer
@@ -695,6 +696,7 @@ components:
         name: category
       type: object
     User:
+      x-swagger-router-model: io.swagger.petstore.model.User
       properties:
         id:
           type: integer
@@ -718,6 +720,7 @@ components:
       xml:
         name: user
       type: object
+      x-swagger-router-model: io.swagger.petstore.model.User
     Tag:
       properties:
         id:
@@ -729,6 +732,7 @@ components:
         name: tag
       type: object
     Pet:
+      x-swagger-router-model: io.swagger.petstore.model.Pet
       required:
         - name
         - photoUrls

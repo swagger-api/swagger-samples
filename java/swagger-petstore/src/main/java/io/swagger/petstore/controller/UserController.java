@@ -1,7 +1,5 @@
 package io.swagger.petstore.controller;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.oas.inflector.models.RequestContext;
 import io.swagger.oas.inflector.models.ResponseContext;
 import io.swagger.petstore.data.UserData;
@@ -9,35 +7,24 @@ import io.swagger.petstore.model.User;
 import io.swagger.petstore.utils.Util;
 import org.apache.commons.lang.math.RandomUtils;
 
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.IOException;
 
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaInflectorServerCodegen", date = "2017-04-08T15:48:56.501Z")
 public class UserController {
 
     private static UserData userData = new UserData();
 
-    public ResponseContext createUser(final RequestContext request, final JsonNode user) {
+    public ResponseContext createUser(final RequestContext request, final User user) {
         if (user == null) {
             return new ResponseContext()
                     .status(Response.Status.BAD_REQUEST)
                     .entity("No User provided. Try again?");
         }
 
-        final MediaType outputType = Util.getMediaType(request);
-        final ObjectMapper objectMapper = new ObjectMapper();
-
-        try {
-            final User convertedUser = objectMapper.readValue(user.toString(), User.class);
-            userData.addUser(convertedUser);
-
-            return new ResponseContext()
-                    .contentType(outputType)
-                    .entity(user);
-        } catch (IOException e) {
-            return new ResponseContext().status(Response.Status.BAD_REQUEST).entity(user);
-        }
+        userData.addUser(user);
+        return new ResponseContext()
+                .contentType(Util.getMediaType(request))
+                .entity(user);
     }
 
     public ResponseContext getUserByName(final RequestContext request, final String username) {
@@ -51,57 +38,42 @@ public class UserController {
         if (user == null) {
             return new ResponseContext().status(Response.Status.NOT_FOUND).entity("User not found");
         }
-        final MediaType outputType = Util.getMediaType(request);
 
         return new ResponseContext()
-                .contentType(outputType)
+                .contentType(Util.getMediaType(request))
                 .entity(user);
     }
 
-    public ResponseContext createUsersWithArrayInput(final RequestContext request, final JsonNode[] users) {
-        if (users == null) {
+    public ResponseContext createUsersWithArrayInput(final RequestContext request, final User[] users) {
+        if (users == null || users.length == 0) {
             return new ResponseContext()
                     .status(Response.Status.BAD_REQUEST)
                     .entity("No User provided. Try again?");
         }
 
-        final MediaType outputType = Util.getMediaType(request);
-        final ObjectMapper objectMapper = new ObjectMapper();
-
-        try {
-            for (int i = 0; i < users.length; i++) {
-                final User convertedUser = objectMapper.readValue(users[i].toString(), User.class);
-                userData.addUser(convertedUser);
-            }
-            return new ResponseContext()
-                    .contentType(outputType)
-                    .entity(users);
-        } catch (IOException e) {
-            return new ResponseContext().status(Response.Status.BAD_REQUEST).entity(users);
+        for (final User user : users) {
+            userData.addUser(user);
         }
+
+        return new ResponseContext()
+                .contentType(Util.getMediaType(request))
+                .entity(users);
     }
 
-    public ResponseContext createUsersWithListInput(final RequestContext request, final JsonNode[] users) {
-        if (users == null) {
+    public ResponseContext createUsersWithListInput(final RequestContext request, final User[] users) {
+        if (users == null || users.length == 0) {
             return new ResponseContext()
                     .status(Response.Status.BAD_REQUEST)
                     .entity("No User provided. Try again?");
         }
 
-        final MediaType outputType = Util.getMediaType(request);
-        final ObjectMapper objectMapper = new ObjectMapper();
-
-        try {
-            for (int i = 0; i < users.length; i++) {
-                final User convertedUser = objectMapper.readValue(users[i].toString(), User.class);
-                userData.addUser(convertedUser);
-            }
-            return new ResponseContext()
-                    .contentType(outputType)
-                    .entity(users);
-        } catch (IOException e) {
-            return new ResponseContext().status(Response.Status.BAD_REQUEST).entity(users);
+        for (final User user : users) {
+            userData.addUser(user);
         }
+
+        return new ResponseContext()
+                .contentType(Util.getMediaType(request))
+                .entity(users);
     }
 
     public ResponseContext loginUser(final RequestContext request, final String username, final String password) {
@@ -111,7 +83,6 @@ public class UserController {
                     .entity("No username provided. Try again?");
         }
 
-        final MediaType outputType = Util.getMediaType(request);
         final User user = userData.findUserByName(username);
 
         if (user == null) {
@@ -120,7 +91,7 @@ public class UserController {
 
         if (password.equals(user.getPassword())) {
             return new ResponseContext()
-                    .contentType(outputType)
+                    .contentType(Util.getMediaType(request))
                     .entity("Logged in user session: " + RandomUtils.nextLong());
         } else {
             return new ResponseContext().status(Response.Status.BAD_REQUEST).entity("Wrong Password");
@@ -128,10 +99,8 @@ public class UserController {
     }
 
     public ResponseContext logoutUser(final RequestContext request) {
-        final MediaType outputType = Util.getMediaType(request);
-
         return new ResponseContext()
-                .contentType(outputType)
+                .contentType(Util.getMediaType(request))
                 .entity("User logged out");
 
     }
@@ -145,46 +114,42 @@ public class UserController {
 
         userData.deleteUser(username);
 
-        final MediaType outputType = Util.getMediaType(request);
-
         final User user = userData.findUserByName(username);
 
         if (null == user) {
             return new ResponseContext()
-                    .contentType(outputType)
+                    .contentType(Util.getMediaType(request))
                     .entity(user);
         } else {
             return new ResponseContext().status(Response.Status.NOT_MODIFIED).entity("User couldn't be deleted.");
         }
     }
 
-    public ResponseContext updateUser(final RequestContext request, final String username, final JsonNode user) {
+    public ResponseContext updateUser(final RequestContext request, final String username, final User user) {
         if (username == null) {
+            return new ResponseContext()
+                    .status(Response.Status.BAD_REQUEST)
+                    .entity("No Username provided. Try again?");
+        }
+
+        if (user == null) {
             return new ResponseContext()
                     .status(Response.Status.BAD_REQUEST)
                     .entity("No User provided. Try again?");
         }
 
-        final MediaType outputType = Util.getMediaType(request);
-        final ObjectMapper objectMapper = new ObjectMapper();
+        final User existingUser = userData.findUserByName(username);
 
-        try {
-            final User userJson = objectMapper.readValue(user.toString(), User.class);
-            final User existingUser = userData.findUserByName(username);
-
-            if (existingUser == null) {
-                return new ResponseContext().status(Response.Status.NOT_FOUND).entity("User not found");
-            }
-
-            userData.deleteUser(existingUser.getUsername());
-            userData.addUser(userJson);
-
-            return new ResponseContext()
-                    .contentType(outputType)
-                    .entity(user);
-        } catch (IOException e) {
-            return new ResponseContext().status(Response.Status.BAD_REQUEST).entity(user);
+        if (existingUser == null) {
+            return new ResponseContext().status(Response.Status.NOT_FOUND).entity("User not found");
         }
+
+        userData.deleteUser(existingUser.getUsername());
+        userData.addUser(user);
+
+        return new ResponseContext()
+                .contentType(Util.getMediaType(request))
+                .entity(user);
     }
 }
 
