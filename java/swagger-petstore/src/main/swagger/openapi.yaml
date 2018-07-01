@@ -46,9 +46,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Pet'
-            application/x-www-form-urlencoded:
-              schema:
-                $ref: '#/components/schemas/Pet'
         '405':
           description: Invalid input
       security:
@@ -82,9 +79,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Pet'
             application/json:
-              schema:
-                $ref: '#/components/schemas/Pet'
-            application/x-www-form-urlencoded:
               schema:
                 $ref: '#/components/schemas/Pet'
         '400':
@@ -352,9 +346,6 @@ paths:
           description: successful operation
           content:
             application/json:
-              schema:
-                $ref: '#/components/schemas/Order'
-            application/x-www-form-urlencoded:
               schema:
                 $ref: '#/components/schemas/Order'
         '405':
