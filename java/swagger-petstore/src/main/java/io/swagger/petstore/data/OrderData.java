@@ -65,7 +65,7 @@ public class OrderData {
         orders.removeIf(order -> order.getId() == orderId);
     }
 
-    private static Order createOrder(final long id, final long petId, final int quantity, final Date shipDate,
+    public static Order createOrder(final long id, final long petId, final int quantity, final Date shipDate,
                                      final String status, final boolean complete) {
         final Order order = new Order();
         order.setId(id);

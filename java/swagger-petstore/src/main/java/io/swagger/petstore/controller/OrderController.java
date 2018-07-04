@@ -23,6 +23,7 @@ import io.swagger.petstore.model.Order;
 import io.swagger.petstore.utils.Util;
 
 import javax.ws.rs.core.Response;
+import java.util.Date;
 
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaInflectorServerCodegen", date = "2017-04-08T15:48:56.501Z")
 public class OrderController {
@@ -64,6 +65,12 @@ public class OrderController {
         return new ResponseContext()
                 .contentType(Util.getMediaType(request))
                 .entity(order);
+    }
+
+    public ResponseContext placeOrder(final RequestContext request, final long id, final long petId, final int quantity, final Date shipDate,
+                                      final String status, final boolean complete) {
+        final Order order = OrderData.createOrder(id, petId, quantity, shipDate, status, complete);
+        return placeOrder(request,order);
     }
 
     public ResponseContext deleteOrder(final RequestContext request, final Long orderId) {
