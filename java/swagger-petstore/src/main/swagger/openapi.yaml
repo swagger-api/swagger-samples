@@ -355,6 +355,9 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Order'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Order'
           application/x-www-form-urlencoded:
             schema:
               $ref: '#/components/schemas/Order'
@@ -422,9 +425,22 @@ paths:
       responses:
         default:
           description: successful operation
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/User'
       requestBody:
         content:
           application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
             schema:
               $ref: '#/components/schemas/User'
         description: Created user object
@@ -677,6 +693,7 @@ components:
         name: address
       type: object
     Category:
+      x-swagger-router-model: io.swagger.petstore.model.Category
       properties:
         id:
           type: integer
@@ -687,7 +704,7 @@ components:
         name: category
       type: object
     User:
-      x-swagger-router-model: io.swagger.petstore.model.User
+      x-swagger-router-model: io.swagger.petstore.model.Use
       properties:
         id:
           type: integer
@@ -713,6 +730,7 @@ components:
       type: object
       x-swagger-router-model: io.swagger.petstore.model.User
     Tag:
+      x-swagger-router-model: io.swagger.petstore.model.Tag
       properties:
         id:
           type: integer
