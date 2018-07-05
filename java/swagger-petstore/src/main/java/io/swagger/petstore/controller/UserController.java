@@ -43,6 +43,13 @@ public class UserController {
                 .entity(user);
     }
 
+    public ResponseContext createUser(final RequestContext request, final Long id, final String username,
+                                      final String firstName, final String lastName, final String email,
+                                      final String password, final String phone, final Integer userStatus) {
+        final User user = UserData.createUser(id, username, firstName, lastName, email, phone, userStatus);
+        return createUser(request, user);
+    }
+
     public ResponseContext getUserByName(final RequestContext request, final String username) {
         if (username == null) {
             return new ResponseContext()
@@ -166,6 +173,13 @@ public class UserController {
         return new ResponseContext()
                 .contentType(Util.getMediaType(request))
                 .entity(user);
+    }
+
+    public ResponseContext updateUser(final RequestContext request, final String updatedUser, final Long id, final String username,
+                                      final String firstName, final String lastName, final String email,
+                                      final String password, final String phone, final Integer userStatus) {
+        final User user = UserData.createUser(id, username, firstName, lastName, email, phone, userStatus);
+        return updateUser(request, updatedUser, user);
     }
 }
 

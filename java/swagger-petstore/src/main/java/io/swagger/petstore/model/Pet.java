@@ -26,30 +26,19 @@ import java.util.List;
 
 @XmlRootElement(name = "Pet")
 public class Pet {
-    private long id;
+    private Long id;
     private Category category;
     private String name;
     private List<String> photoUrls = new ArrayList<>();
     private List<Tag> tags = new ArrayList<>();
     private String status;
 
-    @Schema(required = true, example = "[2, 3]")
-    private int[] lorem;
-
-    public int[] getLorem() {
-        return lorem;
-    }
-
-    public void setLorem(int[] lorem) {
-        this.lorem = lorem;
-    }
-
     @XmlElement(name = "id")
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -58,7 +47,7 @@ public class Pet {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(final Category category) {
         this.category = category;
     }
 
@@ -67,7 +56,7 @@ public class Pet {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -77,7 +66,7 @@ public class Pet {
         return photoUrls;
     }
 
-    public void setPhotoUrls(List<String> photoUrls) {
+    public void setPhotoUrls(final List<String> photoUrls) {
         this.photoUrls = photoUrls;
     }
 
@@ -87,7 +76,7 @@ public class Pet {
         return tags;
     }
 
-    public void setTags(List<Tag> tags) {
+    public void setTags(final List<Tag> tags) {
         this.tags = tags;
     }
 
@@ -97,7 +86,7 @@ public class Pet {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(final String status) {
         this.status = status;
     }
 }

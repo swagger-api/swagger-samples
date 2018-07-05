@@ -112,6 +112,18 @@ public class PetData {
         pets.removeIf(pet -> pet.getId() == petId);
     }
 
+    public static Pet createPet(final Long id, final Category cat, final String name,
+                            final List<String> urls, final List<Tag> tags, final String status) {
+        final Pet pet = new Pet();
+        pet.setId(id);
+        pet.setCategory(cat);
+        pet.setName(name);
+        pet.setPhotoUrls(urls);
+        pet.setTags(tags);
+        pet.setStatus(status);
+        return pet;
+    }
+
     private static Pet createPet(final long id, final Category cat, final String name, final String[] urls,
                                  final String[] tags, final String status) {
         final Pet pet = new Pet();

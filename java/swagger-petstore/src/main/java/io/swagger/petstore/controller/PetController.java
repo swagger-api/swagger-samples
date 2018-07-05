@@ -19,7 +19,9 @@ package io.swagger.petstore.controller;
 import io.swagger.oas.inflector.models.RequestContext;
 import io.swagger.oas.inflector.models.ResponseContext;
 import io.swagger.petstore.data.PetData;
+import io.swagger.petstore.model.Category;
 import io.swagger.petstore.model.Pet;
+import io.swagger.petstore.model.Tag;
 import io.swagger.petstore.utils.Util;
 
 import javax.ws.rs.core.MediaType;
@@ -166,6 +168,12 @@ public class PetController {
                 .entity(pet);
     }
 
+    public ResponseContext addPet(final RequestContext request, final Long id, final Category category, final String name,
+                                  final List<String> urls, final List<Tag> tags, final String status) {
+        final Pet pet = PetData.createPet(id, category, name, urls, tags, status);
+        return addPet(request, pet);
+    }
+
     public ResponseContext updatePet(final RequestContext request, final Pet pet) {
         if (pet == null) {
             return new ResponseContext()
@@ -184,6 +192,12 @@ public class PetController {
         return new ResponseContext()
                 .contentType(Util.getMediaType(request))
                 .entity(pet);
+    }
+
+    public ResponseContext updatePet(final RequestContext request, final Long id, final Category category, final String name,
+                                  final List<String> urls, final List<Tag> tags, final String status) {
+        final Pet pet = PetData.createPet(id, category, name, urls, tags, status);
+        return updatePet(request, pet);
     }
 
     public ResponseContext findPetsByTags(final RequestContext request, final List<String> tags) {

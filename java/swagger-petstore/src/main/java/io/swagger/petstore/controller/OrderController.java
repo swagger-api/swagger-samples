@@ -21,6 +21,7 @@ import io.swagger.oas.inflector.models.ResponseContext;
 import io.swagger.petstore.data.OrderData;
 import io.swagger.petstore.model.Order;
 import io.swagger.petstore.utils.Util;
+import org.joda.time.DateTime;
 
 import javax.ws.rs.core.Response;
 import java.util.Date;
@@ -67,9 +68,9 @@ public class OrderController {
                 .entity(order);
     }
 
-    public ResponseContext placeOrder(final RequestContext request, final long id, final long petId, final int quantity, final Date shipDate,
-                                      final String status, final boolean complete) {
-        final Order order = OrderData.createOrder(id, petId, quantity, shipDate, status, complete);
+    public ResponseContext placeOrder(final RequestContext request, final Long id, final Long petId, final Integer quantity, final DateTime shipDate,
+                                      final String status, final Boolean complete) {
+        final Order order = OrderData.createOrder(id, petId, quantity, new Date(), status, complete);
         return placeOrder(request,order);
     }
 
