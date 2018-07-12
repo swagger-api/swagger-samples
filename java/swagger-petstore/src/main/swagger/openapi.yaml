@@ -710,7 +710,7 @@ components:
         name: category
       type: object
     User:
-      x-swagger-router-model: io.swagger.petstore.model.Use
+      x-swagger-router-model: io.swagger.petstore.model.User
       properties:
         id:
           type: integer
@@ -763,17 +763,19 @@ components:
         photoUrls:
           type: array
           xml:
-            name: photoUrl
             wrapped: true
           items:
             type: string
+            xml:
+              name: photoUrl
         tags:
           type: array
           xml:
-            name: tag
             wrapped: true
           items:
             $ref: '#/components/schemas/Tag'
+            xml:
+              name: tag
         status:
           type: string
           description: pet status in the store
