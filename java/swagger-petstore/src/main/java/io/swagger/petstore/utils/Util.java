@@ -3,6 +3,7 @@ package io.swagger.petstore.utils;
 import io.swagger.oas.inflector.models.RequestContext;
 
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 public class Util {
 
@@ -12,8 +13,13 @@ public class Util {
     public static MediaType getMediaType(final RequestContext request) {
         MediaType outputType = MediaType.APPLICATION_JSON_TYPE;
 
-        if (request.getMediaType().equals(MediaType.APPLICATION_ATOM_XML_TYPE)) {
-            return request.getMediaType();
+        final List<String> accept = request.getHeaders().get("Accept");
+        String responseMediaType = "";
+        if (accept != null && accept.get(0) != null) {
+            responseMediaType = accept.get(0);
+        }
+        if (MediaType.APPLICATION_XML.equals(responseMediaType)) {
+            return MediaType.APPLICATION_XML_TYPE;
         }
 
         boolean isJsonOK = false;
