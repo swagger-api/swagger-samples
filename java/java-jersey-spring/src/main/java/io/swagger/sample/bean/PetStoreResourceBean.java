@@ -1,5 +1,5 @@
 /**
- *  Copyright 2015 SmartBear Software
+ *  Copyright 2016 SmartBear Software
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -29,7 +29,6 @@ import javax.ws.rs.*;
 @Component
 public class PetStoreResourceBean implements PetStoreResource {
   static StoreData storeData = new StoreData();
-  static JavaRestResourceUtil ru = new JavaRestResourceUtil();
 
   @Override
   public Response getOrderById(Long orderId) throws NotFoundException {
@@ -48,8 +47,11 @@ public class PetStoreResourceBean implements PetStoreResource {
   }
 
   @Override
-  public Response deleteOrder(String orderId) {
-    storeData.deleteOrder(ru.getLong(0, 10000, 0, orderId));
-    return Response.ok().entity("").build();
+  public Response deleteOrder(Long orderId) {
+    if (storeData.deleteOrder(orderId)) {
+      return Response.ok().entity("").build();
+    } else {
+      return Response.status(Response.Status.NOT_FOUND).entity("Order not found").build();
+    }
   }
 }

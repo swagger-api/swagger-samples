@@ -1,5 +1,5 @@
 /**
- *  Copyright 2015 SmartBear Software
+ *  Copyright 2016 SmartBear Software
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -38,7 +38,6 @@ import javax.ws.rs.*;
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public class PetResource {
   static PetData petData = new PetData();
-  static JavaRestResourceUtil ru = new JavaRestResourceUtil();
 
   @GET
   @Path("/{petId}")
@@ -52,7 +51,7 @@ public class PetResource {
   public Response getPetById(
       @ApiParam(value = "ID of pet that needs to be fetched", allowableValues = "range[1,5]", required = true) @PathParam("petId") Long petId)
       throws NotFoundException {
-    Pet pet = petData.getPetbyId(petId);
+    Pet pet = petData.getPetById(petId);
     if (null != pet) {
       return Response.ok().entity(pet).build();
     } else {
@@ -63,12 +62,16 @@ public class PetResource {
   @DELETE
   @Path("/{petId}")
   @ApiOperation(value = "Deletes a pet")
-  @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid pet value")})
+  @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid ID supplied"),
+          @ApiResponse(code = 404, message = "Pet not found")})
   public Response deletePet(
     @ApiParam() @HeaderParam("api_key") String apiKey,
     @ApiParam(value = "Pet id to delete", required = true)@PathParam("petId") Long petId) {
-    petData.deletePet(petId);
-    return Response.ok().build();
+    if (petData.deletePet(petId)) {
+      return Response.ok().build();
+    } else {
+      return Response.status(Response.Status.NOT_FOUND).build();
+    }
   }
 
   @POST
@@ -96,7 +99,7 @@ public class PetResource {
   @GET
   @Path("/findByStatus")
   @ApiOperation(value = "Finds Pets by status", 
-    notes = "Multiple status values can be provided with comma seperated strings", 
+    notes = "Multiple status values can be provided with comma separated strings",
     response = Pet.class, 
     responseContainer = "List")
   @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid status value") })
@@ -108,7 +111,7 @@ public class PetResource {
   @GET
   @Path("/findByTags")
   @ApiOperation(value = "Finds Pets by tags",
-    notes = "Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.", 
+    notes = "Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.",
     response = Pet.class, 
     responseContainer = "List")
   @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid tag value") })
@@ -130,9 +133,7 @@ public class PetResource {
    @ApiParam(value = "ID of pet that needs to be updated", required = true)@PathParam("petId") Long petId,
    @ApiParam(value = "Updated name of the pet", required = false)@FormParam("name") String name,
    @ApiParam(value = "Updated status of the pet", required = false)@FormParam("status") String status) {
-    System.out.println(name);
-    System.out.println(status);
-    Pet pet = petData.getPetbyId(petId);
+    Pet pet = petData.getPetById(petId);
     if(pet != null) {
       if(name != null && !"".equals(name))
         pet.setName(name);

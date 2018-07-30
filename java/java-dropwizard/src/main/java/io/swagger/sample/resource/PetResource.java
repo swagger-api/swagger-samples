@@ -1,5 +1,5 @@
 /**
- *  Copyright 2015 SmartBear Software
+ *  Copyright 2016 SmartBear Software
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -29,20 +29,19 @@ import javax.ws.rs.*;
 @Produces({"application/json"})
 public class PetResource {
 	static PetData petData = new PetData();
-	static JavaRestResourceUtil ru = new JavaRestResourceUtil();
 
 	@GET
 	@Path("/{petId}")
 	@ApiOperation(
 		value = "Find pet by ID", 
-		notes = "Returns a pet when ID < 10. ID > 10 or nonintegers will simulate API error conditions", 
+		notes = "Returns a pet when 0 < ID <= 10. ID > 10 or nonintegers will simulate API error conditions",
 		response = Pet.class)
 	@ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid ID supplied"),
 			@ApiResponse(code = 404, message = "Pet not found") })
 	public Response getPetById(
-			@ApiParam(value = "ID of pet that needs to be fetched", allowableValues = "range[1,5]", required = true) @PathParam("petId") String petId)
+			@ApiParam(value = "ID of pet that needs to be fetched", allowableValues = "range[1,10]", required = true) @PathParam("petId") Long petId)
 			throws NotFoundException {
-		Pet pet = petData.getPetbyId(ru.getLong(0, 100000, 0, petId));
+		Pet pet = petData.getPetById(petId);
 		if (null != pet) {
 			return Response.ok().entity(pet).build();
 		} else {
@@ -74,7 +73,7 @@ public class PetResource {
 	@Path("/findByStatus")
 	@ApiOperation(
 		value = "Finds Pets by status", 
-		notes = "Multiple status values can be provided with comma seperated strings", 
+		notes = "Multiple status values can be provided with comma separated strings", 
 		response = Pet.class,
 		responseContainer = "List")
 	@ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid status value") })
@@ -87,7 +86,7 @@ public class PetResource {
 	@Path("/findByTags")
 	@ApiOperation(
 		value = "Finds Pets by tags", 
-		notes = "Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.", 
+		notes = "Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.",
 		response = Pet.class, 
 		responseContainer = "List")
 	@ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid tag value") })

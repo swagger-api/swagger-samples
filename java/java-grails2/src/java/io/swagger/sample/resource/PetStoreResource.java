@@ -1,5 +1,5 @@
 /**
- *  Copyright 2015 SmartBear Software
+ *  Copyright 2016 SmartBear Software
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -29,16 +29,15 @@ import javax.ws.rs.*;
 @Produces({"application/json"})
 public class PetStoreResource {
 	static StoreData storeData = new StoreData();
-	static JavaRestResourceUtil ru = new JavaRestResourceUtil();
 
 	@GET
 	@Path("/order/{orderId}")
-	@ApiOperation(value = "Find purchase order by ID", notes = "For valid response try integer IDs with value <= 5 or > 10. "
+	@ApiOperation(value = "Find purchase order by ID", notes = "For valid response try integer IDs with value >= 1 and <= 10. "
 			+ "Other values will generated exceptions", response = Order.class)
 	@ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid ID supplied"),
 			@ApiResponse(code = 404, message = "Order not found") })
 	public Response getOrderById(
-			@ApiParam(value = "ID of pet that needs to be fetched", allowableValues = "range[1,5]", required = true) @PathParam("orderId") Long orderId)
+			@ApiParam(value = "ID of pet that needs to be fetched", allowableValues = "range[1,10]", required = true) @PathParam("orderId") Long orderId)
 			throws NotFoundException {
 		Order order = storeData.findOrderById(orderId);
 		if (null != order) {
@@ -60,13 +59,17 @@ public class PetStoreResource {
 
 	@DELETE
 	@Path("/order/{orderId}")
-	@ApiOperation(value = "Delete purchase order by ID", notes = "For valid response try integer IDs with value < 1000. "
-			+ "Anything above 1000 or nonintegers will generate API errors")
+	@ApiOperation(value = "Delete purchase order by ID", notes = "For valid response try integer IDs with positive integer " +
+			"value. Negative or non-integer values will generate API errors")
 	@ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid ID supplied"),
 			@ApiResponse(code = 404, message = "Order not found") })
 	public Response deleteOrder(
-			@ApiParam(value = "ID of the order that needs to be deleted", allowableValues = "range[1,infinity]", required = true) @PathParam("orderId") String orderId) {
-		storeData.deleteOrder(ru.getLong(0, 10000, 0, orderId));
-		return Response.ok().entity("").build();
+			@ApiParam(value = "ID of the order that needs to be deleted", allowableValues = "range[1,infinity]", required = true)
+			@PathParam("orderId") Long orderId) {
+		if (storeData.deleteOrder(orderId)) {
+			return Response.ok().entity("").build();
+		} else {
+			return Response.status(Response.Status.NOT_FOUND).entity("Order not found").build();
+		}
 	}
 }

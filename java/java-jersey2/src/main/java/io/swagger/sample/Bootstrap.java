@@ -1,5 +1,6 @@
 package io.swagger.sample;
 
+import io.swagger.jaxrs.config.SwaggerContextService;
 import io.swagger.models.*;
 
 import io.swagger.models.auth.*;
@@ -32,6 +33,6 @@ public class Bootstrap extends HttpServlet {
         .implicit("http://petstore.swagger.io/api/oauth/dialog")
         .scope("read:pets", "read your pets")
         .scope("write:pets", "modify pets in your account"));
-    context.setAttribute("swagger", swagger);
+    new SwaggerContextService().withServletConfig(config).updateSwagger(swagger);
   }
 }

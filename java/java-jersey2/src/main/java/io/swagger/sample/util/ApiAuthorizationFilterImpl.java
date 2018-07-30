@@ -1,5 +1,5 @@
 /**
- *  Copyright 2015 SmartBear Software
+ *  Copyright 2016 SmartBear Software
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -16,17 +16,17 @@
 
 package io.swagger.sample.util;
 
+import io.swagger.core.filter.AbstractSpecFilter;
+import io.swagger.model.ApiDescription;
 import io.swagger.models.Model;
 import io.swagger.models.Operation;
 import io.swagger.models.parameters.Parameter;
 import io.swagger.models.properties.Property;
-import io.swagger.model.ApiDescription;
-import io.swagger.core.filter.SwaggerSpecFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import org.slf4j.*;
-
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 
@@ -43,7 +43,7 @@ import java.util.List;
  * 
  */
 
-public class ApiAuthorizationFilterImpl implements SwaggerSpecFilter {
+public class ApiAuthorizationFilterImpl extends AbstractSpecFilter {
   static Logger logger = LoggerFactory.getLogger(ApiAuthorizationFilterImpl.class);
 
   public boolean isOperationAllowed(
@@ -89,5 +89,9 @@ public class ApiAuthorizationFilterImpl implements SwaggerSpecFilter {
       return true;
     else
       return false;
+  }
+
+  public boolean isRemovingUnreferencedDefinitions() {
+    return true;
   }
 }

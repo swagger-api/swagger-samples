@@ -1,5 +1,5 @@
 /**
- *  Copyright 2015 SmartBear Software
+ *  Copyright 2016 SmartBear Software
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -58,7 +58,7 @@ public class PetData {
         "url1", "url2" }, new String[] { "tag3", "tag4" }, "available"));
   }
 
-  public Pet getPetbyId(long petId) {
+  public Pet getPetById(long petId) {
     for (Pet pet : pets) {
       if (pet.getId() == petId) {
         return pet;

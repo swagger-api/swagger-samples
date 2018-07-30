@@ -1,5 +1,5 @@
 /**
- *  Copyright 2015 SmartBear Software
+ *  Copyright 2016 SmartBear Software
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -72,14 +72,16 @@ public class UserData {
     users.add(user);
   }
 
-  public void removeUser(String username) {
+  public boolean removeUser(String username) {
     if (users.size() > 0) {
       for (int i = users.size() - 1; i >= 0; i--) {
         if (users.get(i).getUsername().equals(username)) {
           users.remove(i);
+          return true;
         }
       }
     }
+    return false;
   }
 
   private static User createUser(long id, String username, String firstName,

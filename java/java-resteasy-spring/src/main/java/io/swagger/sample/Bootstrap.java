@@ -1,5 +1,6 @@
 package io.swagger.sample;
 
+import io.swagger.jaxrs.config.SwaggerContextService;
 import io.swagger.models.Contact;
 import io.swagger.models.ExternalDocs;
 import io.swagger.models.Info;
@@ -48,6 +49,6 @@ public class Bootstrap extends HttpServlet {
             .name("user")
             .description("Operations about user")
             .externalDocs(new ExternalDocs("Find out more about our store", "http://swagger.io")));
-    context.setAttribute("swagger", swagger);
+    new SwaggerContextService().withServletConfig(config).updateSwagger(swagger);
   }
 }

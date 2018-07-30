@@ -1,5 +1,5 @@
 /**
- *  Copyright 2015 SmartBear Software
+ *  Copyright 2016 SmartBear Software
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -32,13 +32,12 @@ import io.swagger.sample.model.Order;
 @Produces({"application/json", "application/xml"})
 public class PetStoreResource {
   static StoreData storeData = new StoreData();
-  static JavaRestResourceUtil ru = new JavaRestResourceUtil();
 
   @GET
   @Path("/order/{orderId}")
-  public Response getOrderById(@PathParam("orderId") String orderId)
+  public Response getOrderById(@PathParam("orderId") Long orderId)
       throws NotFoundException {
-    Order order = storeData.findOrderById(ru.getLong(0, 10000, 0, orderId));
+    Order order = storeData.findOrderById(orderId);
     if (null != order) {
       return Response.ok().entity(order).build();
     } else {
@@ -55,8 +54,11 @@ public class PetStoreResource {
 
   @DELETE
   @Path("/order/{orderId}")
-  public Response deleteOrder(@PathParam("orderId") String orderId) {
-    storeData.deleteOrder(ru.getLong(0, 10000, 0, orderId));
-    return Response.ok().entity("").build();
+  public Response deleteOrder(@PathParam("orderId") Long orderId) {
+    if (storeData.deleteOrder(orderId)) {
+      return Response.ok().entity("").build();
+    } else {
+      return Response.status(Response.Status.NOT_FOUND).entity("Order not found").build();
+    }
   }
 }

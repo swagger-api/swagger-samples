@@ -1,7 +1,7 @@
 # Swagger Sample App
 
 ## Overview
-This is a java project to build a mule application which implements the Swagger spec.  You can find out more about both the spec and the framework at http://swagger.io.  
+This is a java project to build a mule application which implements the OpenAPI Spec.  You can find out more about both the spec and the framework at http://swagger.io.  
 
 There is an online version of this server at http://petstore.swagger.io.
 

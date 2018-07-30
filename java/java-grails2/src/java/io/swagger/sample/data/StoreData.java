@@ -1,5 +1,5 @@
 /**
- *  Copyright 2015 SmartBear Software
+ *  Copyright 2016 SmartBear Software
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -31,11 +31,11 @@ public class StoreData {
     orders.add(createOrder(3, 2, 2, new Date(), "placed"));
     orders.add(createOrder(4, 2, 2, new Date(), "delivered"));
     orders.add(createOrder(5, 3, 2, new Date(), "placed"));
-    orders.add(createOrder(11, 3, 2, new Date(), "placed"));
-    orders.add(createOrder(12, 3, 2, new Date(), "placed"));
-    orders.add(createOrder(13, 3, 2, new Date(), "placed"));
-    orders.add(createOrder(14, 3, 2, new Date(), "placed"));
-    orders.add(createOrder(15, 3, 2, new Date(), "placed"));
+    orders.add(createOrder(6, 3, 2, new Date(), "placed"));
+    orders.add(createOrder(7, 3, 2, new Date(), "placed"));
+    orders.add(createOrder(8, 3, 2, new Date(), "placed"));
+    orders.add(createOrder(9, 3, 2, new Date(), "placed"));
+    orders.add(createOrder(10, 3, 2, new Date(), "placed"));
   }
 
   public Order findOrderById(long orderId) {
@@ -59,14 +59,16 @@ public class StoreData {
     return order;
   }
 
-  public void deleteOrder(long orderId) {
+  public boolean deleteOrder(long orderId) {
     if (orders.size() > 0) {
       for (int i = orders.size() - 1; i >= 0; i--) {
         if (orders.get(i).getId() == orderId) {
           orders.remove(i);
+          return true;
         }
       }
     }
+    return false;
   }
 
   private static Order createOrder(long id, long petId, int quantity,

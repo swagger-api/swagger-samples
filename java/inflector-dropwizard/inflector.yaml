@@ -1,0 +1,11 @@
+controllerPackage: io.swagger.samples.inflector.dropwizard.controllers
+modelPackage: io.swagger.samples.inflector.dropwizard.models
+swaggerUrl: ./src/main/swagger/swagger.yaml
+modelMappings:
+  Pet: io.swagger.samples.inflector.dropwizard.models.Pet
+
+# loads all by default, or pick and choose
+entityProcessors:
+  - json
+  - xml
+  - yaml

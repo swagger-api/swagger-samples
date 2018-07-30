@@ -1,0 +1,14 @@
+controllerPackage: io.swagger.sample.controllers
+modelPackage: io.swagger.sample.models
+swaggerUrl: ./src/main/swagger/swagger.yaml
+modelMappings:
+  Pet: io.swagger.sample.models.Pet
+# allows environment to be develop, staging, production.  Production will not start if
+# unimplemented models or methods are detected
+environment: development
+
+# loads all by default, or pick and choose
+entityProcessors:
+  - json
+  - xml
+  - yaml

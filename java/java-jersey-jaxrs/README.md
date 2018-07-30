@@ -3,7 +3,7 @@
 This is the pet store sample hosted at http://petstore.swagger.io!
 
 ## Overview
-This is a java project to build a stand-alone server which implements the Swagger spec.  You can find out 
+This is a java project to build a stand-alone server which implements the OpenAPI Spec.  You can find out 
 more about both the spec and the framework at http://swagger.io. 
 
 ### To run (with Maven)

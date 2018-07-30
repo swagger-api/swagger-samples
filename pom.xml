@@ -289,6 +289,9 @@
     </profile>
   </profiles>
   <modules>
+    <module>java/inflector-dropwizard-guice</module>
+    <module>java/inflector-dropwizard</module>
+    <module>java/inflector-jetty-webxml</module>
     <module>java/java-dropwizard</module>
     <module>java/java-grails2</module>
     <module>java/java-resteasy-spring</module>
@@ -298,12 +301,19 @@
     <module>java/java-jaxrs-no-webxml</module>
     <module>java/java-mule</module>
     <module>java/java-jersey-jaxrs</module>
+    <module>java/java-jersey-jaxrs-multi</module>
+    <module>java/java-jersey-jaxrs-multi-simple-servlet</module>
+    <module>java/java-jersey-jaxrs-multi-simple-webxml</module>
+    <module>java/java-jersey-jaxrs-multi-use-basepath</module>
     <module>java/java-jaxrs-no-annotations</module>
     <module>java/java-resteasy</module>
+    <module>java/java-resteasy-filter</module>
     <module>java/java-jersey-spring</module>
+    <module>java/java-jersey-governator</module>
     <module>java/java-jersey2-guice</module>
     <module>java/java-jaxrs-wink</module>
     <module>java/java-jaxrs-cxf</module>
+    <module>java/java-servlet</module>
   </modules>
   <reporting>
     <outputDirectory>target/site</outputDirectory>
@@ -423,8 +433,8 @@
   <properties>
     <joda-version>1.2</joda-version>
     <joda-time-version>2.2</joda-time-version>
-    <swagger-version>1.5.3</swagger-version>
-    <swagger-ui-version>2.1.0-M2</swagger-ui-version>
+    <swagger-version>1.5.10</swagger-version>
+    <swagger-ui-version>2.1.4</swagger-ui-version>
     <scala-version>2.10.4</scala-version>
     <felix-version>2.3.4</felix-version>
     <servlet-api-version>2.5</servlet-api-version>
@@ -440,7 +450,6 @@
     <slf4j-version>1.6.3</slf4j-version>
     <scala-test-version>2.1.3</scala-test-version>
     <jetty-version>8.1.11.v20130520</jetty-version>
-    <servlet-api-version>2.5</servlet-api-version>
     <scala-maven-plugin-version>3.1.5</scala-maven-plugin-version>
     <coverage.complexity.minimum>0.90</coverage.complexity.minimum>
     <coverage.line.minimum>0.90</coverage.line.minimum>

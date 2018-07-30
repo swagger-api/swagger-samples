@@ -1,5 +1,5 @@
 /**
- *  Copyright 2015 SmartBear Software
+ *  Copyright 2016 SmartBear Software
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -88,8 +88,11 @@ public class UserResource {
       @ApiResponse(code = 404, message = "User not found") })
   public Response deleteUser(
       @ApiParam(value = "The name that needs to be deleted", required = true) @PathParam("username") String username) {
-    userData.removeUser(username);
-    return Response.ok().entity("").build();
+    if (userData.removeUser(username)) {
+      return Response.ok().entity("").build();
+    } else {
+      return Response.status(Response.Status.NOT_FOUND).build();
+    }
   }
 
   @GET
