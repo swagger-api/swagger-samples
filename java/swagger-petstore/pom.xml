@@ -115,6 +115,7 @@
                 <executions>
                     <execution>
                         <id>swagger-ui</id>
+                        <phase>validate</phase>
                         <goals>
                             <goal>wget</goal>
                         </goals>
@@ -133,7 +134,7 @@
                 <executions>
                     <execution>
                         <id>copy-resources</id>
-                        <phase>validate</phase>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
@@ -186,7 +187,7 @@
     </repositories>
     <properties>
         <maven-plugin-version>1.0.0</maven-plugin-version>
-        <swagger-parser-version>2.0.0-SNAPSHOT</swagger-parser-version>
+        <swagger-parser-version>2.0.3-SNAPSHOT</swagger-parser-version>
         <swagger-inflector-version>2.0.0-SNAPSHOT</swagger-inflector-version>
         <jetty-version>9.4.9.v20180320</jetty-version>
         <logback-version>1.0.1</logback-version>
