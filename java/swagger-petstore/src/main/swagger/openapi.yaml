@@ -734,7 +734,6 @@ components:
       xml:
         name: user
       type: object
-      x-swagger-router-model: io.swagger.petstore.model.User
     Tag:
       x-swagger-router-model: io.swagger.petstore.model.Tag
       properties:
@@ -821,10 +820,16 @@ components:
       type: oauth2
       flows:
         implicit:
-          authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
+          authorizationUrl: http://localhost:8080/api/oauth/dialog
           scopes:
             'write:pets': modify pets in your account
             'read:pets': read your pets
+          authorizationCode:
+            authorizationUrl: http://localhost:8080/api/oauth/dialog
+            tokenUrl: http://localhost:8080/api/oauth/token
+            scopes:
+              write:pets: modify pets in your account
+              read:pets: read your pets
     api_key:
       type: apiKey
       name: api_key

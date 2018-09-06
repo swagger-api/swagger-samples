@@ -103,7 +103,7 @@
                     </webApp>
                     <webAppSourceDirectory>target/${project.artifactId}-${project.version}</webAppSourceDirectory>
                     <httpConnector>
-                        <port>8080</port>
+                        <port>8000</port>
                         <idleTimeout>60000</idleTimeout>
                     </httpConnector>
                 </configuration>
@@ -186,7 +186,7 @@
     </repositories>
     <properties>
         <maven-plugin-version>1.0.0</maven-plugin-version>
-        <swagger-parser-version>2.0.0-SNAPSHOT</swagger-parser-version>
+        <swagger-parser-version>2.0.3-SNAPSHOT</swagger-parser-version>
         <swagger-inflector-version>2.0.0-SNAPSHOT</swagger-inflector-version>
         <jetty-version>9.4.9.v20180320</jetty-version>
         <logback-version>1.0.1</logback-version>
