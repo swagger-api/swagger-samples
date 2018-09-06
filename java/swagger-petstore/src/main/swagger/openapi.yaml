@@ -704,8 +704,10 @@ components:
         id:
           type: integer
           format: int64
+          example: 1
         name:
           type: string
+          example: Dogs
       xml:
         name: category
       type: object
@@ -715,21 +717,29 @@ components:
         id:
           type: integer
           format: int64
+          example: 10
         username:
           type: string
+          example: theUser
         firstName:
           type: string
+          example: John
         lastName:
           type: string
+          example: James
         email:
           type: string
+          example: john@email.com
         password:
           type: string
+          example: 12345
         phone:
           type: string
+          example: 12345
         userStatus:
           type: integer
           format: int32
+          example: 1
           description: User Status
       xml:
         name: user
@@ -754,6 +764,7 @@ components:
         id:
           type: integer
           format: int64
+          example: 10
         category:
           $ref: '#/components/schemas/Category'
         name:
