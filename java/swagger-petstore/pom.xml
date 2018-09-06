@@ -115,6 +115,7 @@
                 <executions>
                     <execution>
                         <id>swagger-ui</id>
+                        <phase>validate</phase>
                         <goals>
                             <goal>wget</goal>
                         </goals>
@@ -133,7 +134,7 @@
                 <executions>
                     <execution>
                         <id>copy-resources</id>
-                        <phase>validate</phase>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
