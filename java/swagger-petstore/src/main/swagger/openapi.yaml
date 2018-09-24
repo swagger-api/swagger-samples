@@ -7,7 +7,7 @@ info:
     Swagger at http://swagger.io or on
     irc.freenode.net, #swagger.  For this sample, you can use the api key
     "special-key" to test the authorization filters
-  version: 1.0.0
+  version: 3.0.0
   title: Swagger Petstore YAML
   termsOfService: 'http://swagger.io/terms/'
   contact:
@@ -444,33 +444,6 @@ paths:
             schema:
               $ref: '#/components/schemas/User'
         description: Created user object
-  /user/createWithArray:
-    post:
-      tags:
-        - user
-      summary: Creates list of users with given input array
-      description: 'Creates list of users with given input array'
-      x-swagger-router-controller: UserController
-      operationId: createUsersWithArrayInput
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/User'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-        default:
-          description: Successful operation
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/User'
   /user/createWithList:
     post:
       tags:
@@ -548,6 +521,7 @@ paths:
       summary: Logs out current logged in user session
       description: ''
       operationId: logoutUser
+      parameters: []
       responses:
         default:
           description: successful operation
@@ -765,11 +739,11 @@ components:
           type: integer
           format: int64
           example: 10
-        category:
-          $ref: '#/components/schemas/Category'
         name:
           type: string
           example: doggie
+        category:
+          $ref: '#/components/schemas/Category'
         photoUrls:
           type: array
           xml:

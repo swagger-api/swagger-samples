@@ -100,25 +100,9 @@ public class UserController {
     }
 
     public ResponseContext loginUser(final RequestContext request, final String username, final String password) {
-        if (username == null) {
-            return new ResponseContext()
-                    .status(Response.Status.BAD_REQUEST)
-                    .entity("No username provided. Try again?");
-        }
-
-        final User user = userData.findUserByName(username);
-
-        if (user == null) {
-            return new ResponseContext().status(Response.Status.NOT_FOUND).entity("User not found");
-        }
-
-        if (password.equals(user.getPassword())) {
-            return new ResponseContext()
-                    .contentType(Util.getMediaType(request))
-                    .entity("Logged in user session: " + RandomUtils.nextLong());
-        } else {
-            return new ResponseContext().status(Response.Status.BAD_REQUEST).entity("Wrong Password");
-        }
+        return new ResponseContext()
+                .contentType(Util.getMediaType(request))
+                .entity("Logged in user session: " + RandomUtils.nextLong());
     }
 
     public ResponseContext logoutUser(final RequestContext request) {

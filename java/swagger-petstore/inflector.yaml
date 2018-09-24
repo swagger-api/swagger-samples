@@ -3,8 +3,8 @@ modelPackage:  io.swagger.petstore.model
 swaggerUrl: ./src/main/swagger/openapi.yaml
 
 entityProcessors:
-  - json
-  - yaml
-  - xml
+- json
+- yaml
+- xml
 
 rootPath: /api

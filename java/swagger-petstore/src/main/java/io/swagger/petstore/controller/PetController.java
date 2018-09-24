@@ -168,7 +168,7 @@ public class PetController {
                 .entity(pet);
     }
 
-    public ResponseContext addPet(final RequestContext request, final Long id, final Category category, final String name,
+    public ResponseContext addPet(final RequestContext request, final Long id, final String name, final Category category,
                                   final List<String> urls, final List<Tag> tags, final String status) {
         final Pet pet = PetData.createPet(id, category, name, urls, tags, status);
         return addPet(request, pet);
@@ -194,7 +194,7 @@ public class PetController {
                 .entity(pet);
     }
 
-    public ResponseContext updatePet(final RequestContext request, final Long id, final Category category, final String name,
+    public ResponseContext updatePet(final RequestContext request, final Long id, final String name, final Category category,
                                   final List<String> urls, final List<Tag> tags, final String status) {
         final Pet pet = PetData.createPet(id, category, name, urls, tags, status);
         return updatePet(request, pet);
