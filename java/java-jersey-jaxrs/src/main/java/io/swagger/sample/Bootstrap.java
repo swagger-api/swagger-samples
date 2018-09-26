@@ -31,7 +31,7 @@ public class Bootstrap extends HttpServlet {
     swagger.securityDefinition("api_key", new ApiKeyAuthDefinition("api_key", In.HEADER));
     swagger.securityDefinition("petstore_auth",
       new OAuth2Definition()
-        .implicit("https://petstore.swagger.io/oauth/dialog")
+        .implicit("https://petstore.swagger.io/oauth/authorize")
         .scope("read:pets", "read your pets")
         .scope("write:pets", "modify pets in your account"));
     swagger.tag(new Tag()

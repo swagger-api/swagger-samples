@@ -80,6 +80,7 @@
 
     // Build a system
     const ui = SwaggerUIBundle({
+      oauth2RedirectUrl:  window.location.protocol + '//' + window.location.host + '/oauth2-redirect.html',
       url: url,
       dom_id: '#swagger-ui',
       presets: [
