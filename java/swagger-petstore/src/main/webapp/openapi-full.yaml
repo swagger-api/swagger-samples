@@ -7,7 +7,7 @@ info:
     Swagger at http://swagger.io or on
     irc.freenode.net, #swagger.  For this sample, you can use the api key
     "special-key" to test the authorization filters
-  version: 1.0.0
+  version: 3.0.1
   title: Swagger Petstore YAML
   termsOfService: 'http://swagger.io/terms/'
   contact:
@@ -434,32 +434,6 @@ paths:
             schema:
               $ref: '#/components/schemas/User'
         description: Created user object
-  /user/createWithArray:
-    post:
-      tags:
-      - user
-      summary: Creates list of users with given input array
-      description: 'Creates list of users with given input array'
-      operationId: createUsersWithArrayInput
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/User'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-        default:
-          description: Successful operation
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/User'
   /user/createWithList:
     post:
       tags:
@@ -736,11 +710,11 @@ components:
         id:
           type: integer
           format: int64
-        category:
-          $ref: '#/components/schemas/Category'
         name:
           type: string
           example: doggie
+        category:
+          $ref: '#/components/schemas/Category'
         photoUrls:
           type: array
           xml:
@@ -802,7 +776,7 @@ components:
       type: oauth2
       flows:
         implicit:
-          authorizationUrl: 'http://petstore.swagger.io/api/oauth/dialog'
+          authorizationUrl: 'http://petstore.swagger.io/oauth/authorize'
           scopes:
             'write:pets': modify pets in your account
             'read:pets': read your pets

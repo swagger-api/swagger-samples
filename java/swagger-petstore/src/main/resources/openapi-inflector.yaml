@@ -7,7 +7,7 @@ info:
     Swagger at http://swagger.io or on
     irc.freenode.net, #swagger.  For this sample, you can use the api key
     "special-key" to test the authorization filters
-  version: 3.0.0
+  version: 3.0.1
   title: Swagger Petstore YAML
   termsOfService: 'http://swagger.io/terms/'
   contact:
@@ -805,16 +805,10 @@ components:
       type: oauth2
       flows:
         implicit:
-          authorizationUrl: http://localhost:8080/api/oauth/dialog
+          authorizationUrl: 'http://petstore.swagger.io/oauth/authorize'
           scopes:
             'write:pets': modify pets in your account
             'read:pets': read your pets
-          authorizationCode:
-            authorizationUrl: http://localhost:8080/api/oauth/dialog
-            tokenUrl: http://localhost:8080/api/oauth/token
-            scopes:
-              write:pets: modify pets in your account
-              read:pets: read your pets
     api_key:
       type: apiKey
       name: api_key

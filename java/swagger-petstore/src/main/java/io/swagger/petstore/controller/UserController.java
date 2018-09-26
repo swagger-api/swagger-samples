@@ -24,6 +24,7 @@ import io.swagger.petstore.utils.Util;
 import org.apache.commons.lang.math.RandomUtils;
 
 import javax.ws.rs.core.Response;
+import java.util.Date;
 
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaInflectorServerCodegen", date = "2017-04-08T15:48:56.501Z")
 public class UserController {
@@ -100,8 +101,11 @@ public class UserController {
     }
 
     public ResponseContext loginUser(final RequestContext request, final String username, final String password) {
+        Date date = new Date(System.currentTimeMillis() + 3600000);
         return new ResponseContext()
                 .contentType(Util.getMediaType(request))
+                .header("X-Rate-Limit", String.valueOf(5000))
+                .header("X-Expires-After", date.toString())
                 .entity("Logged in user session: " + RandomUtils.nextLong());
     }
 
