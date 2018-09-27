@@ -11,6 +11,9 @@
   <packaging>war</packaging>
   <name>swagger-java-jersey-jaxrs-app</name>
   <version>1.0.0</version>
+  <properties>
+    <swagger-version>1.5.7</swagger-version>
+  </properties>
   <build>
     <sourceDirectory>src/main/java</sourceDirectory>
     <plugins>
