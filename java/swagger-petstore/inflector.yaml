@@ -7,4 +7,7 @@ entityProcessors:
 - yaml
 - xml
 
+swaggerProcessors:
+- io.swagger.petstore.utils.HandleAuthUrlProcessor
+
 rootPath: /api
