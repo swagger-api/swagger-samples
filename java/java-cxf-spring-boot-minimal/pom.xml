@@ -12,8 +12,8 @@
   <name>swagger-cxf-spring-boot-minimal-sample-app</name>
   <version>2.0.0</version>
   <properties>
-    <cxf.version>3.2.4</cxf.version>
-    <spring-boot.version>2.0.2.RELEASE</spring-boot.version>
+    <cxf.version>3.2.7</cxf.version>
+    <spring-boot.version>2.1.0.RELEASE</spring-boot.version>
   </properties>
   <build>
     <sourceDirectory>src/main/java</sourceDirectory>
@@ -41,16 +41,16 @@
     </plugins>
   </build>
   <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <!-- Import dependency management from Spring Boot -->
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
+    <dependencies>
+        <dependency>
+            <!-- Import dependency management from Spring Boot -->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-dependencies</artifactId>
+            <version>${spring-boot.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
   </dependencyManagement>
   <dependencies>
     <dependency>
@@ -67,7 +67,7 @@
     <dependency>
       <groupId>org.webjars</groupId>
       <artifactId>swagger-ui</artifactId>
-      <version>3.17.0</version>
+      <version>3.19.4</version>
     </dependency>
     <dependency>
       <groupId>org.apache.cxf</groupId>
