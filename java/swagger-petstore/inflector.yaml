@@ -1,10 +1,13 @@
 controllerPackage: io.swagger.petstore.controller
 modelPackage:  io.swagger.petstore.model
-swaggerUrl: ./src/main/swagger/openapi.yaml
+swaggerUrl: openapi-inflector.yaml
 
 entityProcessors:
 - json
 - yaml
 - xml
+
+swaggerProcessors:
+- io.swagger.petstore.utils.HandleAuthUrlProcessor
 
 rootPath: /api
