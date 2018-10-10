@@ -103,7 +103,7 @@
                     </webApp>
                     <webAppSourceDirectory>target/${project.artifactId}-${project.version}</webAppSourceDirectory>
                     <httpConnector>
-                        <port>8000</port>
+                        <port>8080</port>
                         <idleTimeout>60000</idleTimeout>
                     </httpConnector>
                 </configuration>

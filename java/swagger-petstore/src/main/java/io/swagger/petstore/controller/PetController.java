@@ -116,7 +116,7 @@ public class PetController {
         if (null == pet) {
             return new ResponseContext()
                     .contentType(outputType)
-                    .entity(pet);
+                    .entity("Pet deleted");
         } else {
             return new ResponseContext().status(Response.Status.NOT_MODIFIED).entity("Pet couldn't be deleted.");
         }
@@ -207,11 +207,11 @@ public class PetController {
                     .entity("No tags provided. Try again?");
         }
 
-        final List<Pet> petByStatus = petData.findPetByTags(tags);
+        final List<Pet> petByTags = petData.findPetByTags(tags);
 
         return new ResponseContext()
                 .contentType(Util.getMediaType(request))
-                .entity(petByStatus);
+                .entity(petByTags);
     }
     
 }
