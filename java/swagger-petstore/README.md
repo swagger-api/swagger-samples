@@ -16,7 +16,7 @@ mvn package jetty:run
 This will start Jetty embedded on port 8080.
 
 ### Testing the server
-Once started, you can navigate to http://localhost:8080/api/v2/openapi.json to view the Swagger Resource Listing.
+Once started, you can navigate to http://localhost:8080/api/v3/openapi.json to view the Swagger Resource Listing.
 This tells you that the server is up and ready to demonstrate Swagger.
 
 ### Using the UI
