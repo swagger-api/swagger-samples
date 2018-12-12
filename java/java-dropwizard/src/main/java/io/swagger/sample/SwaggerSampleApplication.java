@@ -11,6 +11,9 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.swagger.sample.resource.PetResource;
 
+import javax.servlet.DispatcherType;
+import java.util.EnumSet;
+
 public class SwaggerSampleApplication extends Application <SwaggerSampleConfiguration> {
   public static void main(String[] args) throws Exception {
     new SwaggerSampleApplication().run(args);
@@ -28,6 +31,8 @@ public class SwaggerSampleApplication extends Application <SwaggerSampleConfigur
   public void run(SwaggerSampleConfiguration configuration, Environment environment) {
     environment.jersey().register(new ApiListingResource());
     environment.jersey().register(new PetResource());
+    environment.servlets().addFilter("ApiOriginFilter", new ApiOriginFilter())
+            .addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), true, "/*");
     environment.getObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
 
     BeanConfig config = new BeanConfig();
