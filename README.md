@@ -12,7 +12,8 @@ project, including additional libraries with support for SpringMVC, other langua
 ## What's here?
  
 This repository serves for samples for various projects. Right now it contains the samples for swagger-core under
-the java library. Each sample contains a README file with details how to run it and what to check.
 
----
+the java library. Each sample contains a README file with details how to run it and what to check...
+
 <img src="http://swagger.io/wp-content/uploads/2016/02/logo.jpg"/>
+
