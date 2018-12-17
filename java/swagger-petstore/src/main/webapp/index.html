@@ -72,10 +72,9 @@
 <script>
   window.onload = function() {
     // Build a system
-    apiUrl = window.location.protocol + "//" + window.location.host + "/api/v3/openapi.json";
     const ui = SwaggerUIBundle({
       oauth2RedirectUrl:  window.location.protocol + '//' + window.location.host + '/oauth2-redirect.html',
-      url: apiUrl,
+      url: "/api/v3/openapi.json",
       dom_id: '#swagger-ui',
       presets: [
         SwaggerUIBundle.presets.apis,
