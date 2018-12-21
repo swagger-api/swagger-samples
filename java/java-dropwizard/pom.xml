@@ -110,7 +110,7 @@
       <dependency>
         <groupId>io.dropwizard</groupId>
         <artifactId>dropwizard-bom</artifactId>
-        <version>1.0.2</version>
+        <version>1.3.7</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
