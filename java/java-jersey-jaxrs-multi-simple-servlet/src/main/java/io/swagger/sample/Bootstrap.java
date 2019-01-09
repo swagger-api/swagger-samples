@@ -25,6 +25,7 @@ public class Bootstrap extends HttpServlet {
     BeanConfig beanConfig = new BeanConfig();
     beanConfig.setResourcePackage("io.swagger.sample.storeresource");
     beanConfig.setInfo(info); // needed if using BeanConfig
+    beanConfig.setBasePath("/api1");
 
     new SwaggerContextService()
             .withContextId("test.1")
@@ -48,6 +49,7 @@ public class Bootstrap extends HttpServlet {
     BeanConfig beanConfig2 = new BeanConfig();
     beanConfig2.setResourcePackage("io.swagger.sample.userresource");
     beanConfig2.setInfo(info2); // needed if using BeanConfig
+    beanConfig2.setBasePath("/api2");
 
     new SwaggerContextService()
             .withContextId("test.2")
