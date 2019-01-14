@@ -32,24 +32,20 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.mortbay.jetty</groupId>
+        <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-maven-plugin</artifactId>
         <version>${jetty-version}</version>
         <configuration>
-          <webAppConfig>
+          <webApp>
             <contextPath>/</contextPath>
-          </webAppConfig>
+          </webApp>
           <webAppSourceDirectory>target/${project.artifactId}-${project.version}</webAppSourceDirectory>
-          <webDefaultXml>${project.basedir}/conf/jetty/webdefault.xml</webDefaultXml>
           <stopPort>8079</stopPort>
           <stopKey>stopit</stopKey>
-          <connectors>
-            <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-              <port>8002</port>
-              <maxIdleTime>60000</maxIdleTime>
-              <confidentialPort>8443</confidentialPort>
-            </connector>
-          </connectors>
+          <httpConnector>
+            <port>8002</port>
+            <idleTimeout>60000</idleTimeout>
+          </httpConnector>
         </configuration>
         <executions>
           <execution>
@@ -120,7 +116,7 @@
   <dependencies>
     <dependency>
       <groupId>io.swagger</groupId>
-      <artifactId>swagger-jersey-jaxrs</artifactId>
+      <artifactId>swagger-jersey2-jaxrs</artifactId>
       <version>${swagger-version}</version>
     </dependency>
     <dependency>
@@ -139,22 +135,6 @@
       <version>1.3.2</version>
     </dependency>
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.sun.jersey</groupId>
-      <artifactId>jersey-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.sun.jersey</groupId>
-      <artifactId>jersey-json</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.sun.jersey</groupId>
-      <artifactId>jersey-servlet</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.scalatest</groupId>
       <artifactId>scalatest_2.10</artifactId>
       <scope>test</scope>
@@ -164,5 +144,35 @@
       <artifactId>junit</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.glassfish.jersey.containers</groupId>
+      <artifactId>jersey-container-servlet-core</artifactId>
+      <version>${jersey2-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish.jersey.media</groupId>
+      <artifactId>jersey-media-multipart</artifactId>
+      <version>${jersey2-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.jaxrs</groupId>
+      <artifactId>jackson-jaxrs-json-provider</artifactId>
+      <version>2.9.5</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-xml</artifactId>
+      <version>2.9.5</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>4.0.1</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
+  <properties>
+    <jetty-version>9.0.7.v20131107</jetty-version>
+    <jersey2-version>2.6</jersey2-version>
+  </properties>
 </project>
