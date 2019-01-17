@@ -22,7 +22,9 @@ import io.swagger.sample.exception.NotFoundException;
 import io.swagger.sample.resource.PetResource;
 import org.springframework.stereotype.Component;
 
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Component
 public class PetResourceBean implements PetResource {
@@ -52,12 +54,12 @@ public class PetResourceBean implements PetResource {
 
     @Override
     public Response findPetsByStatus(String status) {
-        return Response.ok(petData.findPetByStatus(status)).build();
+        return Response.ok(new GenericEntity<List<Pet>>(petData.findPetByStatus(status)){}).build();
     }
 
     @Override
     @Deprecated
     public Response findPetsByTags(String tags) {
-        return Response.ok(petData.findPetByTags(tags)).build();
+        return Response.ok(new GenericEntity<List<Pet>>(petData.findPetByTags(tags)){}).build();
     }
 }

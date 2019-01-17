@@ -10,7 +10,7 @@
     </context-param>
 
     <filter>
-        <filter-name>Resteasy</filter-name>
+        <filter-name>resteasy</filter-name>
         <filter-class>
             org.jboss.resteasy.plugins.server.servlet.FilterDispatcher
         </filter-class>
@@ -20,16 +20,14 @@
         </init-param>
     </filter>
     <filter-mapping>
-        <filter-name>Resteasy</filter-name>
+        <filter-name>resteasy</filter-name>
         <url-pattern>/api/*</url-pattern>
     </filter-mapping>
-
 
     <filter>
         <filter-name>ApiOriginFilter</filter-name>
         <filter-class>io.swagger.sample.util.ApiOriginFilter</filter-class>
     </filter>
-
 
     <servlet>
         <servlet-name>Bootstrap</servlet-name>
@@ -41,6 +39,4 @@
         <filter-name>ApiOriginFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
-
 </web-app>

@@ -2,11 +2,13 @@ package io.swagger.sample;
 
 import io.swagger.jaxrs.config.BeanConfig;
 import io.swagger.jaxrs.config.SwaggerContextService;
-import io.swagger.models.*;
+import io.swagger.models.Info;
+import io.swagger.models.Swagger;
+import io.swagger.models.Tag;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 
 public class Bootstrap extends HttpServlet {
   @Override
