@@ -314,6 +314,7 @@
     <module>java/java-jaxrs-wink</module>
     <module>java/java-jaxrs-cxf</module>
     <module>java/java-servlet</module>
+    <module>java/swagger-petstore-v2</module>
   </modules>
   <reporting>
     <outputDirectory>target/site</outputDirectory>
