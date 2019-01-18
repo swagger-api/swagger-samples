@@ -10,7 +10,7 @@
   <artifactId>swagger-petstore-v2</artifactId>
   <packaging>war</packaging>
   <name>swagger-petstore-v2</name>
-  <version>1.0.0</version>
+  <version>1.0.1-SNAPSHOT</version>
   <properties>
     <swagger-version>1.5.7</swagger-version>
   </properties>
