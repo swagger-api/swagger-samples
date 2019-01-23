@@ -53,18 +53,18 @@ paths:
             - 'write:pets'
             - 'read:pets'
       requestBody:
-           description: Create a new pet in the store
-           required: true
-           content:
-             application/json:
-               schema:
-                 $ref: '#/components/schemas/Pet'
-             application/xml:
-               schema:
-                 $ref: '#/components/schemas/Pet'
-             application/x-www-form-urlencoded:
-               schema:
-                 $ref: '#/components/schemas/Pet'
+        description: Create a new pet in the store
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pet'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Pet'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Pet'
     put:
       tags:
         - pet
@@ -92,18 +92,18 @@ paths:
             - 'write:pets'
             - 'read:pets'
       requestBody:
-           description: Update an existent pet in the store
-           required: true
-           content:
-             application/json:
-               schema:
-                 $ref: '#/components/schemas/Pet'
-             application/xml:
-               schema:
-                 $ref: '#/components/schemas/Pet'
-             application/x-www-form-urlencoded:
-               schema:
-                 $ref: '#/components/schemas/Pet'
+        description: Update an existent pet in the store
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pet'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Pet'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Pet'
   /pet/findByStatus:
     get:
       tags:
@@ -291,7 +291,7 @@ paths:
             type: integer
             format: int64
         - name: additionalMetadata
-          in: path
+          in: query
           description: Additional Metadata
           required: false
           schema:
@@ -425,13 +425,13 @@ paths:
       responses:
         default:
           description: successful operation
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/User'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
       requestBody:
         content:
           application/json:
@@ -571,17 +571,17 @@ paths:
         default:
           description: successful operation
       requestBody:
-           description: Update an existent user in the store
-           content:
-             application/json:
-               schema:
-                 $ref: '#/components/schemas/User'
-             application/xml:
-               schema:
-                 $ref: '#/components/schemas/User'
-             application/x-www-form-urlencoded:
-               schema:
-                 $ref: '#/components/schemas/User'
+        description: Update an existent user in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
     delete:
       tags:
         - user
