@@ -9,7 +9,7 @@
     <artifactId>swagger-petstore</artifactId>
     <packaging>war</packaging>
     <name>swagger-petstore</name>
-    <version>1.0.1</version>
+    <version>1.0.2-SNAPSHOT</version>
     <prerequisites>
         <maven>2.2.0</maven>
     </prerequisites>
