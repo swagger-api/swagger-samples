@@ -21,8 +21,10 @@ import io.swagger.sample.data.PetData;
 import io.swagger.sample.model.Pet;
 import io.swagger.sample.exception.NotFoundException;
 
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.*;
+import java.util.List;
 
 @Path("/pet")
 @Api(value = "/pet", description = "Operations about pets")
@@ -43,7 +45,7 @@ public class PetResource {
       throws NotFoundException {
     Pet pet = petData.getPetById(petId);
     if (null != pet) {
-      return Response.ok().entity(pet).build();
+      return Response.ok().entity(new GenericEntity<Pet>(pet){}).build();
     } else {
       throw new NotFoundException(404, "Pet not found");
     }
@@ -78,7 +80,7 @@ public class PetResource {
   @ApiResponses(value = { @ApiResponse(code = 400, message = "Invalid status value") })
   public Response findPetsByStatus(
       @ApiParam(value = "Status values that need to be considered for filter", required = true, defaultValue = "available", allowableValues = "available,pending,sold", allowMultiple = true) @QueryParam("status") String status) {
-    return Response.ok(petData.findPetByStatus(status)).build();
+    return Response.ok(new GenericEntity<List<Pet>>(petData.findPetByStatus(status)){}).build();
   }
 
   @GET
@@ -91,6 +93,6 @@ public class PetResource {
   @Deprecated
   public Response findPetsByTags(
       @ApiParam(value = "Tags to filter by", required = true, allowMultiple = true) @QueryParam("tags") String tags) {
-    return Response.ok(petData.findPetByTags(tags)).build();
+    return Response.ok(new GenericEntity<List<Pet>>(petData.findPetByTags(tags)){}).build();
   }
 }

@@ -266,12 +266,12 @@
     <dependency>
       <groupId>com.fasterxml.jackson.jaxrs</groupId>
       <artifactId>jackson-jaxrs-json-provider</artifactId>
-      <version>2.9.5</version>
+      <version>${jackson-version}</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.dataformat</groupId>
       <artifactId>jackson-dataformat-xml</artifactId>
-      <version>2.9.5</version>
+      <version>${jackson-version}</version>
     </dependency>
 
   </dependencies>
