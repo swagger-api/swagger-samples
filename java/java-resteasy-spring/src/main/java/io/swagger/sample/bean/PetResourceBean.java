@@ -21,7 +21,9 @@ import io.swagger.sample.model.Pet;
 import io.swagger.sample.exception.NotFoundException;
 import io.swagger.sample.resource.PetResource;
 
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 public class PetResourceBean implements PetResource {
     static PetData petData = new PetData();
@@ -50,12 +52,12 @@ public class PetResourceBean implements PetResource {
 
     @Override
     public Response findPetsByStatus(String status) {
-        return Response.ok(petData.findPetByStatus(status)).build();
+        return Response.ok(new GenericEntity<List<Pet>>(petData.findPetByStatus(status)){}).build();
     }
 
     @Override
     @Deprecated
     public Response findPetsByTags(String tags) {
-        return Response.ok(petData.findPetByTags(tags)).build();
+        return Response.ok(new GenericEntity<List<Pet>>(petData.findPetByTags(tags)){}).build();
     }
 }
