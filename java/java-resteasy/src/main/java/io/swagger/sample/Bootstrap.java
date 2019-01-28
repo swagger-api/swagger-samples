@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServlet;
 
 public class Bootstrap extends HttpServlet {
 
-  public void init(ServletConfig config) throws ServletException {
   @Override
+  public void init(ServletConfig config) throws ServletException {
     Info info = new Info()
             .title("Swagger Petstore")
             .description("This is a sample server Petstore server.  You can find out more about Swagger " +
