@@ -25,13 +25,13 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <properties>
-        <dropwizard-version>1.3.8</dropwizard-version>
-        <inflector-version>1.0.2</inflector-version>
+        <dropwizard-version>1.3.7</dropwizard-version>
+        <inflector-version>1.0.16</inflector-version>
         <jackson.version>2.9.8</jackson.version>
+        <swagger-core-version>1.5.22-SNAPSHOT</swagger-core-version>
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>io.swagger</groupId>
             <artifactId>swagger-inflector</artifactId>
@@ -58,6 +58,12 @@
                     <artifactId>jackson-core</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-core</artifactId>
+            <version>${swagger-core-version}</version>
         </dependency>
 
         <dependency>
@@ -93,7 +99,7 @@
         <dependency>
             <groupId>com.hubspot.dropwizard</groupId>
             <artifactId>dropwizard-guice</artifactId>
-            <version>0.8.0</version>
+            <version>1.3.5.0</version>
             <exclusions>
                 <exclusion>
                     <artifactId>javax.inject</artifactId>
