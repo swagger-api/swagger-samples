@@ -141,7 +141,7 @@
         <junit-version>4.8.1</junit-version>
         <spring-boot-version>1.4.0.RELEASE</spring-boot-version>
         <springfox-version>2.5.0</springfox-version>
-        <swagger-core-version>1.5.10</swagger-core-version>
+        <swagger-core-version>1.5.22-SNAPSHOT</swagger-core-version>
         <spring-version>4.3.2.RELEASE</spring-version>
         <hibernate-validator-version>5.2.4.Final</hibernate-validator-version>
     </properties>
