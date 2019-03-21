@@ -13,13 +13,15 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
-import jdk.nashorn.internal.runtime.linker.Bootstrap;
+import io.swagger.v3.oas.models.servers.Server;
 import org.glassfish.jersey.servlet.ServletContainer;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.List;
+import java.util.ArrayList;
 
 public class SwaggerExampleGuiceContextListener extends GuiceServletContextListener {
 
@@ -50,6 +52,10 @@ public class SwaggerExampleGuiceContextListener extends GuiceServletContextListe
                                 .url("http://www.apache.org/licenses/LICENSE-2.0.html"));
 
                 oas.info(info);
+                Server server = new Server().url("/api");
+                List<Server> servers = new ArrayList();
+                servers.add(server);
+                oas.servers(servers);
                 SwaggerConfiguration oasConfig = new SwaggerConfiguration()
                         .openAPI(oas)
                         .prettyPrint(true)
