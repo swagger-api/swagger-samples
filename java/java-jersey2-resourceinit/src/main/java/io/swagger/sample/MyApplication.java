@@ -52,5 +52,6 @@ public class MyApplication extends ResourceConfig {
 
         openApiResource.setOpenApiConfiguration(oasConfig);
         register(openApiResource);
+        packages("io.swagger.sample.resource");
     }
 }
