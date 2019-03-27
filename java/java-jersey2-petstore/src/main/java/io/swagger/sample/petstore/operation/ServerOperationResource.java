@@ -12,19 +12,12 @@ import javax.ws.rs.Path;
  * Resource With a Hidden Operation
  */
 @OpenAPIDefinition(
-        servers = {
-                @Server(description = "server 1", url = "http://foo")
-        }
 )
 @Path("/operations")
 public class ServerOperationResource {
     @Path("/serversoperation")
     @GET
-    @Operation(operationId = "Pets", description = "Pets Example",
-            servers = {
-                    @Server(description = "server 2", url = "http://foo2")
-            }
-    )
+    @Operation(operationId = "Pets", description = "Pets Example")
     public Pet getPet() {
         return new Pet();
     }
