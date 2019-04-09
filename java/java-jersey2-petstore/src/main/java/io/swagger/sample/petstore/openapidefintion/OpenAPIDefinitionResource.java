@@ -6,6 +6,8 @@ import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.info.License;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.servers.Server;
+import io.swagger.v3.oas.annotations.servers.ServerVariable;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 /**
@@ -17,7 +19,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
                 version = "2.0",
                 description = "API Definition",
                 termsOfService = "Terms of service",
-                license = @License(name = "Apache 2.0", url = ""),
+                license = @License(name = "Apache 2.0", url = "http://foo.bar"),
                 contact = @Contact(url = "http://gigantic-server.com", name = "Fred", email = "Fred@gigagantic-server.com")
         ),
         tags = {
@@ -29,6 +31,22 @@ import io.swagger.v3.oas.annotations.tags.Tag;
         security = {
                 @SecurityRequirement(name = "req 1", scopes = {"a", "b"}),
                 @SecurityRequirement(name = "req 2", scopes = {"b", "c"})
+        },
+        servers = {
+                @Server(
+                        description = "server 1",
+                        url = "/",
+                        variables = {
+                                @ServerVariable(name = "var1", description = "var 1", defaultValue = "1", allowableValues = {"1", "2"}),
+                                @ServerVariable(name = "var2", description = "var 2", defaultValue = "1", allowableValues = {"1", "2"})
+                        }),
+                @Server(
+                        description = "server 2",
+                        url = "http://foo",
+                        variables = {
+                                @ServerVariable(name = "var1", description = "var 1", defaultValue = "1", allowableValues = {"1", "2"}),
+                                @ServerVariable(name = "var2", description = "var 2", defaultValue = "1", allowableValues = {"1", "2"})
+                        })
         }
 )
 public class OpenAPIDefinitionResource {

@@ -88,15 +88,16 @@
     <servlet-name>OpenApi</servlet-name>
     <url-pattern>/openapi/*</url-pattern>
   </servlet-mapping>
-
-  <servlet>
-    <servlet-name>Bootstrap</servlet-name>
-    <servlet-class>io.swagger.sample.Bootstrap</servlet-class>
-    <load-on-startup>2</load-on-startup>
-  </servlet>
+  <!-- alternatively use own Bootstrap servlet
+    <servlet>
+      <servlet-name>Bootstrap</servlet-name>
+      <servlet-class>io.swagger.sample.Bootstrap</servlet-class>
+      <load-on-startup>2</load-on-startup>
+    </servlet>
+  -->
 
   <filter>
-    <filter-name>ApiOriginFilter</filter-name>
+    <filter-name>AxpiOriginFilter</filter-name>
     <filter-class>io.swagger.sample.util.ApiOriginFilter</filter-class>
   </filter>
 

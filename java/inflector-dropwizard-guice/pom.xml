@@ -32,7 +32,7 @@
         <inflector-version>2.0.0-SNAPSHOT</inflector-version>
         <jackson.version>2.9.8</jackson.version>
         <jersey2.version>2.23.1</jersey2.version>
-        <swagger-core-version>2.0.7-SNAPSHOT</swagger-core-version>
+        <swagger-core-version>2.0.8-SNAPSHOT</swagger-core-version>
     </properties>
 
     <dependencies>
@@ -161,6 +161,12 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-core</artifactId>
+            <version>${swagger-core-version}</version>
         </dependency>
 
     </dependencies>
