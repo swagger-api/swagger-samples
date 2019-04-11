@@ -7,10 +7,13 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.servers.Server;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -32,6 +35,9 @@ public class Bootstrap extends HttpServlet {
         .url("http://www.apache.org/licenses/LICENSE-2.0.html"));
 
     oas.info(info);
+    List<Server> servers = new ArrayList<>();
+    servers.add(new Server().url("/api"));
+    oas.servers(servers);
     SwaggerConfiguration oasConfig = new SwaggerConfiguration()
             .openAPI(oas)
             .resourcePackages(Stream.of("io.swagger.sample.resource").collect(Collectors.toSet()));

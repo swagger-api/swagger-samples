@@ -13,7 +13,10 @@ import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.sample.resource.PetResource;
+import io.swagger.v3.oas.models.servers.Server;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -50,6 +53,9 @@ public class SwaggerSampleApplication extends Application <SwaggerSampleConfigur
                     .url("http://www.apache.org/licenses/LICENSE-2.0.html"));
 
     oas.info(info);
+    List<Server> servers = new ArrayList<>();
+    servers.add(new Server().url("/api"));
+    oas.servers(servers);
     SwaggerConfiguration oasConfig = new SwaggerConfiguration()
             .openAPI(oas)
             .prettyPrint(true)
