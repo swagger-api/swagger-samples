@@ -97,7 +97,7 @@
   -->
 
   <filter>
-    <filter-name>AxpiOriginFilter</filter-name>
+    <filter-name>ApiOriginFilter</filter-name>
     <filter-class>io.swagger.sample.util.ApiOriginFilter</filter-class>
   </filter>
 
