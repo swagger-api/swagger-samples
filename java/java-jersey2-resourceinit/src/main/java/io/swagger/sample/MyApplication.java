@@ -1,5 +1,7 @@
 package io.swagger.sample;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import io.swagger.v3.jaxrs2.integration.resources.OpenApiResource;
 import io.swagger.v3.oas.integration.SwaggerConfiguration;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -12,6 +14,8 @@ import org.glassfish.jersey.server.ResourceConfig;
 import javax.servlet.ServletConfig;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.ext.ContextResolver;
+import javax.ws.rs.ext.Provider;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -20,6 +24,7 @@ public class MyApplication extends ResourceConfig {
 
     public MyApplication(@Context ServletConfig servletConfig) {
         super();
+        register(new ObjectMapperContextResolver());
         OpenAPI oas = new OpenAPI();
         Info info = new Info()
                 .title("Swagger Sample App bootstrap code")
@@ -53,5 +58,26 @@ public class MyApplication extends ResourceConfig {
         openApiResource.setOpenApiConfiguration(oasConfig);
         register(openApiResource);
         packages("io.swagger.sample.resource");
+    }
+
+    @Provider
+    public class ObjectMapperContextResolver implements ContextResolver<ObjectMapper> {
+
+        private final ObjectMapper mapper;
+
+        public ObjectMapperContextResolver() {
+            this.mapper = createObjectMapper();
+        }
+
+        @Override
+        public ObjectMapper getContext(Class<?> type) {
+            return mapper;
+        }
+
+        private ObjectMapper createObjectMapper() {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+            return mapper;
+        }
     }
 }
