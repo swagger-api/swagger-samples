@@ -213,10 +213,10 @@
     </repositories>
     <properties>
         <maven-plugin-version>1.0.0</maven-plugin-version>
-        <swagger-parser-version>2.0.8</swagger-parser-version>
-        <swagger-core-version>2.0.6</swagger-core-version>
-        <jackson-version>2.9.8</jackson-version>
-        <swagger-inflector-version>2.0.0-rc3</swagger-inflector-version>
+        <swagger-parser-version>2.0.14</swagger-parser-version>
+        <swagger-core-version>2.0.9</swagger-core-version>
+        <jackson-version>2.9.9</jackson-version>
+        <swagger-inflector-version>2.0.2</swagger-inflector-version>
         <jetty-version>9.4.9.v20180320</jetty-version>
         <logback-version>1.0.1</logback-version>
         <junit-version>4.8.2</junit-version>
