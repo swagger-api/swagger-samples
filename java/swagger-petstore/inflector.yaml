@@ -2,6 +2,9 @@ controllerPackage: io.swagger.petstore.controller
 modelPackage:  io.swagger.petstore.model
 swaggerUrl: openapi-inflector.yaml
 
+exposedSpecOptions:
+  useOriginalNotParsed: true
+
 entityProcessors:
 - json
 - yaml
