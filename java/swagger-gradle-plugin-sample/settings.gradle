@@ -1,0 +1,10 @@
+pluginManagement {
+    repositories {
+        maven {
+            url mavenLocal().url
+        }
+        gradlePluginPortal()
+    }
+}
+rootProject.name = 'swagger-gradle-plugin-sample'
+
