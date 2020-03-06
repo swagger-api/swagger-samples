@@ -30,7 +30,7 @@
 
         <dropwizard-version>1.3.1</dropwizard-version>
         <inflector-version>2.0.0-SNAPSHOT</inflector-version>
-        <jackson.version>2.9.10</jackson.version>
+        <jackson.version>2.10.3</jackson.version>
         <jersey2.version>2.23.1</jersey2.version>
         <swagger-core-version>2.0.8-SNAPSHOT</swagger-core-version>
     </properties>
