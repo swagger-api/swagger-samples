@@ -1,6 +1,6 @@
 ## Spring Boot Jersey Inflector Sample
 
-A simple example demonstrating how to use Swagger Inflector with Spring Boot. This project integrates both Spring Boot Actuator and the Spring Boot Jersey integration. Because Actuator is built upon SpringMVC, [Jersey and Actuator must listen on different endpoints](http://docs.spring.io/spring-boot/docs/current/reference/html/howto-actuator.html#howto-use-actuator-with-jersey). Please see the `applictaion.yaml` for how this is accomplished. 
+A simple example demonstrating how to use Swagger Inflector with Spring Boot. This project integrates both Spring Boot Actuator and the Spring Boot Jersey integration. Because Actuator is built upon SpringMVC, [Jersey and Actuator must listen on different endpoints](http://docs.spring.io/spring-boot/docs/current/reference/html/howto-actuator.html#howto-use-actuator-with-jersey). Please see the `application.yaml` for how this is accomplished. 
 
 
 The project uses [Gradle](https://gradle.org/) for its build system and you can build the project by running:
