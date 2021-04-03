@@ -23,9 +23,7 @@ def fake_outer_boolean_serialize(body=None):  # noqa: E501
 
     :rtype: OuterBoolean
     """
-    if connexion.request.is_json:
-        body = bool.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return True
 
 
 def fake_outer_composite_serialize(body=None):  # noqa: E501
@@ -38,9 +36,11 @@ def fake_outer_composite_serialize(body=None):  # noqa: E501
 
     :rtype: OuterComposite
     """
-    if connexion.request.is_json:
-        body = OuterComposite.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return {
+        'my_number': 1000,
+        'my_string': 'my_string',
+        'my_boolean': True
+    }
 
 
 def fake_outer_number_serialize(body=None):  # noqa: E501
@@ -53,9 +53,7 @@ def fake_outer_number_serialize(body=None):  # noqa: E501
 
     :rtype: OuterNumber
     """
-    if connexion.request.is_json:
-        body = float.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return 7
 
 
 def fake_outer_string_serialize(body=None):  # noqa: E501
@@ -68,9 +66,7 @@ def fake_outer_string_serialize(body=None):  # noqa: E501
 
     :rtype: OuterString
     """
-    if connexion.request.is_json:
-        body = str.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return 'ok'
 
 
 def test_client_model(body):  # noqa: E501
@@ -83,9 +79,9 @@ def test_client_model(body):  # noqa: E501
 
     :rtype: Client
     """
-    if connexion.request.is_json:
-        body = Client.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return {
+        "client": "string"
+    }
 
 
 def test_endpoint_parameters(body):  # noqa: E501
@@ -98,9 +94,7 @@ def test_endpoint_parameters(body):  # noqa: E501
 
     :rtype: None
     """
-    if connexion.request.is_json:
-        body = Body2.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return 'ok'
 
 
 def test_enum_parameters(enum_header_string_array=None, enum_header_string=None, enum_query_string_array=None, enum_query_string=None, enum_query_integer=None):  # noqa: E501
@@ -121,7 +115,7 @@ def test_enum_parameters(enum_header_string_array=None, enum_header_string=None,
 
     :rtype: None
     """
-    return 'do some magic!'
+    return 'ok'
 
 
 def test_enum_request_body(body=None):  # noqa: E501
@@ -134,9 +128,7 @@ def test_enum_request_body(body=None):  # noqa: E501
 
     :rtype: None
     """
-    if connexion.request.is_json:
-        body = Body4.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return 'ok'
 
 
 def test_inline_additional_properties(body):  # noqa: E501
@@ -149,9 +141,7 @@ def test_inline_additional_properties(body):  # noqa: E501
 
     :rtype: None
     """
-    if connexion.request.is_json:
-        body = Dict[str, str].from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return 'ok'
 
 
 def test_json_form_data(body):  # noqa: E501
@@ -164,6 +154,4 @@ def test_json_form_data(body):  # noqa: E501
 
     :rtype: None
     """
-    if connexion.request.is_json:
-        body = Body5.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return 'ok'

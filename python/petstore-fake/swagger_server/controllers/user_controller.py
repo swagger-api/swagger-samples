@@ -15,9 +15,16 @@ def create_user(body):  # noqa: E501
 
     :rtype: None
     """
-    if connexion.request.is_json:
-        body = User.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return {
+        "id": 0,
+        "username": "usertest",
+        "firstName": "User",
+        "lastName": "Test",
+        "email": "user.test@mail.com",
+        "password": "*****",
+        "phone": "000-00000000",
+        "userStatus": 1
+    }
 
 
 def create_users_with_array_input(body):  # noqa: E501
@@ -30,9 +37,16 @@ def create_users_with_array_input(body):  # noqa: E501
 
     :rtype: None
     """
-    if connexion.request.is_json:
-        body = [User.from_dict(d) for d in connexion.request.get_json()]  # noqa: E501
-    return 'do some magic!'
+    return {
+        "id": 0,
+        "username": "usertest",
+        "firstName": "User",
+        "lastName": "Test",
+        "email": "user.test@mail.com",
+        "password": "*****",
+        "phone": "000-00000000",
+        "userStatus": 1
+    }
 
 
 def create_users_with_list_input(body):  # noqa: E501
@@ -45,9 +59,16 @@ def create_users_with_list_input(body):  # noqa: E501
 
     :rtype: None
     """
-    if connexion.request.is_json:
-        body = [User.from_dict(d) for d in connexion.request.get_json()]  # noqa: E501
-    return 'do some magic!'
+    return {
+        "id": 0,
+        "username": "usertest",
+        "firstName": "User",
+        "lastName": "Test",
+        "email": "user.test@mail.com",
+        "password": "*****",
+        "phone": "000-00000000",
+        "userStatus": 1
+    }
 
 
 def delete_user(username):  # noqa: E501
@@ -60,7 +81,7 @@ def delete_user(username):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return 'ok'
 
 
 def get_user_by_name(username):  # noqa: E501
@@ -73,7 +94,16 @@ def get_user_by_name(username):  # noqa: E501
 
     :rtype: User
     """
-    return 'do some magic!'
+    return {
+        "id": 0,
+        "username": "usertest",
+        "firstName": "User",
+        "lastName": "Test",
+        "email": "user.test@mail.com",
+        "password": "*****",
+        "phone": "000-00000000",
+        "userStatus": 1
+    }
 
 
 def login_user(username, password):  # noqa: E501
@@ -88,7 +118,7 @@ def login_user(username, password):  # noqa: E501
 
     :rtype: str
     """
-    return 'do some magic!'
+    return 'ok'
 
 
 def logout_user():  # noqa: E501
@@ -99,7 +129,7 @@ def logout_user():  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return 'ok'
 
 
 def update_user(body, username):  # noqa: E501
@@ -114,6 +144,4 @@ def update_user(body, username):  # noqa: E501
 
     :rtype: None
     """
-    if connexion.request.is_json:
-        body = User.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return 'ok'

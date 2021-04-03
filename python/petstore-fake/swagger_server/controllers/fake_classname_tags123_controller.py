@@ -15,6 +15,6 @@ def test_classname(body):  # noqa: E501
 
     :rtype: Client
     """
-    if connexion.request.is_json:
-        body = Client.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return {
+        "client": "string"
+    }

@@ -15,9 +15,7 @@ def add_animal(body):  # noqa: E501
 
     :rtype: None
     """
-    if connexion.request.is_json:
-        body = Animal.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return 'ok'
 
 
 def delete_animal(animal_id, api_key=None):  # noqa: E501
@@ -32,7 +30,7 @@ def delete_animal(animal_id, api_key=None):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return 'ok'
 
 
 def get_animal_by_id(animal_id):  # noqa: E501
@@ -45,7 +43,10 @@ def get_animal_by_id(animal_id):  # noqa: E501
 
     :rtype: Animal
     """
-    return 'do some magic!'
+    return {
+        "className": "string",
+        "color": "red"
+    }
 
 
 def update_animal(body):  # noqa: E501
@@ -58,9 +59,7 @@ def update_animal(body):  # noqa: E501
 
     :rtype: None
     """
-    if connexion.request.is_json:
-        body = Animal.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return 'ok'
 
 
 def update_animal_with_form(animal_id, name=None, status=None):  # noqa: E501
@@ -77,4 +76,4 @@ def update_animal_with_form(animal_id, name=None, status=None):  # noqa: E501
 
     :rtype: None
     """
-    return 'do some magic!'
+    return 'ok'
