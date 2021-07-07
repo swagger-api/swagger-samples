@@ -9,14 +9,19 @@ to reflect over property packages to discover swagger-enabled resources.
 This was originally contributed by [chadhahn](https://github.com/chadhahn) and adapted 
 by [rvullriede](https://github.com/rvullriede).  Thank you for your contributions!
 
+Please note that in the meantime Swagger has been integrated into CXF which simplifies the setup. 
+Take a look at the [CXF Documentation](http://cxf.apache.org/docs/swagger2feature.html) 
+or [one of the samples](https://github.com/apache/cxf/tree/master/distribution/src/main/release/samples/jax_rs/spring_boot)
+to get more information.
+
 ### To run (with Maven)
 To run the server, run this task:
 
 ```
-mvn package tomcat6:run
+mvn package tomcat7:run
 ```
 
-This will start Tomcat 6 embedded on port 8002.
+This will start Tomcat 7 embedded on port 8002.
 
 ### Testing the server
 Once started, you can navigate to http://localhost:8002/api/swagger.json to view the Swagger Resource Listing.
