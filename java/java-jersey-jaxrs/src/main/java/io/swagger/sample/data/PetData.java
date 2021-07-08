@@ -23,6 +23,7 @@ import io.swagger.sample.model.Tag;
 import java.util.*;
 
 public class PetData {
+
   static List<Pet> pets = new ArrayList<Pet>();
   static List<Category> categories = new ArrayList<Category>();
 
@@ -58,9 +59,11 @@ public class PetData {
   }
 
   public Pet getPetById(long petId) {
+    synchronized (pets) {
     for (Pet pet : pets) {
-      if (pet.getId() == petId) {
-        return pet;
+        if (pet.getId() == petId) {
+          return pet;
+        }
       }
     }
     return null;
@@ -68,11 +71,13 @@ public class PetData {
 
   public boolean deletePet(long petId) {
     if(pets.size() > 0) {
-      for (int i = pets.size() - 1; i >= 0; i--) {
-        Pet pet = pets.get(i);
-        if(pet.getId() == petId) {
-          pets.remove(i);
-          return true;
+      synchronized (pets) {
+        for (int i = pets.size() - 1; i >= 0; i--) {
+          Pet pet = pets.get(i);
+          if(pet.getId() == petId) {
+            pets.remove(i);
+            return true;
+          }
         }
       }
     }
@@ -85,10 +90,12 @@ public class PetData {
       return result;
     }
     String[] statuses = status.split(",");
-    for (Pet pet : pets) {
-      for (String s : statuses) {
-        if (s.equals(pet.getStatus())) {
-          result.add(pet);
+    synchronized (pets) {
+      for (Pet pet : pets) {
+        for (String s : statuses) {
+          if (s.equals(pet.getStatus())) {
+            result.add(pet);
+          }
         }
       }
     }
@@ -102,12 +109,14 @@ public class PetData {
       return result;
     }    
     String[] tagList = tags.split(",");
-    for (Pet pet : pets) {
-      if (null != pet.getTags()) {
-        for (Tag tag : pet.getTags()) {
-          for (String tagListString : tagList) {
-            if (tagListString.equals(tag.getName()))
-              result.add(pet);
+    synchronized (pets) {
+      for (Pet pet : pets) {
+        if (null != pet.getTags()) {
+          for (Tag tag : pet.getTags()) {
+            for (String tagListString : tagList) {
+              if (tagListString.equals(tag.getName()))
+                result.add(pet);
+            }
           }
         }
       }
@@ -116,37 +125,41 @@ public class PetData {
   }
 
   public Pet addPet(Pet pet) {
-    if(pet.getId() == 0) {
-      long maxId = 0;
-      for (int i = pets.size() - 1; i >= 0; i--) {
-        if(pets.get(i).getId() > maxId) {
-          maxId = pets.get(i).getId();
+    synchronized (pets) {
+      if(pet.getId() == 0) {
+        long maxId = 0;
+        for (int i = pets.size() - 1; i >= 0; i--) {
+          if(pets.get(i).getId() > maxId) {
+            maxId = pets.get(i).getId();
+          }
+        }
+        pet.setId(maxId + 1);
+      }
+      if (pets.size() > 0) {
+        for (int i = pets.size() - 1; i >= 0; i--) {
+          if (pets.get(i).getId() == pet.getId()) {
+            pets.remove(i);
+          }
         }
       }
-      pet.setId(maxId + 1);
+      pets.add(pet);
     }
-    if (pets.size() > 0) {
-      for (int i = pets.size() - 1; i >= 0; i--) {
-        if (pets.get(i).getId() == pet.getId()) {
-          pets.remove(i);
-        }
-      }
-    }
-    pets.add(pet);
     return pet;
   }
 
   public Map<String, Integer> getInventoryByStatus() {
     Map<String, Integer> output = new HashMap<String, Integer>();
-    for(Pet pet : pets) {
-      String status = pet.getStatus();
-      if(status != null && !"".equals(status)) {
-        Integer count = output.get(status);
-        if(count == null)
-          count = new Integer(1);
-        else
-          count = count.intValue() + 1;
-        output.put(status, count);
+    synchronized (pets) {
+      for(Pet pet : pets) {
+        String status = pet.getStatus();
+        if(status != null && !"".equals(status)) {
+          Integer count = output.get(status);
+          if(count == null)
+            count = new Integer(1);
+          else
+            count = count.intValue() + 1;
+          output.put(status, count);
+        }
       }
     }
     return output;
