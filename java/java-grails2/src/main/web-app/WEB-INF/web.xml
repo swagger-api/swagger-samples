@@ -12,8 +12,7 @@
             <param-name>jersey.config.server.provider.packages</param-name>
             <param-value>
                 io.swagger.jaxrs.listing,
-                io.swagger.sample.resource,
-                {your.application.packages}
+                io.swagger.sample.resource
             </param-value>
         </init-param>
         <init-param>
@@ -53,5 +52,19 @@
         </init-param>
         <load-on-startup>2</load-on-startup>
     </servlet>
+
+    <filter>
+        <filter-name>ApiOriginFilter</filter-name>
+        <filter-class>io.swagger.sample.util.ApiOriginFilter</filter-class>
+    </filter>
+    <servlet>
+        <servlet-name>Bootstrap</servlet-name>
+        <servlet-class>io.swagger.sample.Bootstrap</servlet-class>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <filter-mapping>
+        <filter-name>ApiOriginFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
 </web-app>

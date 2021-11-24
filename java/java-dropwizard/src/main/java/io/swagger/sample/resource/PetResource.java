@@ -18,11 +18,11 @@ package io.swagger.sample.resource;
 
 import io.swagger.annotations.*;
 import io.swagger.sample.data.PetData;
-import io.swagger.sample.model.Pet;
 import io.swagger.sample.exception.NotFoundException;
+import io.swagger.sample.model.Pet;
 
-import javax.ws.rs.core.Response;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
 
 @Path("/pet")
 @Api(value = "/pet", description = "Operations about pets")

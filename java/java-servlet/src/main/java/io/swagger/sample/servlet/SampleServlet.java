@@ -53,8 +53,8 @@ public class SampleServlet extends HttpServlet {
                     = "query"),
             @ApiImplicitParam(name = "age", value = "User's age", required = true, dataType = "integer", paramType =
                     "query"),
-            @ApiImplicitParam(name = "dateOfBirth", value = "User's date of birth, in dd-MM-yyyy format", required =
-                    true, dataType = "java.util.Date", paramType = "query")})
+            @ApiImplicitParam(name = "dateOfBirth", value = "User's date of birth, in dd-MM-yyyy format",
+                    dataType = "java.util.Date", paramType = "query")})
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String result;
         try {

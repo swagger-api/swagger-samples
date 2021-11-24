@@ -314,6 +314,7 @@
     <module>java/java-jaxrs-wink</module>
     <module>java/java-jaxrs-cxf</module>
     <module>java/java-servlet</module>
+    <module>java/swagger-petstore-v2</module>
   </modules>
   <reporting>
     <outputDirectory>target/site</outputDirectory>
@@ -440,7 +441,7 @@
     <servlet-api-version>2.5</servlet-api-version>
     <jersey-version>1.13</jersey-version>
     <jersey2-version>2.1</jersey2-version>
-    <jackson-version>2.4.2</jackson-version>
+    <jackson-version>2.10.3</jackson-version>
     <jackson-guava-version>2.4.2</jackson-guava-version>
     <logback-version>1.2.7</logback-version>
 

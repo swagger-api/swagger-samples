@@ -18,7 +18,6 @@ package io.swagger.sample.resources;
 
 import io.swagger.annotations.*;
 
-import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.GET;
@@ -52,9 +51,9 @@ public class RootResource {
     private final UserResource userResource;
 
     @Inject
-    public RootResource(@Nonnull PetResource petResource,
-                        @Nonnull PetStoreResource petStoreResource,
-                        @Nonnull UserResource userResource) {
+    public RootResource(PetResource petResource,
+                        PetStoreResource petStoreResource,
+                        UserResource userResource) {
         this.petResource = petResource;
         this.petStoreResource = petStoreResource;
         this.userResource = userResource;

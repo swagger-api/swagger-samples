@@ -23,11 +23,14 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.Response;
 
 import io.swagger.sample.data.PetData;
 import io.swagger.sample.exception.NotFoundException;
 import io.swagger.sample.model.Pet;
+
+import java.util.List;
 
 @Path("/pet")
 @Produces({"application/json", "application/xml"})
@@ -61,13 +64,13 @@ public class PetResource {
   @GET
   @Path("/findByStatus")
   public Response findPetsByStatus(@QueryParam("status") String status) {
-    return Response.ok(petData.findPetByStatus(status)).build();
+    return Response.ok(new GenericEntity<List<Pet>>(petData.findPetByStatus(status)){}).build();
   }
 
   @GET
   @Path("/findByTags")
   @Deprecated
   public Response findPetsByTags(@QueryParam("tags") String tags) {
-    return Response.ok(petData.findPetByTags(tags)).build();
+    return Response.ok(new GenericEntity<List<Pet>>(petData.findPetByTags(tags)){}).build();
   }
 }

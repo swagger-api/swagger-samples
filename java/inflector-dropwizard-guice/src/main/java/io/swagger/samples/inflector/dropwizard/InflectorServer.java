@@ -29,6 +29,7 @@ import io.swagger.inflector.config.ControllerFactory;
 import io.swagger.inflector.processors.JsonNodeExampleSerializer;
 import io.swagger.inflector.processors.XMLExampleProvider;
 import io.swagger.jaxrs.listing.SwaggerSerializers;
+import io.swagger.models.Operation;
 import io.swagger.util.Json;
 import io.swagger.util.Yaml;
 import org.eclipse.jetty.servlets.CrossOriginFilter;
@@ -91,8 +92,8 @@ public class InflectorServer extends Application<InflectorServerConfiguration> {
             this.injector = injector;
         }
 
-        public Object instantiateController(Class cls) throws IllegalAccessException, InstantiationException {
-            return this.injector.getInstance(cls);
+        public Object instantiateController(Class<?> aClass, Operation operation) throws IllegalAccessException, InstantiationException {
+            return this.injector.getInstance(aClass);
         }
     }
 }
