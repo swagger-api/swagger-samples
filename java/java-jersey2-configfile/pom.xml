@@ -210,6 +210,17 @@
       <groupId>org.glassfish.jersey.media</groupId>
       <artifactId>jersey-media-json-jackson</artifactId>
       <version>${jersey2-version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>com.fasterxml.jackson.module</groupId>
+          <artifactId>jackson-module-jaxb-annotations</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
   </dependencies>
+  <properties>
+    <swagger-version>2.2.0</swagger-version>
+    <jackson-version>2.13.2</jackson-version>
+    <commons-lang-version>3.12.0</commons-lang-version>
+  </properties>
 </project>
