@@ -5,4 +5,8 @@ the java library. Each sample contains a README file with details how to run it 
 
 ## Security contact
 
-Please disclose any security-related issues or vulnerabilities by emailing [security@swagger.io](mailto:security@swagger.io), instead of using the public issue tracker.
+This repository has been set to “archived” as these samples are no longer kept up to date with security patches. 
+If you still wish to use these samples in production, it is highly advised to update all the dependencies to their latest versions 
+to mitigate any potential security vulnerabilities from outdated dependencies. While this repo is unmaintained
+, the integration pattern of Swagger Core with the demonstrated frameworks and environments are valid and applicable 
+to latest version of Swagger Core v1 (master branch) and v2 (2.0 branch) as of 30/10/2023
