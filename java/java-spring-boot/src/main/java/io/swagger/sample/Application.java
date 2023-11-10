@@ -61,7 +61,7 @@ public class Application {
         return new ApiInfoBuilder()
             .title("Springfox petstore API")
             .description("description")
-            .contact(new Contact("name", "url", "email"))
+            .contact(new Contact("name", "http://url.com", "email@email.com"))
             .license("Apache License Version 2.0")
             .licenseUrl("https://github.com/springfox/springfox/blob/master/LICENSE")
             .version("2.0")
