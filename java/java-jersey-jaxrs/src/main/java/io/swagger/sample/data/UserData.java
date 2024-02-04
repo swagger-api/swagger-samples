@@ -18,8 +18,7 @@ package io.swagger.sample.data;
 
 import io.swagger.sample.model.User;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
 public class UserData {
   static List<User> users = new ArrayList<User>();
@@ -51,9 +50,11 @@ public class UserData {
   }
 
   public User findUserByName(String username) {
-    for (User user : users) {
-      if (user.getUsername().equals(username)) {
-        return user;
+    synchronized (users) {
+      for (User user : users) {
+        if (user.getUsername().equals(username)) {
+          return user;
+        }
       }
     }
     return null;
@@ -62,22 +63,27 @@ public class UserData {
   public void addUser(User user) {
     if(user.getUsername() == null)
       return;
-    if (users.size() > 0) {
-      for (int i = users.size() - 1; i >= 0; i--) {
-        if (users.get(i).getUsername().equals(user.getUsername())) {
-          users.remove(i);
+
+    synchronized (users) {
+      if (users.size() > 0) {
+        for (int i = users.size() - 1; i >= 0; i--) {
+          if (users.get(i).getUsername().equals(user.getUsername())) {
+            users.remove(i);
+          }
         }
       }
+      users.add(user);
     }
-    users.add(user);
   }
 
   public boolean removeUser(String username) {
     if (users.size() > 0) {
-      for (int i = users.size() - 1; i >= 0; i--) {
-        if (users.get(i).getUsername().equals(username)) {
-          users.remove(i);
-          return true;
+      synchronized (users) {
+        for (int i = users.size() - 1; i >= 0; i--) {
+          if (users.get(i).getUsername().equals(username)) {
+            users.remove(i);
+            return true;
+          }
         }
       }
     }
